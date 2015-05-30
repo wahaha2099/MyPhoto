@@ -20,5 +20,7 @@
 //添加image到view
 -(void)showImages:(Pin *)image ;
 
+//初始化scrollview
+-(void)initScrollView;
 
 @end

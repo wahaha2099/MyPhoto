@@ -15,6 +15,17 @@
 int last_idx;       //最后的图片的index
 int layout_count;     //layoutSubviews处理了的长度
 
+//初始化scrollview
+-(void)initScrollView{
+    [self setScrollEnabled:YES];
+    [self setCanCancelContentTouches:YES];
+    self.delaysContentTouches = NO;
+    CGRect myFrame = [[UIScreen mainScreen] bounds];
+    [ self setContentSize:myFrame.size];
+    self.showsHorizontalScrollIndicator=NO;
+    self.showsVerticalScrollIndicator=NO;
+}
+
 //add subview 后,UIView调用此方法进行布局管理
 -(void)layoutSubviews{
     
@@ -112,12 +123,15 @@ int layout_count;     //layoutSubviews处理了的长度
     
     UIImageView * imageV = [[UIImageView alloc]init];
     
-    UIImage *placehold = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
-    pin.placehold = placehold;
+    if( pin.is_local ){//9张默认的本地图片
+        imageV.image = pin.image;
+    }else{//其他网络图片
+        UIImage *placehold = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
+        pin.placehold = placehold;
+        imageV.image = pin.placehold;
+        [imageV imageWithUrlStr: pin.url_320 phImage:pin.placehold];
+    }
     
-    imageV.image = pin.placehold;
-    [imageV imageWithUrlStr: pin.url_320 phImage:pin.placehold];
-
     //开启事件
     imageV.userInteractionEnabled = YES;
     
