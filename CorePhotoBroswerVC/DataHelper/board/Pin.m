@@ -18,9 +18,9 @@
 
     pin.key = [file objectForKey:@"key"];
     pin.type = [file objectForKey:@"type"];//image/gif;
-    pin.created_at = [json objectForKey:@"created_at"];
+    //pin.created_at = [json objectForKey:@"created_at"];
     pin.pin_id = [json objectForKey:@"pin_id"];
-    pin.raw_text = [json objectForKey:@"raw_text"];
+    //pin.raw_text = [json objectForKey:@"raw_text"];
     pin.board_id = [json objectForKey:@"board_id"];
     
     return pin;

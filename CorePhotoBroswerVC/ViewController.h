@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoBroswerVC.h"
+#import "PhotoCotentView.h"
+#import "DataMagic.h"
+#import "UIImage+ReMake.h"
+#import "PhotoScrollView.h"
+#import "SDImageCache.h"
 
-@interface ViewController : UIViewController<UIScrollViewDelegate>
+@interface ViewController : UIViewController
 
+@property (nonatomic,strong) NSMutableArray *pins;
 
 @end
 

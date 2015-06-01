@@ -22,6 +22,6 @@
 -(void)showImages:(UIImage *)image ;
 
 //传入父类的controller
--(void)setParentViewController:(ViewController*)viewController;
+//-(void)setParentViewController:(ViewController*)viewController;
 
 @end

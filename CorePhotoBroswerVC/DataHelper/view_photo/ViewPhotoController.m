@@ -1,54 +1,17 @@
 //
-//  ViewController.m
+//  ViewPhotoController.m
 //  CorePhotoBroswerVC
 //
-//  Created by 成林 on 15/5/4.
-//  Copyright (c) 2015年 冯成林. All rights reserved.
+//  Created by Apple on 15/5/30.
+//  Copyright (c) 2015年 MartinJiang. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "PhotoScrollView.h"
-/*
-#import "PhotoBroswerVC.h"
-#import "PhotoCotentView.h"
-#import "DataMagic.h"
+#import "ViewPhotoController.h"
+#import "SDImageCache.h"
 
-#import "UIImage+ReMake.h"
-*/
-@interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet PhotoScrollView *scrollView;
-//@property (nonatomic,strong) NSMutableArray *pins;
+@implementation ViewPhotoController
 
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    
-    self.automaticallyAdjustsScrollViewInsets = false;
-    
-    UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
-
-    /**/
-    self.tabBarItem.title=@"美图";
-    self.tabBarItem.image= tempBarItem.selectedImage;
-    self.tabBarItem.badgeValue=@"10";
-    //[self showViewPhoto];
-    
-    [self initController];
-}
-/*
--(void)showViewPhoto{
-    
-    ViewPhotoController * controller = [[ViewPhotoController alloc]init];
-    controller.parentViewController = self;
-    controller.scrollView = _scrollView;
-    [controller initController];
-}
-*/
 
 - (void)initController {
     
@@ -66,9 +29,9 @@
     //事件
     [self event];
     
-    [_scrollView initScrollView:self];
+    [_scrollView initScrollView];
     //_scrollView.delegate = self;
-    
+
 }
 
 //请求远程图片
@@ -119,7 +82,7 @@
     
     __weak typeof(self) weakSelf=self;
     
-    [PhotoBroswerVC show:self type:PhotoBroswerVCTypeZoom index:index photoModelBlock:^NSArray *{
+    [PhotoBroswerVC show:_parentViewController type:PhotoBroswerVCTypeZoom index:index photoModelBlock:^NSArray *{
         
         NSArray *localImages = weakSelf.pins;
         
@@ -156,12 +119,12 @@
     
     __weak typeof(self) weakSelf=self;
     
-    [PhotoBroswerVC show:self type:PhotoBroswerVCTypeZoom index:index photoModelBlock:^NSArray *{
+    [PhotoBroswerVC show:_parentViewController type:PhotoBroswerVCTypeZoom index:index photoModelBlock:^NSArray *{
         
         NSArray * networkImages = _pins;;
         
         NSMutableArray *modelsM = [NSMutableArray arrayWithCapacity:networkImages.count];
-        for (NSUInteger i = 0; i< [weakSelf.scrollView.subviews count]; i++) {
+        for (NSUInteger i = 0; i< networkImages.count; i++) {
             
             Pin * pin = _pins[i];
             
@@ -206,8 +169,8 @@
         
         [_pins addObject:pin];
         
-        if([_pins count] < 18)//2页
-           [_scrollView showImages:pin];
+        //if([[_scrollView subviews ]count] < 30)
+         //   [_scrollView showImages:pin];
     }];
     
     //清除board里面的数据
@@ -216,6 +179,7 @@
     
     [[DataMagic Instance]finishShowPage];
 }
+
 
 
 

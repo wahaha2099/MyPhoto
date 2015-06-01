@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		185DFC7E1B1A01CA0058C89E /* MainTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185DFC7D1B1A01CA0058C89E /* MainTab.storyboard */; };
 		1883B6E01B145710009E0271 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6DF1B145710009E0271 /* HttpHelper.m */; };
 		1883B6E31B146652009E0271 /* DataMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6E21B146652009E0271 /* DataMagic.m */; };
 		18C079B91B17009300F92123 /* BoardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C079B81B17009300F92123 /* BoardInfo.m */; };
@@ -111,6 +112,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		185DFC7D1B1A01CA0058C89E /* MainTab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainTab.storyboard; sourceTree = "<group>"; };
 		1883B6DE1B145710009E0271 /* HttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpHelper.h; sourceTree = "<group>"; };
 		1883B6DF1B145710009E0271 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
 		1883B6E11B146652009E0271 /* DataMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMagic.h; sourceTree = "<group>"; };
@@ -292,9 +294,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		185DFC791B19F7AB0058C89E /* view_photo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view_photo;
+			sourceTree = "<group>";
+		};
 		1883B6DD1B1456FE009E0271 /* DataHelper */ = {
 			isa = PBXGroup;
 			children = (
+				185DFC791B19F7AB0058C89E /* view_photo */,
 				18C079B61B17009300F92123 /* board */,
 				1883B6DE1B145710009E0271 /* HttpHelper.h */,
 				1883B6DF1B145710009E0271 /* HttpHelper.m */,
@@ -499,6 +509,7 @@
 				895806B11AFF0463006E49B9 /* show */,
 				896339E31AF7BA1A0085A721 /* Info.plist */,
 				896339E41AF7BA1A0085A721 /* main.m */,
+				185DFC7D1B1A01CA0058C89E /* MainTab.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -944,6 +955,7 @@
 				892DD8AE1B0C1FD20038CC9A /* transition.gif in Resources */,
 				895806B71AFF0463006E49B9 /* 3.gif in Resources */,
 				896339F01AF7BA1A0085A721 /* Images.xcassets in Resources */,
+				185DFC7E1B1A01CA0058C89E /* MainTab.storyboard in Resources */,
 				892DD89F1B0C1FB70038CC9A /* 6.png in Resources */,
 				89F703D41AFB37B500B048E8 /* SVProgressHUD.bundle in Resources */,
 				892DD89D1B0C1FB70038CC9A /* 4.png in Resources */,
