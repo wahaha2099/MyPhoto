@@ -17,7 +17,10 @@
 @property NSString * key;
 @property NSString * pin_id;
 @property NSString * board_id;
+
+//其他图片的地址
 @property NSString * url320;
+@property NSString * url658;
 
 +(Pin*) initPin:(NSDictionary*)json;
 

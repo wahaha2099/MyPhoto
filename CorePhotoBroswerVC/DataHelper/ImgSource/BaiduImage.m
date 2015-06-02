@@ -83,6 +83,7 @@ BaiduImage * instance;
         Pin* pin = [[Pin alloc]init];
         
         pin.url320 = [file objectForKey:@"thumbnailUrl"];
+        pin.url658 = [file objectForKey:@"downloadUrl"];
         pin.pin_id = [file objectForKey:@"id"];
         pin.board_id = baidu_board_id;
 

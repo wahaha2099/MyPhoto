@@ -34,6 +34,9 @@
     return [NSString stringWithFormat:@"http://img.hb.aicdn.com/%@_fw320",_key];
 };
 -(NSString * ) url_658{
+    if(_url658 != nil )
+        return _url658;
+    
     return [NSString stringWithFormat:@"http://img.hb.aicdn.com/%@_fw658",_key];
 };
 

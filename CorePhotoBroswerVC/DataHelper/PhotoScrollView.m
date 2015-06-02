@@ -186,9 +186,11 @@ ViewController * controller;
     if( pin.is_local ){//9张默认的本地图片
         imageV.image = pin.image;
     }else{//其他网络图片
-        //UIImage *placehold = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
-        //pin.placehold = placehold;
-        //imageV.image = pin.placehold;
+        UIImage *placehold = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
+        pin.placehold = placehold;
+        imageV.image = pin.placehold;
+        
+        //异步方式
         [imageV imageWithUrlStr: pin.url_320 phImage:nil];
     }
     
@@ -209,7 +211,7 @@ ViewController * controller;
     
     last_idx = (int)pin.idx ;
     
-    NSLog(@"adding image %i" , (int)pin.idx);
+    //NSLog(@"adding image %i" , (int)pin.idx);
     //默认隐藏
     [imageV setHidden:YES];
     [self addSubview:imageV];
@@ -229,7 +231,18 @@ int page_num = 9;//页数
 -(void)removeNewest:(int)page{
     [cachePage removeObject:[NSNumber numberWithInt:page]];
     NSLog(@"remove newest %i" , page);
-    //int start = page *num;
+    int start = page * page_num;
+    
+    [[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
+        if(v.tag > start){
+            if ([v isKindOfClass:UIImageView.class]) {
+                NSLog(@"remove index %ld" , v.tag);
+                [v removeFromSuperview];
+                v = nil;
+            }
+        }
+    }];
+    /*
     int end = (int)[self.subviews count];
     for(int iCnt = end; iCnt > end; iCnt--) {
 
@@ -238,31 +251,45 @@ int page_num = 9;//页数
             [viewLiberar removeFromSuperview];
             viewLiberar = nil;
         }
-    }
+    }*/
 }
 
 //往下拉,删除上面的数据
 -(void)removePrevious:(int)page{
-    for (int i = 0 ; i< page ; i++) {
-        [self removePage:i];
-    }
+    [self removePage:page];
 }
 
 //往下拉,删除上面的数据
 -(void)removePage:(int)page{
     [cachePage removeObject:[NSNumber numberWithInt:page]];
         NSLog(@"remove previous %i" , page);
-    int start = page * page_num;
-    int end = start + page_num;
-    for(int iCnt = start; iCnt < end; iCnt++) {
-        if([self.subviews count] <= iCnt)break;
+//    int start = page * page_num;
+    int end = (page + 1)* page_num;
     
-        UIView *viewLiberar = [self.subviews objectAtIndex:iCnt];
+    [[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
+        
+        if(v.tag < end){
+            if ([v isKindOfClass:UIImageView.class]) {
+                NSLog(@"remove index %ld" , v.tag);
+                [v removeFromSuperview];
+                v = nil;
+            }
+        }
+    }];
+    
+    /*
+    for(int iCnt = 0; iCnt < [[self subviews]count]; iCnt++) {
+        UIView * viewLiberar = [self viewWithTag:iCnt];
+        
+        if(viewLiberar == nil)continue;
+//        if([self.subviews count] <= iCnt)break;
+//        UIView *viewLiberar = [self.subviews objectAtIndex:iCnt];
         if ([viewLiberar isKindOfClass:UIImageView.class]) {
+            NSLog(@"remove index %ld" , viewLiberar.tag);
             [viewLiberar removeFromSuperview];
             viewLiberar = nil;
         }
-    }
+    }*/
 }
 
 //滑到最后,读取其他界面
@@ -300,15 +327,11 @@ NSMutableSet * cachePage ;
     
     NSLog(@"current %i " ,pageOnScrollView);
     
-/*    NSLog(@"offset.y %i " , (int)scrollOffset.y );
-    NSLog(@"frame.height %i" , (int)scroll.frame.size.height);
-    NSLog(@"page %i",(int)(scrollOffset.y/scroll.frame.size.height));
-    NSLog(@"atual %i " , pagAtual);*/
     if(pageOnScrollView < ((int)scrollOffset.y/scroll.frame.size.height))
     {
-        if(pagAtual - 1 > -1 ){
+        if(pagAtual - 2 > -1 ){
             //if(pagAtual - 2 < 3)
-            [self removePrevious:pagAtual - 1];
+            [self removePrevious:pagAtual - 2];
             //else
             //    [self removePrevious:2];
         }
@@ -321,19 +344,13 @@ NSMutableSet * cachePage ;
     }
     else if(pageOnScrollView > ((int)scrollOffset.y/scroll.frame.size.height))//避免回弹回来导致数据错误
     {
-        [self removeNewest:pagAtual + 0 ];
+        [self removeNewest:pagAtual + 2 ];
         
-        //for (int i = 0 ; i< pagAtual; i++) {
         [self loadNextPage: pagAtual - 1 ];
-        //}
+        //for (int i = 0 ; i< pagAtual; i++) {//}
         
         pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
     }
-/*
-    NSLog(@"offset.y %i " , (int)scrollOffset.y );
-    NSLog(@"frame.height %i" , (int)scroll.frame.size.height);
-    NSLog(@"showing %i ",(int)(scrollOffset.y/scroll.frame.size.height));
-*/
 }
 
 -(void)loadNextPage:(int)page{
