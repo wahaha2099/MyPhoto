@@ -236,22 +236,12 @@ int page_num = 9;//页数
     [[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
         if(v.tag > start){
             if ([v isKindOfClass:UIImageView.class]) {
-                NSLog(@"remove index %ld" , v.tag);
+                //NSLog(@"remove index %ld" , v.tag);
                 [v removeFromSuperview];
                 v = nil;
             }
         }
     }];
-    /*
-    int end = (int)[self.subviews count];
-    for(int iCnt = end; iCnt > end; iCnt--) {
-
-        UIView *viewLiberar = [self.subviews objectAtIndex:iCnt];
-        if ([viewLiberar isKindOfClass:UIImageView.class]) {
-            [viewLiberar removeFromSuperview];
-            viewLiberar = nil;
-        }
-    }*/
 }
 
 //往下拉,删除上面的数据
@@ -263,33 +253,18 @@ int page_num = 9;//页数
 -(void)removePage:(int)page{
     [cachePage removeObject:[NSNumber numberWithInt:page]];
         NSLog(@"remove previous %i" , page);
-//    int start = page * page_num;
+
     int end = (page + 1)* page_num;
     
     [[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
         
         if(v.tag < end){
             if ([v isKindOfClass:UIImageView.class]) {
-                NSLog(@"remove index %ld" , v.tag);
                 [v removeFromSuperview];
                 v = nil;
             }
         }
     }];
-    
-    /*
-    for(int iCnt = 0; iCnt < [[self subviews]count]; iCnt++) {
-        UIView * viewLiberar = [self viewWithTag:iCnt];
-        
-        if(viewLiberar == nil)continue;
-//        if([self.subviews count] <= iCnt)break;
-//        UIView *viewLiberar = [self.subviews objectAtIndex:iCnt];
-        if ([viewLiberar isKindOfClass:UIImageView.class]) {
-            NSLog(@"remove index %ld" , viewLiberar.tag);
-            [viewLiberar removeFromSuperview];
-            viewLiberar = nil;
-        }
-    }*/
 }
 
 //滑到最后,读取其他界面
@@ -353,6 +328,7 @@ NSMutableSet * cachePage ;
     }
 }
 
+bool needFillToPage = false;
 -(void)loadNextPage:(int)page{
     NSLog(@"loading page %i" , page);
     
@@ -363,20 +339,28 @@ NSMutableSet * cachePage ;
 
     for (int i =page * page_num; i < ( page+1) * page_num; i++) {
         if([controller.pins count] <= i){
-            NSLog(@"pins size %ld , num %i" , [controller.pins count] , i);
+            needFillToPage = true;
             break;
         }
-        Pin * pin = [controller.pins objectAtIndex:i];
-        [self showImages:pin];
-    
+        if([self viewWithTag:i] == nil){
+            Pin * pin = [controller.pins objectAtIndex:i];
+            [self showImages:pin];
+        }
     }
     
     if( [controller.pins count] >= (page + 1 ) * page_num )
         [cachePage addObject:[NSNumber numberWithInt:page]];
     
-    NSLog(@" pins count %ld " , [controller.pins count]);
     if([controller.pins count] <=  ( page + 10 ) * page_num){ //保证后面2页是有数据的
         [self loadNextWebData];
+    }
+}
+
+//数据到了的通知
+-(void)pinsRefresh{
+    if(needFillToPage){
+        [self loadNextPage: pageOnScrollView + 1];
+        needFillToPage = false;
     }
 }
 

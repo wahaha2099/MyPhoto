@@ -26,4 +26,7 @@
 //初始化scrollview
 -(void)initScrollView:(id )controller;
 
+//数据到了的通知
+-(void)pinsRefresh;
+
 @end

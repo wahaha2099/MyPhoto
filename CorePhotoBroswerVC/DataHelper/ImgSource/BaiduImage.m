@@ -27,7 +27,7 @@ BaiduImage * instance;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notify object:nil ];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parseBoardCallback:) name:notify object:nil];
     
-    [DataMagic Instance].loading_page++;
+
     
     //根据url获取board_id,就是key
     NSNumber * key = [NSNumber numberWithInt:[baidu_board_id intValue]];
@@ -35,7 +35,7 @@ BaiduImage * instance;
     //
     NSString * url = @"http://image.baidu.com/data/imgs?col=%E7%BE%8E%E5%A5%B3&tag=%E5%85%A8%E9%83%A8&sort=0&tag3=&rn=20&p=channel&from=1";
     
-    url = [url stringByAppendingString:[NSString stringWithFormat:@"&pn=%i", [DataMagic Instance].loading_page]];
+    url = [url stringByAppendingString:[NSString stringWithFormat:@"&pn=%i", [DataMagic Instance].loading_page * 20 ] ];
 
     //init board
     BoardInfo * b = [[[DataMagic Instance] Boards] objectForKey:key];
@@ -48,6 +48,8 @@ BaiduImage * instance;
     
     //NSString * url = [NSString stringWithFormat:@"%@?max=%@&limit=20&wfl=1",board_url,b.max];//381205601,999999999
     [[HttpHelper Instance] request:url notify:notify isJson:false];
+    
+    [DataMagic Instance].loading_page++;
     
     finish_notify = finish_callback;
 }
