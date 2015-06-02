@@ -21,6 +21,7 @@
 
 -(NSString*) getIdx;
 +(BoardInfo*) initByUrl:(NSString *)url;
++(BoardInfo*) initByInt:(NSString *)url idx:(NSString *)idx;
 
 //根据json解析得到
 -(void) addPin:(Pin*)pin;

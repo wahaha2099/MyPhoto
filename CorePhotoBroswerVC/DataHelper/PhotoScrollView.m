@@ -32,15 +32,10 @@ ViewController * controller;
     self.showsHorizontalScrollIndicator=NO;
     self.showsVerticalScrollIndicator=NO;
     self.delegate =self;
-    [self performSelectorInBackground:@selector(loadWebData) withObject:nil];
+    [self performSelectorInBackground:@selector(loadNextWebData) withObject:nil];
     
+    cachePage = [[NSMutableSet alloc]init];
     controller = cont;
-}
-
-//请求远程图片
--(void)loadWebData{
-    //添加远程数据
-    [[DataMagic Instance]requestPic];
 }
 
 //add subview 后,UIView调用此方法进行布局管理
@@ -87,14 +82,19 @@ ViewController * controller;
     }
     */
     //设置content size
-    int newHeight = height * ([self.subviews count] / maxCol );
+    //int newHeight = height * ([self.subviews count] / maxCol );
+    
+    int newHeight = height * (pageOnScrollView + 2) * maxCol;//页数*3行
+    
     if( newHeight > myFrame.size.height ){
         if([self.subviews count] % maxCol > 0){//不足3条多一行
             newHeight += height;
         }
     }
     newHeight = newHeight + height / 2 ;//默认加大一点,避免拖拉不生效
+    
     self.contentSize =  CGSizeMake(myFrame.size.width , newHeight);
+    //NSLog(@"content height %i" , newHeight);
 }
 
 -(void)layoutImageView:(UIImageView*)view pin:(Pin*)pin{
@@ -111,8 +111,8 @@ ViewController * controller;
     
     int imgIndex =  (int) (subView.tag);
     
-    if(imgIndex > [self.subviews count])
-        imgIndex = (int)(subView.tag - [self.subviews count]);
+    //if(imgIndex > [self.subviews count])
+     //   imgIndex = (int)(subView.tag - [self.subviews count]);
         
     //NSLog(@"subview %@ " , subView);
     NSUInteger row = imgIndex % maxRow;
@@ -123,8 +123,8 @@ ViewController * controller;
         
     CGFloat y = height * col;
         
-    //NSLog(@"i , x , y = %ld ,%f , %f " , idx , x , y  );
-        
+    //NSLog(@"i , x , y = %i ,%f , %f " , imgIndex , x , y  );
+
     CGRect frame = CGRectMake(x, y, width, height);
         
     subView.frame = frame;
@@ -186,10 +186,10 @@ ViewController * controller;
     if( pin.is_local ){//9张默认的本地图片
         imageV.image = pin.image;
     }else{//其他网络图片
-        UIImage *placehold = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
-        pin.placehold = placehold;
-        imageV.image = pin.placehold;
-        [imageV imageWithUrlStr: pin.url_320 phImage:pin.placehold];
+        //UIImage *placehold = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
+        //pin.placehold = placehold;
+        //imageV.image = pin.placehold;
+        [imageV imageWithUrlStr: pin.url_320 phImage:nil];
     }
     
     //开启事件
@@ -209,6 +209,7 @@ ViewController * controller;
     
     last_idx = (int)pin.idx ;
     
+    NSLog(@"adding image %i" , (int)pin.idx);
     //默认隐藏
     [imageV setHidden:YES];
     [self addSubview:imageV];
@@ -226,11 +227,12 @@ int page_num = 9;//页数
 
 //往上拉,删除最新的数据
 -(void)removeNewest:(int)page{
-    NSLog(@"remove page >%i" , page);
-
+    [cachePage removeObject:[NSNumber numberWithInt:page]];
+    NSLog(@"remove newest %i" , page);
     //int start = page *num;
     int end = (int)[self.subviews count];
     for(int iCnt = end; iCnt > end; iCnt--) {
+
         UIView *viewLiberar = [self.subviews objectAtIndex:iCnt];
         if ([viewLiberar isKindOfClass:UIImageView.class]) {
             [viewLiberar removeFromSuperview];
@@ -248,12 +250,13 @@ int page_num = 9;//页数
 
 //往下拉,删除上面的数据
 -(void)removePage:(int)page{
-    NSLog(@"remove previous %i" , page);
+    [cachePage removeObject:[NSNumber numberWithInt:page]];
+        NSLog(@"remove previous %i" , page);
     int start = page * page_num;
     int end = start + page_num;
     for(int iCnt = start; iCnt < end; iCnt++) {
         if([self.subviews count] <= iCnt)break;
-        
+    
         UIView *viewLiberar = [self.subviews objectAtIndex:iCnt];
         if ([viewLiberar isKindOfClass:UIImageView.class]) {
             [viewLiberar removeFromSuperview];
@@ -268,12 +271,10 @@ int page_num = 9;//页数
     CGFloat contentYoffset = scrollView.contentOffset.y;
     CGFloat distanceFromBottom = scrollView.contentSize.height - contentYoffset;
     if(distanceFromBottom <= height){
-        if([[DataMagic Instance] isFinishShow]){
-            [self loadNextWebData];
-        }
+        //[self loadNextWebData];
     }
     
-    [self scrollViewDidScroll_end:scrollView];
+    //[self scrollViewDidScroll_end:scrollView];
 }
 
 //查询远程数据
@@ -286,7 +287,10 @@ int page_num = 9;//页数
 
 //第几页显示
 int pageOnScrollView = -1;
-- (void)scrollViewDidScroll_end:(UIScrollView *)scrollView
+
+//显示中的cachePage,用于判断是否需要重新load
+NSMutableSet * cachePage ;
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     UIScrollView * scroll = scrollView;
     CGPoint scrollOffset=scrollView.contentOffset;
@@ -294,39 +298,68 @@ int pageOnScrollView = -1;
     
     if(pagAtual == pageOnScrollView) return ;
     
+    NSLog(@"current %i " ,pageOnScrollView);
+    
+/*    NSLog(@"offset.y %i " , (int)scrollOffset.y );
+    NSLog(@"frame.height %i" , (int)scroll.frame.size.height);
+    NSLog(@"page %i",(int)(scrollOffset.y/scroll.frame.size.height));
+    NSLog(@"atual %i " , pagAtual);*/
     if(pageOnScrollView < ((int)scrollOffset.y/scroll.frame.size.height))
     {
-        if(pagAtual - 2 > -1 ){
-            [self removePrevious:pagAtual - 2];
+        if(pagAtual - 1 > -1 ){
+            //if(pagAtual - 2 < 3)
+            [self removePrevious:pagAtual - 1];
+            //else
+            //    [self removePrevious:2];
         }
         
         //load the next page
         [self loadNextPage:(pagAtual)];
         [self loadNextPage:(pagAtual + 1)];
-    }
-    else if(pageOnScrollView > ((int)scrollOffset.y/scroll.frame.size.height))
-    {
-        [self removeNewest:pagAtual + 3 ];
         
-        for (int i = 0 ; i< pagAtual; i++) {
-            [self loadNextPage:i];
-        }
+        pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
     }
-    
-    pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
+    else if(pageOnScrollView > ((int)scrollOffset.y/scroll.frame.size.height))//避免回弹回来导致数据错误
+    {
+        [self removeNewest:pagAtual + 0 ];
+        
+        //for (int i = 0 ; i< pagAtual; i++) {
+        [self loadNextPage: pagAtual - 1 ];
+        //}
+        
+        pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
+    }
+/*
+    NSLog(@"offset.y %i " , (int)scrollOffset.y );
+    NSLog(@"frame.height %i" , (int)scroll.frame.size.height);
+    NSLog(@"showing %i ",(int)(scrollOffset.y/scroll.frame.size.height));
+*/
 }
 
 -(void)loadNextPage:(int)page{
     NSLog(@"loading page %i" , page);
-    //if(page == 0 )return ;
-    int num = 9;//每页显示9条
+    
+    if([cachePage containsObject:[NSNumber numberWithInt:page]])
+        return ;
+    
+    if(page < 0 )return ;
 
-    for (int i =page *num;( page+1) * num; i++) {
+    for (int i =page * page_num; i < ( page+1) * page_num; i++) {
         if([controller.pins count] <= i){
+            NSLog(@"pins size %ld , num %i" , [controller.pins count] , i);
             break;
         }
         Pin * pin = [controller.pins objectAtIndex:i];
         [self showImages:pin];
+    
+    }
+    
+    if( [controller.pins count] >= (page + 1 ) * page_num )
+        [cachePage addObject:[NSNumber numberWithInt:page]];
+    
+    NSLog(@" pins count %ld " , [controller.pins count]);
+    if([controller.pins count] <=  ( page + 10 ) * page_num){ //保证后面2页是有数据的
+        [self loadNextWebData];
     }
 }
 

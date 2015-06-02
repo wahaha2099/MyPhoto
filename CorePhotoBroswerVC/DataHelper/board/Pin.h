@@ -17,11 +17,12 @@
 @property NSString * key;
 @property NSString * pin_id;
 @property NSString * board_id;
-
+@property NSString * url320;
 
 +(Pin*) initPin:(NSDictionary*)json;
 
 //返回图片地址
+
 -(NSString * ) url_320;
 -(NSString * ) url_658;
 //[NSString stringWithFormat:@"http://img.hb.aicdn.com/%@_fw320",pin.key]

@@ -7,7 +7,7 @@
 //
 
 #import "DataMagic.h"
-#import "BaiduImage.h"
+
 
 @implementation DataMagic
 
@@ -32,9 +32,6 @@ static DataMagic * instance ;
 
 //请求图片
 -(void) requestPic{
-    [[BaiduImage Instance]requestPic:_NOTIFY_HTTP_PIC_REQ finish:_NOTIFY_FINISH_PIC_PARSE];
-    return ;
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:_NOTIFY_HTTP_PIC_REQ object:nil ];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parseBoardCallback:) name:_NOTIFY_HTTP_PIC_REQ object:nil];
 
@@ -59,7 +56,6 @@ static DataMagic * instance ;
     }
     
     NSLog(@"request %@",board_url);
-    b.max =@"46420493";
 
     NSString * url = [NSString stringWithFormat:@"%@?max=%@&limit=20&wfl=1",board_url,b.max];//381205601,999999999
     [[HttpHelper Instance] request:url notify:_NOTIFY_HTTP_PIC_REQ isJson:true];

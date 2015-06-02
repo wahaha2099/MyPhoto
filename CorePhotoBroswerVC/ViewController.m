@@ -156,12 +156,12 @@
     
     __weak typeof(self) weakSelf=self;
     
-    [PhotoBroswerVC show:self type:PhotoBroswerVCTypeZoom index:index photoModelBlock:^NSArray *{
+    [PhotoBroswerVC show:self type:PhotoBroswerVCTypeModal index:index photoModelBlock:^NSArray *{
         
-        NSArray * networkImages = _pins;;
+        NSArray * networkImages = self.pins;
         
         NSMutableArray *modelsM = [NSMutableArray arrayWithCapacity:networkImages.count];
-        for (NSUInteger i = 0; i< [weakSelf.scrollView.subviews count]; i++) {
+        for (NSUInteger i = 0; i< [networkImages count]; i++) {
             
             Pin * pin = _pins[i];
             
@@ -176,8 +176,8 @@
                 pbModel.image_HD_U = pin.url_658;
             
             //源frame
-            UIImageView *imageV =(UIImageView *) weakSelf.scrollView.subviews[i];
-            pbModel.sourceImageView = imageV;
+            //UIImageView *imageV =(UIImageView *) weakSelf.scrollView.subviews[i];
+            //pbModel.sourceImageView = imageV;
             
             [modelsM addObject:pbModel];
         }
@@ -206,13 +206,14 @@
         
         [_pins addObject:pin];
         
-        if([_pins count] < 18)//2页
-           [_scrollView showImages:pin];
+        //if([_pins count] < 18)//2页
+        //[_scrollView showImages:pin];
     }];
-    
+
     //清除board里面的数据
+    board.pins = nil;
     board.pins = [[NSMutableArray alloc]init];
-    [[SDImageCache sharedImageCache] clearMemory];
+    //[[SDImageCache sharedImageCache] clearMemory];
     
     [[DataMagic Instance]finishShowPage];
 }

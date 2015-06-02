@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		185DFC7E1B1A01CA0058C89E /* MainTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185DFC7D1B1A01CA0058C89E /* MainTab.storyboard */; };
+		187893611B1D60D200EC6024 /* BaiduImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 187893601B1D60D200EC6024 /* BaiduImage.m */; };
 		1883B6E01B145710009E0271 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6DF1B145710009E0271 /* HttpHelper.m */; };
 		1883B6E31B146652009E0271 /* DataMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6E21B146652009E0271 /* DataMagic.m */; };
 		18C079B91B17009300F92123 /* BoardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C079B81B17009300F92123 /* BoardInfo.m */; };
@@ -113,6 +114,8 @@
 
 /* Begin PBXFileReference section */
 		185DFC7D1B1A01CA0058C89E /* MainTab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainTab.storyboard; sourceTree = "<group>"; };
+		1878935F1B1D60D200EC6024 /* BaiduImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduImage.h; sourceTree = "<group>"; };
+		187893601B1D60D200EC6024 /* BaiduImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduImage.m; sourceTree = "<group>"; };
 		1883B6DE1B145710009E0271 /* HttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpHelper.h; sourceTree = "<group>"; };
 		1883B6DF1B145710009E0271 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
 		1883B6E11B146652009E0271 /* DataMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMagic.h; sourceTree = "<group>"; };
@@ -301,9 +304,19 @@
 			path = view_photo;
 			sourceTree = "<group>";
 		};
+		1878935E1B1D60D200EC6024 /* ImgSource */ = {
+			isa = PBXGroup;
+			children = (
+				1878935F1B1D60D200EC6024 /* BaiduImage.h */,
+				187893601B1D60D200EC6024 /* BaiduImage.m */,
+			);
+			path = ImgSource;
+			sourceTree = "<group>";
+		};
 		1883B6DD1B1456FE009E0271 /* DataHelper */ = {
 			isa = PBXGroup;
 			children = (
+				1878935E1B1D60D200EC6024 /* ImgSource */,
 				185DFC791B19F7AB0058C89E /* view_photo */,
 				18C079B61B17009300F92123 /* board */,
 				1883B6DE1B145710009E0271 /* HttpHelper.h */,
@@ -1026,6 +1039,7 @@
 				89E38DF41AFB4A51000B273A /* UIImage+GIF.m in Sources */,
 				892DD8DC1B0C1FFD0038CC9A /* PhotoItemView.m in Sources */,
 				89F704181AFB395700B048E8 /* UIWindow+Launch.m in Sources */,
+				187893611B1D60D200EC6024 /* BaiduImage.m in Sources */,
 				89F704171AFB395700B048E8 /* UIView+Extend.m in Sources */,
 				89F704121AFB395700B048E8 /* UIImage+Cut.m in Sources */,
 				892DD8E51B0C20690038CC9A /* PhotoCotentView.m in Sources */,

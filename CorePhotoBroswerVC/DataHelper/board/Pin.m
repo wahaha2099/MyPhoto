@@ -28,6 +28,9 @@
 
 //返回图片地址
 -(NSString * ) url_320{
+    if(_url320 != nil)
+        return _url320;
+    
     return [NSString stringWithFormat:@"http://img.hb.aicdn.com/%@_fw320",_key];
 };
 -(NSString * ) url_658{

@@ -20,6 +20,16 @@
     return b;
 }
 
++(BoardInfo*) initByInt:(NSString *)url idx:(NSString*)idx{
+    BoardInfo * b = [[BoardInfo alloc ] init ] ;
+    
+    b.url = url;
+    b.idx = idx;
+    b.pins = [[NSMutableArray alloc]init];
+    b.max =@"999999999";
+    return b;
+}
+
 -(NSString*)getIdx{
     return _idx;
 }
