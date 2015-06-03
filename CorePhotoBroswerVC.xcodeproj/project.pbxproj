@@ -297,13 +297,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		185DFC791B19F7AB0058C89E /* view_photo */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = view_photo;
-			sourceTree = "<group>";
-		};
 		1878935E1B1D60D200EC6024 /* ImgSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,7 +310,6 @@
 			isa = PBXGroup;
 			children = (
 				1878935E1B1D60D200EC6024 /* ImgSource */,
-				185DFC791B19F7AB0058C89E /* view_photo */,
 				18C079B61B17009300F92123 /* board */,
 				1883B6DE1B145710009E0271 /* HttpHelper.h */,
 				1883B6DF1B145710009E0271 /* HttpHelper.m */,

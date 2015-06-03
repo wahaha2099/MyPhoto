@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import "PhotoScrollView.h"
+#import "SDImageCache.h"
+#import "SDWebImageDownloader.h"
+
 /*
 #import "PhotoBroswerVC.h"
 #import "PhotoCotentView.h"
@@ -51,6 +54,12 @@
 */
 
 - (void)initController {
+    
+    [[SDImageCache sharedImageCache]setMaxMemoryCost:10 ];
+    [[SDImageCache sharedImageCache] setShouldDecompressImages:NO];
+    [[SDWebImageDownloader sharedDownloader] setShouldDecompressImages:NO];
+
+    //[[SDImageCache sharedImageCache]setMaxCacheSize:];
     
     _pins = [[NSMutableArray alloc]init];
     
@@ -155,6 +164,7 @@
     
     
     __weak typeof(self) weakSelf=self;
+    __weak NSMutableArray * __pins = _pins;
     
     [PhotoBroswerVC show:self type:PhotoBroswerVCTypeModal index:index photoModelBlock:^NSArray *{
         
@@ -163,7 +173,7 @@
         NSMutableArray *modelsM = [NSMutableArray arrayWithCapacity:networkImages.count];
         for (NSUInteger i = 0; i< [networkImages count]; i++) {
             
-            Pin * pin = _pins[i];
+            Pin * pin = __pins[i];
             
             PhotoModel *pbModel=[[PhotoModel alloc] init];
             pbModel.mid = i + 1;
@@ -201,10 +211,11 @@
 
 //异步添加图片到ui
 -(void)addPin2UI:(BoardInfo*)board{
+    __weak NSMutableArray * __pins = _pins;
     [board.pins enumerateObjectsUsingBlock:^(Pin * pin, NSUInteger idx, BOOL *stop) {
-        pin.idx = [_pins count];
+        pin.idx = [__pins count];
         
-        [_pins addObject:pin];
+        [__pins addObject:pin];
         
         //if([_pins count] < 18)//2页
         //[_scrollView showImages:pin];
@@ -213,9 +224,14 @@
     //清除board里面的数据
     board.pins = nil;
     board.pins = [[NSMutableArray alloc]init];
+    
     //[[SDImageCache sharedImageCache] clearMemory];
+    //[[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+
     
     [[DataMagic Instance]finishShowPage];
+    
+    [_scrollView pinsRefresh];
 }
 
 

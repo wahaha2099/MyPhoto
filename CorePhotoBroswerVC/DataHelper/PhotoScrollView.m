@@ -50,41 +50,15 @@ ViewController * controller;
     CGRect myFrame = [[UIScreen mainScreen] bounds];
 
     NSUInteger maxCol = 3;
-    NSUInteger maxRow = 3;
+    //NSUInteger maxRow = 3;
+    //CGFloat width = myFrame.size.width / maxRow;
     
-    CGFloat width = myFrame.size.width / maxRow;
     CGFloat height = myFrame.size.height / maxCol;
-    /*
-//    for(int idx = finish_idx ; idx < last_idx ; idx++){
-      for(int idx = 0 ; idx <  [self.subviews count] ; idx++){
-   
-        UIView * subView = [self.subviews objectAtIndex:idx];
-        int imgIndex =  (int) subView.tag % [self.subviews count];
-          
-        //NSLog(@"subview %@ " , subView);
-        NSUInteger row = imgIndex % maxRow;
-        
-        NSUInteger col = imgIndex / maxCol;
-        
-        CGFloat x = width * row;
-        
-        CGFloat y = height * col;
-        
-        //NSLog(@"i , x , y = %ld ,%f , %f " , idx , x , y  );
-        
-        CGRect frame = CGRectMake(x, y, width, height);
-        
-        subView.frame = frame;
-        
-        //添加手势
-        [subView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchImage:)]];
-        [subView setHidden:NO];
-    }
-    */
+    
     //设置content size
     //int newHeight = height * ([self.subviews count] / maxCol );
     
-    int newHeight = height * (pageOnScrollView + 2) * maxCol;//页数*3行
+    int newHeight = height * (pageOnScrollView + 2) * 4;//页数*4行
     
     if( newHeight > myFrame.size.height ){
         if([self.subviews count] % maxCol > 0){//不足3条多一行
@@ -106,15 +80,10 @@ ViewController * controller;
     CGFloat width = myFrame.size.width / maxRow;
     CGFloat height = myFrame.size.height / maxCol;
     
-    //    for(int idx = finish_idx ; idx < last_idx ; idx++){
-    UIImageView * subView = view;
+    __weak UIImageView * subView = view;
     
     int imgIndex =  (int) (subView.tag);
     
-    //if(imgIndex > [self.subviews count])
-     //   imgIndex = (int)(subView.tag - [self.subviews count]);
-        
-    //NSLog(@"subview %@ " , subView);
     NSUInteger row = imgIndex % maxRow;
     
     NSUInteger col = imgIndex / maxCol;
@@ -133,7 +102,7 @@ ViewController * controller;
     [subView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchImage:)]];
     [subView setHidden:NO];
 }
-
+/*
 -(void)setImages:(NSArray *)images{
     
     _images = images;
@@ -167,7 +136,7 @@ ViewController * controller;
         last_idx++;
         [self addSubview:imageV];
     }];
-}
+}*/
 
 -(void)touchImage:(UITapGestureRecognizer *)tap{
     if([tap.view isKindOfClass:[UIImageView class]]){
@@ -180,16 +149,19 @@ ViewController * controller;
 
 
 -(void)showImages:(Pin *)pin {
+    //pin.url320 = @"http://imgt8.bdstatic.com/it/u=2,971217956&fm=25&gp=0.jpg";
     
     UIImageView * imageV = [[UIImageView alloc]init];
     
     if( pin.is_local ){//9张默认的本地图片
         imageV.image = pin.image;
     }else{//其他网络图片
-        UIImage *placehold = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
-        pin.placehold = placehold;
-        imageV.image = pin.placehold;
-        
+        /* 同步方式
+        NSURL *imageURL = [NSURL URLWithString:pin.url320];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        UIImage *im = [UIImage imageWithData:imageData];
+        imageV.image = im;
+         */
         //异步方式
         [imageV imageWithUrlStr: pin.url_320 phImage:nil];
     }
@@ -208,6 +180,8 @@ ViewController * controller;
     [imageV setUserInteractionEnabled:YES];
     //设置tag
     imageV.tag = pin.idx ;//(last_idx++);
+    
+    //NSLog(@"add tag %i , %@" , (int)imageV.tag , pin.url320 );
     
     last_idx = (int)pin.idx ;
     
@@ -230,13 +204,18 @@ int page_num = 9;//页数
 //往上拉,删除最新的数据
 -(void)removeNewest:(int)page{
     [cachePage removeObject:[NSNumber numberWithInt:page]];
-    NSLog(@"remove newest %i" , page);
+    //NSLog(@"remove newest %i" , page);
     int start = page * page_num;
     
     [[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
         if(v.tag > start){
             if ([v isKindOfClass:UIImageView.class]) {
-                //NSLog(@"remove index %ld" , v.tag);
+                UIImageView * iv = (UIImageView*) v;
+                //NSLog(@"remove tag %i " , (int)v.tag);
+                iv.image = nil;
+                for (UIGestureRecognizer *recognizer in v.gestureRecognizers) {
+                    [v removeGestureRecognizer:recognizer];
+                }
                 [v removeFromSuperview];
                 v = nil;
             }
@@ -252,7 +231,7 @@ int page_num = 9;//页数
 //往下拉,删除上面的数据
 -(void)removePage:(int)page{
     [cachePage removeObject:[NSNumber numberWithInt:page]];
-        NSLog(@"remove previous %i" , page);
+    //NSLog(@"remove previous %i" , page);
 
     int end = (page + 1)* page_num;
     
@@ -260,6 +239,12 @@ int page_num = 9;//页数
         
         if(v.tag < end){
             if ([v isKindOfClass:UIImageView.class]) {
+                //NSLog(@"remove tag %i " , (int)v.tag);
+                UIImageView * iv = (UIImageView*) v;
+                iv.image = nil;
+                for (UIGestureRecognizer *recognizer in v.gestureRecognizers) {
+                    [v removeGestureRecognizer:recognizer];
+                }
                 [v removeFromSuperview];
                 v = nil;
             }
@@ -282,7 +267,6 @@ int page_num = 9;//页数
 //查询远程数据
 -(void)loadNextWebData{
     if([[DataMagic Instance] isFinishShow]){
-        //if((pageOnScrollView+1) * 9 >= [_pins count])//每页数据需要请求
         [[DataMagic Instance] requestPic];
     }
 }
@@ -292,6 +276,10 @@ int pageOnScrollView = -1;
 
 //显示中的cachePage,用于判断是否需要重新load
 NSMutableSet * cachePage ;
+
+//拉取下面2页的同步器
+bool loadingNext2Page = false;
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     UIScrollView * scroll = scrollView;
@@ -300,29 +288,31 @@ NSMutableSet * cachePage ;
     
     if(pagAtual == pageOnScrollView) return ;
     
-    NSLog(@"current %i " ,pageOnScrollView);
+    //NSLog(@"current %i " ,pageOnScrollView);
     
     if(pageOnScrollView < ((int)scrollOffset.y/scroll.frame.size.height))
     {
+        if(loadingNext2Page)return ;
+        
         if(pagAtual - 2 > -1 ){
-            //if(pagAtual - 2 < 3)
             [self removePrevious:pagAtual - 2];
-            //else
-            //    [self removePrevious:2];
         }
         
+        loadingNext2Page = true;
         //load the next page
         [self loadNextPage:(pagAtual)];
         [self loadNextPage:(pagAtual + 1)];
+        [self loadNextPage:(pagAtual + 2)];
         
         pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
+        
+        loadingNext2Page = false;
     }
     else if(pageOnScrollView > ((int)scrollOffset.y/scroll.frame.size.height))//避免回弹回来导致数据错误
     {
-        [self removeNewest:pagAtual + 2 ];
+        [self removeNewest:pagAtual + 3 ];
         
         [self loadNextPage: pagAtual - 1 ];
-        //for (int i = 0 ; i< pagAtual; i++) {//}
         
         pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
     }
@@ -330,10 +320,11 @@ NSMutableSet * cachePage ;
 
 bool needFillToPage = false;
 -(void)loadNextPage:(int)page{
-    NSLog(@"loading page %i" , page);
-    
+
     if([cachePage containsObject:[NSNumber numberWithInt:page]])
         return ;
+    
+    //NSLog(@"loading page %i" , page);
     
     if(page < 0 )return ;
 
@@ -342,16 +333,21 @@ bool needFillToPage = false;
             needFillToPage = true;
             break;
         }
+        
         if([self viewWithTag:i] == nil){
             Pin * pin = [controller.pins objectAtIndex:i];
             [self showImages:pin];
         }
     }
+    if( page == 0 ){
+        Pin * pin = [controller.pins objectAtIndex:0];//0的在viewWithTag中返回不为空,需要手动加
+        [self showImages:pin];
+    }
     
     if( [controller.pins count] >= (page + 1 ) * page_num )
         [cachePage addObject:[NSNumber numberWithInt:page]];
     
-    if([controller.pins count] <=  ( page + 10 ) * page_num){ //保证后面2页是有数据的
+    if([controller.pins count] <=  ( page + 3 ) * page_num){ //保证后面2页是有数据的
         [self loadNextWebData];
     }
 }

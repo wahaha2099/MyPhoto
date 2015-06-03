@@ -21,7 +21,7 @@
 
 @property (strong, nonatomic, readwrite) SDImageCache *imageCache;
 @property (strong, nonatomic, readwrite) SDWebImageDownloader *imageDownloader;
-@property (strong, nonatomic) NSMutableSet *failedURLs;
+@property (strong, nonatomic) NSMutableArray *failedURLs;
 @property (strong, nonatomic) NSMutableArray *runningOperations;
 
 @end
@@ -41,7 +41,7 @@
     if ((self = [super init])) {
         _imageCache = [self createCache];
         _imageDownloader = [SDWebImageDownloader sharedDownloader];
-        _failedURLs = [NSMutableSet new];
+        _failedURLs = [NSMutableArray new];
         _runningOperations = [NSMutableArray new];
     }
     return self;
@@ -194,7 +194,9 @@
 
                     if (error.code != NSURLErrorNotConnectedToInternet && error.code != NSURLErrorCancelled && error.code != NSURLErrorTimedOut) {
                         @synchronized (self.failedURLs) {
-                            [self.failedURLs addObject:url];
+                            if (![self.failedURLs containsObject:url]) {
+                                [self.failedURLs addObject:url];
+                            }
                         }
                     }
                 }
@@ -288,6 +290,18 @@
     }
 }
 
+- (void)cancelOperations:(NSArray *)operations
+{
+    @synchronized (self.runningOperations) {
+        NSArray *operationsToCancel = [self.runningOperations filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSOperation *evaluatedObject, NSDictionary *bindings) {
+            return [operations containsObject:evaluatedObject];
+        }]];
+
+        [operationsToCancel makeObjectsPerformSelector:@selector(cancel)];
+        [self.runningOperations removeObjectsInArray:operationsToCancel];
+    }
+}
+
 - (BOOL)isRunning {
     return self.runningOperations.count > 0;
 }
@@ -323,24 +337,6 @@
 //        self.cancelBlock = nil;
         _cancelBlock = nil;
     }
-}
-
-@end
-
-
-@implementation SDWebImageManager (Deprecated)
-
-// deprecated method, uses the non deprecated method
-// adapter for the completion block
-- (id <SDWebImageOperation>)downloadWithURL:(NSURL *)url options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletedWithFinishedBlock)completedBlock {
-    return [self downloadImageWithURL:url
-                              options:options
-                             progress:progressBlock
-                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                if (completedBlock) {
-                                    completedBlock(image, error, cacheType, finished);
-                                }
-                            }];
 }
 
 @end

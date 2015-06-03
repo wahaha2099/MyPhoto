@@ -13,7 +13,7 @@
 @interface PhotoScrollView : UIScrollView
 
 /** 图片数组 */
-@property (nonatomic,strong) NSArray *images;
+//@property (nonatomic,strong) NSArray *images;
 
 @property (nonatomic,copy) void (^ClickImageBlock)(NSUInteger index);
 

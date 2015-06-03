@@ -29,10 +29,6 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
     return NO;
 }
 
-FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
-    return image.size.height * image.size.width * image.scale * image.scale;
-}
-
 @interface SDImageCache ()
 
 @property (strong, nonatomic) NSCache *memCache;
@@ -75,13 +71,16 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 
         // Init the memory cache
         _memCache = [[NSCache alloc] init];
+        //[_memCache setTotalCostLimit:10];
+        //[_memCache setCountLimit:10];//设置20张内存缓存
         _memCache.name = fullNamespace;
 
         // Init the disk cache
-        _diskCachePath = [self makeDiskCachePath:fullNamespace];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        _diskCachePath = [paths[0] stringByAppendingPathComponent:fullNamespace];
 
         // Set decompression to YES
-        _shouldDecompressImages = YES;
+        _shouldDecompressImages = NO;
 
         dispatch_sync(_ioQueue, ^{
             _fileManager = [NSFileManager new];
@@ -150,19 +149,12 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 
 #pragma mark ImageCache
 
-// Init the disk cache
--(NSString *)makeDiskCachePath:(NSString*)fullNamespace{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    return [paths[0] stringByAppendingPathComponent:fullNamespace];
-}
-
 - (void)storeImage:(UIImage *)image recalculateFromImage:(BOOL)recalculate imageData:(NSData *)imageData forKey:(NSString *)key toDisk:(BOOL)toDisk {
     if (!image || !key) {
         return;
     }
 
-    NSUInteger cost = SDCacheCostForImage(image);
-    [self.memCache setObject:image forKey:key cost:cost];
+    [self.memCache setObject:image forKey:key cost:image.size.height * image.size.width * image.scale * image.scale];
 
     if (toDisk) {
         dispatch_async(self.ioQueue, ^{
@@ -249,7 +241,7 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
     // Second check the disk cache...
     UIImage *diskImage = [self diskImageForKey:key];
     if (diskImage) {
-        NSUInteger cost = SDCacheCostForImage(diskImage);
+        CGFloat cost = diskImage.size.height * diskImage.size.width * diskImage.scale * diskImage.scale;
         [self.memCache setObject:diskImage forKey:key cost:cost];
     }
 
@@ -263,8 +255,7 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
         return data;
     }
 
-    NSArray *customPaths = [self.customPaths copy];
-    for (NSString *path in customPaths) {
+    for (NSString *path in self.customPaths) {
         NSString *filePath = [self cachePathForKey:key inPath:path];
         NSData *imageData = [NSData dataWithContentsOfFile:filePath];
         if (imageData) {
@@ -320,7 +311,7 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
         @autoreleasepool {
             UIImage *diskImage = [self diskImageForKey:key];
             if (diskImage) {
-                NSUInteger cost = SDCacheCostForImage(diskImage);
+                CGFloat cost = diskImage.size.height * diskImage.size.width * diskImage.scale * diskImage.scale;
                 [self.memCache setObject:diskImage forKey:key cost:cost];
             }
 
