@@ -17,17 +17,11 @@
 //请求图片
 -(void)requestPic;
 
-//解析关注的人
--(void) parseFollow;
-
 //展示结束
 -(void)finishShowPage;
 
 //是否展示结束
 -(bool)isFinishShow;
-
-//board画板对应的信息,
-@property NSMutableDictionary * Boards ;
 
 //当前请求的页数
 @property int loading_page;
@@ -38,5 +32,8 @@
 @property NSString * NOTIFY_HTTP_PIC_REQ ;
 @property NSString * NOTIFY_FINISH_PIC_REQ ;
 @property NSString * NOTIFY_FINISH_PIC_PARSE;
+
+//board画板对应的信息,
+@property NSMutableDictionary * Boards ;
 
 @end

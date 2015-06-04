@@ -21,9 +21,6 @@
 //解析关注的人
 -(void) parseFollow;
 
-//board画板对应的信息,
-@property NSMutableDictionary * Boards ;
-
 
 
 

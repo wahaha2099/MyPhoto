@@ -23,7 +23,7 @@ static HuabanImage * instance ;
 +(instancetype) Instance{
     if( instance == nil){
         instance = [[HuabanImage alloc] init];
-        instance.Boards = [[NSMutableDictionary alloc]init];
+
     }
     return instance;
 }
@@ -50,6 +50,7 @@ static HuabanImage * instance ;
     NSNumber * key = [NSNumber numberWithLongLong:[[board_url lastPathComponent]longLongValue ]];
     
     //init board
+    NSMutableDictionary * _Boards = [[DataMagic Instance]Boards];
     BoardInfo * b = [_Boards objectForKey:key];
     if(b == nil){
         b = [BoardInfo initByUrl:board_url];
@@ -60,7 +61,7 @@ static HuabanImage * instance ;
     //b.max =@"46420493";
 
     NSString * url = [NSString stringWithFormat:@"%@?max=%@&limit=20&wfl=1",board_url,b.max];//381205601,999999999
-    [[HttpHelper Instance] request:url notify:notify isJson:false];
+    [[HttpHelper Instance] request:url notify:notify isJson:true];
     
     [DataMagic Instance].loading_page++;
     
@@ -86,6 +87,8 @@ static HuabanImage * instance ;
     
     NSString * board_id = [board objectForKey:@"board_id"];
     NSArray * pins = [board objectForKey:@"pins"];
+    
+    NSMutableDictionary * _Boards = [[DataMagic Instance]Boards];
     [pins enumerateObjectsUsingBlock:^(NSDictionary * pin_dic, NSUInteger idx, BOOL *stop) {
         Pin* pin = [Pin initPin:pin_dic];
         [[_Boards objectForKey:[NSNumber numberWithLongLong:[pin.board_id longLongValue]]] addPin:pin];
