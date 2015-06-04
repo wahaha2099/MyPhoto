@@ -10,6 +10,7 @@
 		185DFC7E1B1A01CA0058C89E /* MainTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185DFC7D1B1A01CA0058C89E /* MainTab.storyboard */; };
 		187893611B1D60D200EC6024 /* BaiduImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 187893601B1D60D200EC6024 /* BaiduImage.m */; };
 		187893641B2007FF00EC6024 /* HuabanImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 187893631B2007FF00EC6024 /* HuabanImage.m */; };
+		1878937E1B207FC400EC6024 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1878937D1B207FC400EC6024 /* iAd.framework */; };
 		1883B6E01B145710009E0271 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6DF1B145710009E0271 /* HttpHelper.m */; };
 		1883B6E31B146652009E0271 /* DataMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6E21B146652009E0271 /* DataMagic.m */; };
 		18C079B91B17009300F92123 /* BoardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C079B81B17009300F92123 /* BoardInfo.m */; };
@@ -119,6 +120,7 @@
 		187893601B1D60D200EC6024 /* BaiduImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduImage.m; sourceTree = "<group>"; };
 		187893621B2007FF00EC6024 /* HuabanImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuabanImage.h; sourceTree = "<group>"; };
 		187893631B2007FF00EC6024 /* HuabanImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuabanImage.m; sourceTree = "<group>"; };
+		1878937D1B207FC400EC6024 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		1883B6DE1B145710009E0271 /* HttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpHelper.h; sourceTree = "<group>"; };
 		1883B6DF1B145710009E0271 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
 		1883B6E11B146652009E0271 /* DataMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMagic.h; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1878937E1B207FC400EC6024 /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +483,7 @@
 		896339D61AF7BA1A0085A721 = {
 			isa = PBXGroup;
 			children = (
+				1878937D1B207FC400EC6024 /* iAd.framework */,
 				896339E11AF7BA1A0085A721 /* CorePhotoBroswerVC */,
 				896339FB1AF7BA1A0085A721 /* CorePhotoBroswerVCTests */,
 				896339E01AF7BA1A0085A721 /* Products */,
