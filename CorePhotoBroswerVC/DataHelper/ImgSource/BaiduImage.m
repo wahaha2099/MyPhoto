@@ -8,10 +8,16 @@
 
 #import "BaiduImage.h"
 
+@interface BaiduImage()
+
+@property NSString * finish_notify;
+
+@end
+
 @implementation BaiduImage
 //
 
-NSString * finish_notify;
+
 NSString * baidu_board_id = @"99999999";
 
 BaiduImage * instance;
@@ -51,7 +57,7 @@ BaiduImage * instance;
     
     [DataMagic Instance].loading_page++;
     
-    finish_notify = finish_callback;
+    _finish_notify = finish_callback;
 }
      
 //处理请求返回
@@ -66,7 +72,7 @@ BaiduImage * instance;
         //_loading_page--;
         
         //通知界面更新
-        [[NSNotificationCenter defaultCenter] postNotificationName:finish_notify object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:nil userInfo:nil];
         return ;
     }
     NSDictionary * rs = [NSJSONSerialization JSONObjectWithData:rsp options:NSJSONReadingMutableLeaves error:&error];
@@ -94,6 +100,6 @@ BaiduImage * instance;
     }
 
     //通知界面更新
-    [[NSNotificationCenter defaultCenter] postNotificationName:finish_notify object:key userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:key userInfo:nil];
 }
 @end

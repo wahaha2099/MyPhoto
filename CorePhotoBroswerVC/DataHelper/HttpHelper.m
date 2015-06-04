@@ -65,7 +65,7 @@ static HttpHelper * helper ;
         [URLRequest setValue:@"http://huaban.com/" forHTTPHeaderField:@"Referer"];
         [URLRequest setValue:@"JSON" forHTTPHeaderField:@"X-Request"];
         [URLRequest setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
-        [URLRequest setValue:@"_hmt2=1; _dc=1;sid=5Jvkbfx8h4mU0ZKpXIFTIeC8.cbsxUghDo3YwLIjGRSGFzKQ1K1FoWH7a9RwIyDMJpuM; _ga2=GA1.2.2003196218.1428032843; __asc2=2acf350114db2c52c2f1835f35b; __auc=df91d1df14c7d63ef1865537567" forHTTPHeaderField:@"Cookie"];
+        //[URLRequest setValue:@"_hmt2=1; _dc=1;sid1=5Jvkbfx8h4mU0ZKpXIFTIeC8.cbsxUghDo3YwLIjGRSGFzKQ1K1FoWH7a9RwIyDMJpuM; _ga2=GA1.2.2003196218.1428032843; __asc2=2acf350114db2c52c2f1835f35b; __auc=df91d1df14c7d63ef1865537567" forHTTPHeaderField:@"Cookie"];
         
     }
     return URLRequest;

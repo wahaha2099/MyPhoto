@@ -6,39 +6,40 @@
 //  Copyright (c) 2015年 冯成林. All rights reserved.
 //
 
-#import "DataMagic.h"
+#import "HuabanImage.h"
 
+@interface HuabanImage()
 
-@implementation DataMagic
+@property NSString * finish_notify;
 
-NSString * notify = @"Notification_finish_follow";
+@end
+
+@implementation HuabanImage
+
 
 //通知回调
-static DataMagic * instance ;
+static HuabanImage * instance ;
 
 +(instancetype) Instance{
     if( instance == nil){
-        instance = [[DataMagic alloc] init];
+        instance = [[HuabanImage alloc] init];
         instance.Boards = [[NSMutableDictionary alloc]init];
-        
-        instance.NOTIFY_HTTP_PIC_REQ = @"NOTIFY_HTTP_PIC_REQ";
-        instance.NOTIFY_FINISH_PIC_REQ = @"NOTIFY_FINISH_PIC_REQ";
-        instance.NOTIFY_FINISH_PIC_PARSE = @"NOTIFY_FINISH_PIC_PARSE";
     }
-
     return instance;
 }
 
 
 //请求图片
--(void) requestPic{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:_NOTIFY_HTTP_PIC_REQ object:nil ];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parseBoardCallback:) name:_NOTIFY_HTTP_PIC_REQ object:nil];
+-(void) requestPic:(NSString * )notify finish:(NSString*)finish_callback{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notify object:nil ];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parseBoardCallback:) name:notify object:nil];
 
     NSArray * list = [self getFollowList];
 
     //轮训 board
     NSString * board_url = nil;
+    int _loading_page = [DataMagic Instance].loading_page;
+    
     if(_loading_page < [list count]){
         board_url = [list objectAtIndex:_loading_page];
     }else{
@@ -56,24 +57,14 @@ static DataMagic * instance ;
     }
     
     NSLog(@"request %@",board_url);
+    //b.max =@"46420493";
 
     NSString * url = [NSString stringWithFormat:@"%@?max=%@&limit=20&wfl=1",board_url,b.max];//381205601,999999999
-    [[HttpHelper Instance] request:url notify:_NOTIFY_HTTP_PIC_REQ isJson:true];
-    _loading_page++;
+    [[HttpHelper Instance] request:url notify:notify isJson:false];
     
-    /*
-    [list enumerateObjectsUsingBlock:^( NSString * obj, NSUInteger idx, BOOL *stop) {
-        if(idx < 2){
-            NSLog(@"request %@",obj);
-     
-            BoardInfo * b = [BoardInfo initByUrl:obj];
-            NSNumber * key = [NSNumber numberWithLongLong:[[b getIdx]longLongValue ]];
-            [_Boards setObject:b forKey: key];
-            
-            NSString * url = [NSString stringWithFormat:@"%@?max=999999999&limit=20&wfl=1",obj];//381205601,999999999
-            [[HttpHelper Instance] request:url notify:_NOTIFY_HTTP_PIC_REQ isJson:true];
-        }
-    }];*/
+    [DataMagic Instance].loading_page++;
+    
+    _finish_notify = finish_callback;
 }
 
 //处理请求返回
@@ -84,10 +75,10 @@ static DataMagic * instance ;
     if (rsp == nil || [rsp length] == 0 ){
         NSLog(@"no data %@" , rsp);
         
-        _loading_page--;
+        [DataMagic Instance].loading_page--;
         
         //通知界面更新
-        [[NSNotificationCenter defaultCenter] postNotificationName:_NOTIFY_FINISH_PIC_PARSE object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:nil userInfo:nil];
         return ;
     }
     NSDictionary * rs = [NSJSONSerialization JSONObjectWithData:rsp options:NSJSONReadingMutableLeaves error:&error];
@@ -101,7 +92,7 @@ static DataMagic * instance ;
     }];
     
     //通知界面更新
-    [[NSNotificationCenter defaultCenter] postNotificationName:_NOTIFY_FINISH_PIC_PARSE object:board_id userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:board_id userInfo:nil];
 }
 
 //返回默认的一些关注列表
@@ -111,32 +102,24 @@ static DataMagic * instance ;
     return b;
 }
 
+NSString * notify_follow = @"Notification_finish_follow";
 //请求远程,解析我关注的人
 -(void) parseFollow{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFollowSuccess:) name:notify object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFollowSuccess:) name:notify_follow object:nil];
     NSString * followUrl = @"http://huaban.com/sksq7twbdf/following/";
-    [[HttpHelper Instance]request:followUrl notify:notify isJson:false];
+    [[HttpHelper Instance]request:followUrl notify:notify_follow isJson:false];
 }
 
 //请求数据返回
 - (void) getFollowSuccess: (NSNotification*) aNotification
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:notify object:nil ];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notify_follow object:nil ];
     
     //NSString * rsp = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
     NSString * rsp = [aNotification object];
     NSLog(@"follow %@" , rsp);
 }
 
-//展示结束
--(void)finishShowPage{
-    _finished_page = _loading_page;
-}
-
-//是否展示结束
--(bool)isFinishShow{
-    return _finished_page == _loading_page;
-}
 /*
  follow页面的解析方式
  //sksq7twbdf/following/

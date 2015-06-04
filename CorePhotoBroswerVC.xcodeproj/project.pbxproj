@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		185DFC7E1B1A01CA0058C89E /* MainTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185DFC7D1B1A01CA0058C89E /* MainTab.storyboard */; };
 		187893611B1D60D200EC6024 /* BaiduImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 187893601B1D60D200EC6024 /* BaiduImage.m */; };
+		187893641B2007FF00EC6024 /* HuabanImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 187893631B2007FF00EC6024 /* HuabanImage.m */; };
 		1883B6E01B145710009E0271 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6DF1B145710009E0271 /* HttpHelper.m */; };
 		1883B6E31B146652009E0271 /* DataMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6E21B146652009E0271 /* DataMagic.m */; };
 		18C079B91B17009300F92123 /* BoardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C079B81B17009300F92123 /* BoardInfo.m */; };
@@ -116,6 +117,8 @@
 		185DFC7D1B1A01CA0058C89E /* MainTab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainTab.storyboard; sourceTree = "<group>"; };
 		1878935F1B1D60D200EC6024 /* BaiduImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduImage.h; sourceTree = "<group>"; };
 		187893601B1D60D200EC6024 /* BaiduImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduImage.m; sourceTree = "<group>"; };
+		187893621B2007FF00EC6024 /* HuabanImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuabanImage.h; sourceTree = "<group>"; };
+		187893631B2007FF00EC6024 /* HuabanImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuabanImage.m; sourceTree = "<group>"; };
 		1883B6DE1B145710009E0271 /* HttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpHelper.h; sourceTree = "<group>"; };
 		1883B6DF1B145710009E0271 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
 		1883B6E11B146652009E0271 /* DataMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMagic.h; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 		1878935E1B1D60D200EC6024 /* ImgSource */ = {
 			isa = PBXGroup;
 			children = (
+				187893621B2007FF00EC6024 /* HuabanImage.h */,
+				187893631B2007FF00EC6024 /* HuabanImage.m */,
 				1878935F1B1D60D200EC6024 /* BaiduImage.h */,
 				187893601B1D60D200EC6024 /* BaiduImage.m */,
 			);
@@ -1045,6 +1050,7 @@
 				89E38DF81AFB4A51000B273A /* UIImageView+WebCache.m in Sources */,
 				892DD8DB1B0C1FFD0038CC9A /* PhotoImageView.m in Sources */,
 				892DD8D31B0C1FFD0038CC9A /* PBConst.m in Sources */,
+				187893641B2007FF00EC6024 /* HuabanImage.m in Sources */,
 				896339E81AF7BA1A0085A721 /* AppDelegate.m in Sources */,
 				896339E51AF7BA1A0085A721 /* main.m in Sources */,
 				89F704131AFB395700B048E8 /* UIImage+Extend.m in Sources */,
