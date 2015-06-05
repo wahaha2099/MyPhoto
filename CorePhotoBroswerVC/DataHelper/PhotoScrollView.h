@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 #import "Pin.h"
+#import "UIImageView+SD.h"
+#import "DataMagic.h"
 
 @interface PhotoScrollView : UIScrollView
 

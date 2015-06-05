@@ -6,10 +6,8 @@
 //  Copyright (c) 2015年 冯成林. All rights reserved.
 //
 
+
 #import "ViewController.h"
-#import "PhotoScrollView.h"
-#import "SDImageCache.h"
-#import "SDWebImageDownloader.h"
 
 /*
 #import "PhotoBroswerVC.h"
@@ -18,7 +16,7 @@
 
 #import "UIImage+ReMake.h"
 */
-@interface ViewController ()
+@interface ViewController ()<ADBannerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet PhotoScrollView *scrollView;
 //@property (nonatomic,strong) NSMutableArray *pins;
@@ -42,6 +40,7 @@
     //[self showViewPhoto];
     
     [self initController];
+    [[iAdHelper Instance] addADBanner:self.view];
 }
 /*
 -(void)showViewPhoto{
@@ -234,6 +233,29 @@
     [_scrollView pinsRefresh];
 }
 
+-(void)showTabBarController:(bool)show{
+    CGRect screen = [[UIScreen mainScreen] bounds];
+    
+    CGRect size = self.tabBarController.tabBar.frame  ;
+    if(show ){
+        size.origin.y = screen.size.height - size.size.height;
+        
+    }else if(!show){
+        size.origin.y = screen.size.height ;
+    }
+    self.tabBarController.tabBar.frame = size;
+}
 
+//隐藏广告
+-(void)hideADBanner{
+    [[iAdHelper Instance] hideADBanner];
+    [self showTabBarController:YES];
+}
+
+//显示广告
+-(void)showADBanner{
+    [[iAdHelper Instance] showADBanner];
+    [self showTabBarController:NO];
+}
 
 @end

@@ -13,10 +13,21 @@
 #import "UIImage+ReMake.h"
 #import "PhotoScrollView.h"
 #import "SDImageCache.h"
+#import "SDWebImageDownloader.h"
+#import "iAdHelper.h"
 
 @interface ViewController : UIViewController
 
 @property (nonatomic,strong) NSMutableArray *pins;
+
+//显示隐藏tabBar
+-(void)showTabBarController:(bool)show;
+
+//隐藏广告
+-(void)hideADBanner;
+
+//显示广告
+-(void)showADBanner;
 
 @end
 

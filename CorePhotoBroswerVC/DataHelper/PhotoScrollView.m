@@ -7,8 +7,7 @@
 //
 
 #import "PhotoScrollView.h"
-#import "UIImageView+SD.h"
-#import "DataMagic.h"
+
 
 @interface PhotoScrollView()<UIScrollViewDelegate>
 
@@ -307,6 +306,8 @@ bool loadingNext2Page = false;
         pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
         
         loadingNext2Page = false;
+        
+        [controller showADBanner];
     }
     else if(pageOnScrollView > ((int)scrollOffset.y/scroll.frame.size.height))//避免回弹回来导致数据错误
     {
@@ -315,6 +316,8 @@ bool loadingNext2Page = false;
         [self loadNextPage: pagAtual - 1 ];
         
         pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
+        
+        [controller hideADBanner];
     }
 }
 
