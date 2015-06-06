@@ -123,6 +123,8 @@
     
     //展示
     [pbVC show];
+    
+    [[iAdHelper Instance] showADBanner:pbVC.view];
 }
 
 

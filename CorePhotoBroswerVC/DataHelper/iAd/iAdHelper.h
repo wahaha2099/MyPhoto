@@ -20,7 +20,7 @@
 -(void)hideADBanner;
 
 //显示广告
--(void)showADBanner;
+-(void)showADBanner:(UIView* ) view;
 
 //添加ad到view中
 -(void)addADBanner:(UIView * )view;

@@ -113,7 +113,7 @@
 #import <UIKit/UIKit.h>
 #import "PhotoModel.h"
 #import "PhotoBroswerType.h"
-
+#import "iAdHelper.h"
 
 
 

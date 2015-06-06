@@ -184,10 +184,6 @@
             else
                 pbModel.image_HD_U = pin.url_658;
             
-            //源frame
-            //UIImageView *imageV =(UIImageView *) weakSelf.scrollView.subviews[i];
-            //pbModel.sourceImageView = imageV;
-            
             [modelsM addObject:pbModel];
         }
         
@@ -254,7 +250,7 @@
 
 //显示广告
 -(void)showADBanner{
-    [[iAdHelper Instance] showADBanner];
+    [[iAdHelper Instance] showADBanner:self.view];
     [self showTabBarController:NO];
 }
 
