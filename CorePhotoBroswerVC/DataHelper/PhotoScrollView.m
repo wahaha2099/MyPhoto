@@ -53,7 +53,6 @@ ViewController * controller;
     //CGFloat width = myFrame.size.width / maxRow;
     
     CGFloat height = myFrame.size.height / maxCol;
-    
     //设置content size
     //int newHeight = height * ([self.subviews count] / maxCol );
     
@@ -78,7 +77,7 @@ ViewController * controller;
     
     CGFloat width = myFrame.size.width / maxRow;
     CGFloat height = myFrame.size.height / maxCol;
-    
+
     __weak UIImageView * subView = view;
     
     int imgIndex =  (int) (subView.tag);
@@ -207,7 +206,7 @@ int page_num = 9;//页数
     int start = page * page_num;
     
     [[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
-        if(v.tag > start){
+        if(v.tag >= start){
             if ([v isKindOfClass:UIImageView.class]) {
                 UIImageView * iv = (UIImageView*) v;
                 //NSLog(@"remove tag %i " , (int)v.tag);
@@ -283,11 +282,12 @@ bool loadingNext2Page = false;
 {
     UIScrollView * scroll = scrollView;
     CGPoint scrollOffset=scrollView.contentOffset;
-    int pagAtual = scrollOffset.y/scroll.frame.size.height;
+    
+    int pagAtual = scrollOffset.y/scroll.superview.frame.size.height;
     
     if(pagAtual == pageOnScrollView) return ;
     
-    //NSLog(@"current %i " ,pageOnScrollView);
+    //NSLog(@"current %i " ,pagAtual);
     
     if(pageOnScrollView < ((int)scrollOffset.y/scroll.frame.size.height))
     {
@@ -299,9 +299,9 @@ bool loadingNext2Page = false;
         
         loadingNext2Page = true;
         //load the next page
-        [self loadNextPage:(pagAtual)];
+        //[self loadNextPage:(pagAtual)];
         [self loadNextPage:(pagAtual + 1)];
-        [self loadNextPage:(pagAtual + 2)];
+        //[self loadNextPage:(pagAtual + 2)];
         
         pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
         
