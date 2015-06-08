@@ -140,6 +140,8 @@ ViewController * controller;
     if([tap.view isKindOfClass:[UIImageView class]]){
         UIImageView * view = (UIImageView*)tap.view;
         if(_ClickImageBlock != nil) _ClickImageBlock(view.tag);
+        [self removePrevious:(pageOnScrollView - 2)];
+        [self removeNewest:(pageOnScrollView + 3)];
     }else{
         NSLog(@"touch img %@" , tap.view);
     }

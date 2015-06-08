@@ -90,6 +90,7 @@
 
 -(void)touchImage:(UITapGestureRecognizer *)tap{
     if([tap.view isKindOfClass:[UIImageView class]]){
+        
         if(_ClickImageBlock != nil) _ClickImageBlock(tap.view.tag);
     }else{
         NSLog(@"touch img %@" , tap.view);

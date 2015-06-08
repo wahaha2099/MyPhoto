@@ -16,7 +16,7 @@
 #import "CoreArchive.h"
 #import "PBScrollView.h"
 #import "CALayer+Transition.h"
-
+#import "ViewController.h"
 
 
 @interface PhotoBroswerVC ()<UIScrollViewDelegate>
@@ -304,7 +304,7 @@
         photoItemView = [PhotoItemView viewFromXIB];
     }
     
-    NSLog(@"PhotoBroswerVC showWithPage %p",&photoItemView);
+    //NSLog(@"PhotoBroswerVC showWithPage %p",&photoItemView);
     
     //数据覆盖
     photoItemView.ItemViewSingleTapBlock = ^(){
@@ -367,6 +367,10 @@
             [itemView handleBotoomView];
         }
     }];
+    if(show){    //显示广告
+        [[iAdHelper Instance] hideADBanner];
+    }else
+        [[iAdHelper Instance] showADBanner:self.view];
 }
 
 
@@ -676,6 +680,13 @@
         default:
             break;
     }
+    
+    //移除subviews和图片
+    [self reuserAndVisibleHandle:0];
+    
+    //显示ad banner
+    ViewController * v = (ViewController*)_handleVC;
+    [v showADBanner];
 }
 
 

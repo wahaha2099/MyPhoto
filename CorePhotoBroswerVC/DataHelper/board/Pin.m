@@ -48,7 +48,20 @@
 //读取本地图片,缩小一倍
 -(UIImage*) loadSmallImage{
     UIImage *image=[UIImage imageWithContentsOfFile:_url658];
-    UIImage *scaledImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:0.5 orientation:image.imageOrientation];
+    
+    int width = [[UIScreen mainScreen] bounds].size.width;
+    int height = [[UIScreen mainScreen] bounds].size.height;
+    //NSLog(@"w = %i" , (int)image.size.width );
+    //NSLog(@"h = %i" , (int)image.size.height );
+    
+    float rate =   width / 3 / image.size.width;//计算缩放比例 , 界面宽度 / 3张图片 /图片大小
+    float rateHei =  height / 3 / image.size.height;
+    
+    float scale = rate < rateHei ? rate : rateHei;
+    NSString* formattedNumber = [NSString stringWithFormat:@"%.1f", scale];
+    float floatTwoDecimalDigits = atof([formattedNumber UTF8String]);
+    //NSLog(@" scale %@" , formattedNumber);
+    UIImage *scaledImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:floatTwoDecimalDigits orientation:image.imageOrientation];
     return scaledImage;
 }
 /*
