@@ -93,9 +93,25 @@
     // Your Button in Cell is selected.
     // Do your stuff.
     
-    [[SDImageCache sharedImageCache] clearDisk];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dete" message:@"Are you sure you want to delete the cache?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    [alert show];
     
     NSLog(@"Button Clicked Index = %i" , (int)sender.tag);
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([[alertView title] isEqualToString:@"Dete"]){
+        [[SDImageCache sharedImageCache] clearDisk];
+        [_settingView reloadData];
+         NSLog(@"has delete ");
+    }
+
+    //NSLog(@"%d", _tmpIndexPath.row);
+    if(buttonIndex == 1)
+    {
+      //  NSLog(@"%d", _tmpIndexPath.row);
+    }
 }
 
 /*
