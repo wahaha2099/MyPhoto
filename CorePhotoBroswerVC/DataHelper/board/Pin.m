@@ -40,7 +40,17 @@
     return [NSString stringWithFormat:@"http://img.hb.aicdn.com/%@_fw658",_key];
 };
 
-
+//读取本地图片
+-(UIImage*) loadLocalImage{
+    UIImage *image=[UIImage imageWithContentsOfFile:_url658];
+    return image;
+}
+//读取本地图片,缩小一倍
+-(UIImage*) loadSmallImage{
+    UIImage *image=[UIImage imageWithContentsOfFile:_url658];
+    UIImage *scaledImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:0.5 orientation:image.imageOrientation];
+    return scaledImage;
+}
 /*
  pin页面对象:
  pin{

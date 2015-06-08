@@ -90,8 +90,8 @@ BaiduImage * instance;
         NSDictionary * file = pins[i];
         Pin* pin = [[Pin alloc]init];
         
-        pin.url320 = [file objectForKey:@"thumbLargeUrl"];//thumbLargeTnUrl
-        pin.url658 = [file objectForKey:@"downloadUrl"];//downloadUrl最大
+        pin.url320 = [file objectForKey:@"thumbLargeUrl"];//thumbLargeUrl最小,thumbLargeTnUrl适中
+        pin.url658 = [file objectForKey:@"thumbLargeTnUrl"];//downloadUrl最大,原图下载，可能有100KB以上
         pin.pin_id = [file objectForKey:@"id"];
         pin.board_id = baidu_board_id;
 

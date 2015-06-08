@@ -64,9 +64,11 @@
     
     //展示数据
     [self contentViewDataPrepare];
+    //[self performSelectorInBackground:@selector(contentViewDataPrepare) withObject:nil];
     
     //请求远程图片
     //[self performSelectorInBackground:@selector(loadWebData) withObject:nil];
+    
     
     //添加注册
     [self loadWebData];
@@ -89,7 +91,8 @@
 
 /** 展示本地9张图片 */
 -(void)contentViewDataPrepare{
-    for (NSUInteger i=0; i<9; i++) {
+    NSUInteger i = 0;
+    for ( i = 0; i < 9 ; i++ ) {
         UIImage *imagae =[UIImage imageNamed:[NSString stringWithFormat:@"%@",@(i+1)]];
         
         Pin * pin = [[Pin alloc]init];
@@ -99,6 +102,17 @@
         [_pins addObject:pin];
         [_scrollView showImages:pin];
     }
+    //return;
+    NSArray * files = [[SDImageCache sharedImageCache]getDiskKeys];
+    [files enumerateObjectsUsingBlock:^(NSURL * url, NSUInteger idx, BOOL *stop) {
+        Pin * pin = [[Pin alloc]init];
+        pin.url658 = [url path];
+        pin.url320 = [url path];
+        //pin.image = [pin loadLocalImage];
+        pin.is_cache = true;
+        pin.idx = [_pins count];
+        [_pins addObject:pin];
+    }];
 }
 
 /** 事件 */
@@ -176,12 +190,17 @@
             
             PhotoModel *pbModel=[[PhotoModel alloc] init];
             pbModel.mid = i + 1;
+            pbModel.pin = pin;
             //pbModel.title = pin.raw_text;
             //pbModel.desc = pin.raw_text;
             
             if(pin.is_local)
                 pbModel.image = pin.image;
-            else
+            if( pin.is_cache ){
+                pbModel.is_local_cache = YES;
+                pbModel.image_HD_U = pin.url_658;
+                
+            }else
                 pbModel.image_HD_U = pin.url_658;
             
             [modelsM addObject:pbModel];

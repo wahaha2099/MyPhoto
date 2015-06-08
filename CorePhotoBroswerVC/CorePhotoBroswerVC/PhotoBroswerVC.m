@@ -124,6 +124,7 @@
     //展示
     [pbVC show];
     
+    //显示广告
     [[iAdHelper Instance] showADBanner:pbVC.view];
 }
 
@@ -303,7 +304,7 @@
         photoItemView = [PhotoItemView viewFromXIB];
     }
     
-    NSLog(@"%p",&photoItemView);
+    NSLog(@"PhotoBroswerVC showWithPage %p",&photoItemView);
     
     //数据覆盖
     photoItemView.ItemViewSingleTapBlock = ^(){
@@ -433,9 +434,20 @@
             
             photoItemView.alpha=0;
             
-            [self.reusablePhotoItemViewSetM addObject:photoItemView];
+            //删除图片试试
+            photoItemView.photoImageView.image = nil;
+            photoItemView.photoModel.image = nil;
+            photoItemView.hasImage = NO;
+            
             
             [self.visiblePhotoItemViewDictM removeObjectForKey:key];
+
+            //内存留8个可重用view cache即可,其他的remove掉
+            if([self.reusablePhotoItemViewSetM count] < 5 ){
+                [self.reusablePhotoItemViewSetM addObject:photoItemView];
+            }//else{
+            [photoItemView removeFromSuperview];
+            //}
         }
     }];
 }

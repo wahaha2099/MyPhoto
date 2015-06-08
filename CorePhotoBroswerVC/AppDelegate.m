@@ -17,24 +17,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    /*
-    UITabBarController * view = [[UITabBarController alloc]init];
-    
-    //1.创建Window
-         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-         self.window.backgroundColor = [UIColor whiteColor];
-    
-         //a.初始化一个tabBar控制器
 
-         //设置控制器为Window的根控制器
-         self.window.rootViewController= view;
-    
-    ViewController * view1 = [[ViewController alloc]init];
-    view.viewControllers = @[view1];
-    
-    [self.window makeKeyAndVisible];
-    */
     return YES;
 }
 

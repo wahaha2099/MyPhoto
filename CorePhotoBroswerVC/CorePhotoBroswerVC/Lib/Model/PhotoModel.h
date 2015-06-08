@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+#import "Pin.h"
 #import "PhotoBroswerType.h"
 
 @interface PhotoModel : NSObject
@@ -34,7 +34,10 @@
 @property (nonatomic,strong) UIImage *image;
 
 
-
+/**
+ * 是否本地cache图片,是的花，image_HD_U就是本地url
+ */
+@property (nonatomic,assign) BOOL is_local_cache;
 
 
 
@@ -56,6 +59,8 @@
 /** 是否从源frame放大呈现 */
 @property (nonatomic,assign) BOOL isFromSourceFrame;
 
+/** 图片信息 */
+@property (nonatomic,weak) Pin * pin;
 
 /*
  *  检查数组合法性

@@ -244,4 +244,9 @@ typedef void(^SDWebImageCalculateSizeBlock)(NSUInteger fileCount, NSUInteger tot
  */
 - (NSString *)defaultCachePathForKey:(NSString *)key;
 
+/**
+ get all keys 
+ */
+-(NSArray*)getDiskKeys;
+
 @end

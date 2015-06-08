@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "UIImage+MultiFormat.h"
 
 @interface Pin : NSObject
 
@@ -38,6 +39,16 @@
 
 //是否默认的那9张本地图片
 @property bool is_local;
+
+//是否本地cache
+@property bool is_cache;
+
 //当前的pin对应的index
 @property NSUInteger idx;
+
+//读取本地图片
+-(UIImage*) loadLocalImage;
+
+//读取本地图片,缩小一倍
+-(UIImage*) loadSmallImage;
 @end

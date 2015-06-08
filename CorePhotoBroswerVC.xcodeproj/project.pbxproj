@@ -13,6 +13,8 @@
 		1878937E1B207FC400EC6024 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1878937D1B207FC400EC6024 /* iAd.framework */; };
 		1883B6E01B145710009E0271 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6DF1B145710009E0271 /* HttpHelper.m */; };
 		1883B6E31B146652009E0271 /* DataMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6E21B146652009E0271 /* DataMagic.m */; };
+		188EE9EA1B22E9DC00FC44DE /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188EE9E91B22E9DC00FC44DE /* SettingViewController.m */; };
+		188EE9ED1B22F41100FC44DE /* SettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188EE9EC1B22F41100FC44DE /* SettingTableView.m */; };
 		18903BAA1B21DE3800C7155F /* iAdHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 18903BA91B21DE3800C7155F /* iAdHelper.m */; };
 		18C079B91B17009300F92123 /* BoardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C079B81B17009300F92123 /* BoardInfo.m */; };
 		18C079BC1B1700A200F92123 /* Pin.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C079BB1B1700A200F92123 /* Pin.m */; };
@@ -126,6 +128,10 @@
 		1883B6DF1B145710009E0271 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
 		1883B6E11B146652009E0271 /* DataMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMagic.h; sourceTree = "<group>"; };
 		1883B6E21B146652009E0271 /* DataMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMagic.m; sourceTree = "<group>"; };
+		188EE9E81B22E9DC00FC44DE /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		188EE9E91B22E9DC00FC44DE /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		188EE9EB1B22F41100FC44DE /* SettingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableView.h; sourceTree = "<group>"; };
+		188EE9EC1B22F41100FC44DE /* SettingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableView.m; sourceTree = "<group>"; };
 		18903BA81B21DE3800C7155F /* iAdHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iAdHelper.h; sourceTree = "<group>"; };
 		18903BA91B21DE3800C7155F /* iAdHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iAdHelper.m; sourceTree = "<group>"; };
 		18C079B71B17009300F92123 /* BoardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardInfo.h; sourceTree = "<group>"; };
@@ -320,6 +326,7 @@
 		1883B6DD1B1456FE009E0271 /* DataHelper */ = {
 			isa = PBXGroup;
 			children = (
+				188EE9E41B22E76F00FC44DE /* setting */,
 				18903BA71B21DE3800C7155F /* iAd */,
 				1878935E1B1D60D200EC6024 /* ImgSource */,
 				18C079B61B17009300F92123 /* board */,
@@ -331,6 +338,17 @@
 				18C079D91B177DB000F92123 /* PhotoScrollView.m */,
 			);
 			path = DataHelper;
+			sourceTree = "<group>";
+		};
+		188EE9E41B22E76F00FC44DE /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				188EE9E81B22E9DC00FC44DE /* SettingViewController.h */,
+				188EE9E91B22E9DC00FC44DE /* SettingViewController.m */,
+				188EE9EB1B22F41100FC44DE /* SettingTableView.h */,
+				188EE9EC1B22F41100FC44DE /* SettingTableView.m */,
+			);
+			path = setting;
 			sourceTree = "<group>";
 		};
 		18903BA71B21DE3800C7155F /* iAd */ = {
@@ -1025,6 +1043,7 @@
 				89E38DF11AFB4A51000B273A /* SDWebImageManager.m in Sources */,
 				89F704151AFB395700B048E8 /* UIImage+Water.m in Sources */,
 				892DD8DA1B0C1FFD0038CC9A /* PBScrollView.m in Sources */,
+				188EE9EA1B22E9DC00FC44DE /* SettingViewController.m in Sources */,
 				89E38DEC1AFB4A51000B273A /* SDImageCache.m in Sources */,
 				89F704091AFB395700B048E8 /* NSArray+Extend.m in Sources */,
 				89E38DEE1AFB4A51000B273A /* SDWebImageDecoder.m in Sources */,
@@ -1063,6 +1082,7 @@
 				18C079BC1B1700A200F92123 /* Pin.m in Sources */,
 				89E38DF01AFB4A51000B273A /* SDWebImageDownloaderOperation.m in Sources */,
 				89F703D21AFB37B500B048E8 /* CoreSVP.m in Sources */,
+				188EE9ED1B22F41100FC44DE /* SettingTableView.m in Sources */,
 				892DD8D21B0C1FFD0038CC9A /* UIView+PBExtend.m in Sources */,
 				89E38DE81AFB4A51000B273A /* UIImage+ReMake.m in Sources */,
 				89E38DF81AFB4A51000B273A /* UIImageView+WebCache.m in Sources */,

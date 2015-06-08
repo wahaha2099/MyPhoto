@@ -14,7 +14,7 @@
 #import "PBConst.h"
 #import "UIImage+Extend.h"
 #import "UIImageView+SD.h"
-
+#import "UIImage+MultiFormat.h"
 
 
 
@@ -100,6 +100,20 @@
 -(void)dataPrepare{
     
     if(self.photoModel == nil) return;
+    
+    if( _photoModel.is_local_cache && _photoModel.image == nil ){
+        UIImage * img = [_photoModel.pin loadLocalImage];
+        _photoModel.image = img;
+        
+        /*
+        NSData *data = [NSData dataWithContentsOfFile:_photoModel.image_HD_U];
+        
+        if (data) {
+            UIImage *image = [UIImage sd_imageWithData:data];
+            data = nil;
+            _photoModel.image = image;
+        }*/
+    }
     
     BOOL isNetWorkShow = _photoModel.image == nil;
     

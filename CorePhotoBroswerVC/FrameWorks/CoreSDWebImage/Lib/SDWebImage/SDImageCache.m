@@ -540,4 +540,41 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
     });
 }
 
+-(NSArray*)getDiskKeys{
+    /*NSURL *diskCacheURL = [NSURL fileURLWithPath:self.diskCachePath isDirectory:YES];
+
+    NSArray * array = [_fileManager URLsForDirectory:diskCacheURL inDomains:NSUserDomainMask];//NSUserDomainMask
+    
+    [array enumerateObjectsUsingBlock:^(NSURL* obj, NSUInteger idx, BOOL *stop) {
+        NSLog(@"url %@" , [obj path]);
+    }];*/
+    //URLsForDirectory
+    
+     NSURL *diskCacheURL = [NSURL fileURLWithPath:self.diskCachePath isDirectory:YES];
+     NSArray *resourceKeys = @[NSURLIsDirectoryKey];
+     
+     // This enumerator prefetches useful properties for our cache files.
+     NSDirectoryEnumerator *fileEnumerator = [_fileManager enumeratorAtURL:diskCacheURL
+                                                includingPropertiesForKeys:resourceKeys
+                                                                   options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                              errorHandler:NULL];
+
+//     NSMutableDictionary *cacheFiles = [NSMutableDictionary dictionary];
+    NSMutableArray * files = [[NSMutableArray alloc]init];
+     // Enumerate all of the files in the cache directory.
+     for (NSURL *fileURL in fileEnumerator) {
+         NSDictionary *resourceValues = [fileURL resourceValuesForKeys:resourceKeys error:NULL];
+     
+         // Skip directories.
+         if ([resourceValues[NSURLIsDirectoryKey] boolValue]) {
+             continue;
+         }
+         //NSLog(@"url %@" , fileURL);
+         [files addObject:fileURL];
+         // Store a reference to this file and account for its total size.
+  //      [cacheFiles setObject:resourceValues forKey:fileURL];
+     }
+    return files;
+}
+
 @end

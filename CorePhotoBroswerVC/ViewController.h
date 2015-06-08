@@ -15,6 +15,7 @@
 #import "SDImageCache.h"
 #import "SDWebImageDownloader.h"
 #import "iAdHelper.h"
+#import "UIImage+MultiFormat.h"
 
 @interface ViewController : UIViewController
 

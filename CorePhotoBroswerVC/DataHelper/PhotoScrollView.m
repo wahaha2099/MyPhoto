@@ -153,6 +153,13 @@ ViewController * controller;
     
     if( pin.is_local ){//9张默认的本地图片
         imageV.image = pin.image;
+    }else if( pin.is_cache ){
+        __weak UIImageView * _weakImageV = imageV;
+        __weak Pin * _weakPin = pin;
+        
+        //[self loadCacheImage:[NSArray arrayWithObjects:_weakImageV,_weakPin, nil]];
+        [self performSelectorInBackground:@selector(loadCacheImage:) withObject:[NSArray arrayWithObjects:_weakImageV,_weakPin, nil]];
+        
     }else{//其他网络图片
         /* 同步方式
         NSURL *imageURL = [NSURL URLWithString:pin.url320];
@@ -161,7 +168,8 @@ ViewController * controller;
         imageV.image = im;
          */
         //异步方式
-        [imageV imageWithUrlStr: pin.url_320 phImage:nil];
+     // [imageV imageWithUrlStr: pin.url_320 phImage:nil];
+        [imageV imageWithUrlStr: pin.url_658 phImage:nil];
     }
     
     //开启事件
@@ -191,6 +199,14 @@ ViewController * controller;
     [self layoutImageView:imageV pin:pin];
 }
 
+//异步读取本地图片
+-(void) loadCacheImage:(NSArray*)array{
+    __weak UIImageView* imageV = array[0];
+    __weak Pin * pin = array[1];
+    __weak UIImage * img = [pin loadSmallImage];
+    imageV.image = img;
+}
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
     //UIView *view = [touch view];
     //NSLog(@"is hit %@" , view);
@@ -208,14 +224,7 @@ int page_num = 9;//页数
     [[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
         if(v.tag >= start){
             if ([v isKindOfClass:UIImageView.class]) {
-                UIImageView * iv = (UIImageView*) v;
-                //NSLog(@"remove tag %i " , (int)v.tag);
-                iv.image = nil;
-                for (UIGestureRecognizer *recognizer in v.gestureRecognizers) {
-                    [v removeGestureRecognizer:recognizer];
-                }
-                [v removeFromSuperview];
-                v = nil;
+                [self removeImageView:v];
             }
         }
     }];
@@ -236,18 +245,23 @@ int page_num = 9;//页数
     [[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
         
         if(v.tag < end){
-            if ([v isKindOfClass:UIImageView.class]) {
-                //NSLog(@"remove tag %i " , (int)v.tag);
-                UIImageView * iv = (UIImageView*) v;
-                iv.image = nil;
-                for (UIGestureRecognizer *recognizer in v.gestureRecognizers) {
-                    [v removeGestureRecognizer:recognizer];
-                }
-                [v removeFromSuperview];
-                v = nil;
-            }
+            [self removeImageView:v];
         }
     }];
+}
+
+-(void)removeImageView:(UIView*)v{
+    if ([v isKindOfClass:UIImageView.class]) {
+        //NSLog(@"remove tag %i " , (int)v.tag);
+        UIImageView * iv = (UIImageView*) v;
+        iv.image = nil;
+        for (UIGestureRecognizer *recognizer in v.gestureRecognizers) {
+            [v removeGestureRecognizer:recognizer];
+        }
+        [v.layer removeAllAnimations];//remove git 动画?
+        [v removeFromSuperview];
+        v = nil;
+    }
 }
 
 //滑到最后,读取其他界面
