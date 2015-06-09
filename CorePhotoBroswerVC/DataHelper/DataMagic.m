@@ -31,11 +31,12 @@ static DataMagic * instance ;
 
 //请求图片
 -(void) requestPic{
-    //[[BaiduImage Instance]requestPic:_NOTIFY_HTTP_PIC_REQ finish:_NOTIFY_FINISH_PIC_PARSE];
-    //return ;
-    [[HuabanImage Instance]requestPic:_NOTIFY_HTTP_PIC_REQ finish:_NOTIFY_FINISH_PIC_PARSE];
-    
+    if(_isHuaban)
+        [[HuabanImage Instance]requestPic:_NOTIFY_HTTP_PIC_REQ finish:_NOTIFY_FINISH_PIC_PARSE];
+    else
+        [[BaiduImage Instance]requestPic:_NOTIFY_HTTP_PIC_REQ finish:_NOTIFY_FINISH_PIC_PARSE];
 }
+
 //展示结束
 -(void)finishShowPage{
     _finished_page = _loading_page;

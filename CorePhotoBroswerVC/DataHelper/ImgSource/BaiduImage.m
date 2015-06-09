@@ -38,19 +38,22 @@ BaiduImage * instance;
     //根据url获取board_id,就是key
     NSNumber * key = [NSNumber numberWithInt:[baidu_board_id intValue]];
     
-    //
     NSString * url = @"http://image.baidu.com/data/imgs?col=%E7%BE%8E%E5%A5%B3&tag=%E5%85%A8%E9%83%A8&sort=0&tag3=&rn=20&p=channel&from=1";
-    
-    url = [url stringByAppendingString:[NSString stringWithFormat:@"&pn=%i", [DataMagic Instance].loading_page * 20 ] ];
-
+   
     //init board
     BoardInfo * b = [[[DataMagic Instance] Boards] objectForKey:key];
     if(b == nil){
         b = [BoardInfo initByInt:url idx:baidu_board_id];
+        b.page = 0;
         b.magic_type = 2;
         [[[DataMagic Instance] Boards] setObject:b forKey: key];
     }
+    [[DataHolder sharedInstance]loadBoard:b];
     
+    //
+    
+    url = [url stringByAppendingString:[NSString stringWithFormat:@"&pn=%i", b.page  * 20 ] ];
+
     NSLog(@"request %@",url);
     
     //NSString * url = [NSString stringWithFormat:@"%@?max=%@&limit=20&wfl=1",board_url,b.max];//381205601,999999999
@@ -85,7 +88,7 @@ BaiduImage * instance;
     //add pin to board
     NSMutableDictionary * Boards  = [[DataMagic Instance] Boards];
     NSNumber * key = [NSNumber numberWithInt:[baidu_board_id intValue]];
-    
+    BoardInfo * b = [Boards objectForKey:key];
     for(int i =0 ; i < [pins count]-1 ; i++){
         //Pin* pin = [Pin initPin:pin_dic];
         NSDictionary * file = pins[i];
@@ -96,10 +99,12 @@ BaiduImage * instance;
         pin.pin_id = [file objectForKey:@"id"];
         pin.board_id = baidu_board_id;
 
-        [[Boards objectForKey:key] addPin:pin];
+        [b addPin:pin];
 
     }
-
+    b.page++;
+    [[DataHolder sharedInstance] saveBoard:b];
+    
     //通知界面更新
     [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:key userInfo:nil];
 }

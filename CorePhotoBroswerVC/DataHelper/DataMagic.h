@@ -28,6 +28,9 @@
 //已经完成展示的页数
 @property int finished_page;
 
+//是否请求花瓣
+@property bool isHuaban;
+
 //通知回调
 @property NSString * NOTIFY_HTTP_PIC_REQ ;
 @property NSString * NOTIFY_FINISH_PIC_REQ ;

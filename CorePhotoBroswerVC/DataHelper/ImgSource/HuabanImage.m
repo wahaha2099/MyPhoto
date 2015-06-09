@@ -77,22 +77,13 @@ static HuabanImage * instance ;
     
     if (rsp == nil || [rsp length] == 0 ){
         NSLog(@"no data %@" , rsp);
-        
-        [DataMagic Instance].loading_page--;
-        
-        //通知界面更新
-        [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:nil userInfo:nil];
+        [self handeError];
         return ;
     }
     NSDictionary * rs = [NSJSONSerialization JSONObjectWithData:rsp options:NSJSONReadingMutableLeaves error:&error];
     
     if([rs objectForKey:@"board"] == 0){
-        NSLog(@"no data huaban error");
-        
-        [DataMagic Instance].loading_page--;
-        
-        //通知界面更新
-        [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:nil userInfo:nil];
+        [self handeError];
         return ;
     }
     
@@ -108,7 +99,7 @@ static HuabanImage * instance ;
     [pins enumerateObjectsUsingBlock:^(NSDictionary * pin_dic, NSUInteger idx, BOOL *stop) {
         
         Pin* pin = [Pin initPin:pin_dic];
-       
+        //设置b的start和max
         if([b.max isEqualToString:@"999999999"]){
             if( idx == 0 ){
                 b.start = pin.pin_id;
@@ -121,6 +112,17 @@ static HuabanImage * instance ;
     
     //通知界面更新
     [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:board_id userInfo:nil];
+}
+
+//处理没有数据
+-(void)handeError{
+    NSLog(@"no data huaban error");
+    
+    [DataMagic Instance].isHuaban = false;
+    [DataMagic Instance].loading_page--;
+    
+    //通知界面更新
+    [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:nil userInfo:nil];
 }
 
 //返回默认的一些关注列表

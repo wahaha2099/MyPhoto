@@ -18,6 +18,7 @@
 @property NSString * start;//第一张图片的id,花瓣是通过id去取图片,分页的
 @property NSString * max;//最后一张图片id,分页的
 @property long timestamp ; //当前这张图片时间戳
+@property int page;//百度用page存页数,花瓣用start,max存
 @property NSMutableArray * pins;//图片具体信息
 @property int pin_idx;//最后显示的pin在pins的index下标
 

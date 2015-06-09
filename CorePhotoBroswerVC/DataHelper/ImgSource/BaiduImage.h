@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DataMagic.h"
+#import "DataHolder.h"
 
 @interface BaiduImage : NSObject
 
