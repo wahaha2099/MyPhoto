@@ -51,6 +51,11 @@ NSString * const keyAccount = @"accounts";
     NSDictionary* exist = [_boards objectForKey:[board idx]];
 
     if( exist != nil ){
+        //change to mutable dictionary
+        NSMutableDictionary* exist2 = [[NSMutableDictionary alloc]init];
+        [exist2 addEntriesFromDictionary:exist];
+        exist = exist2;
+        
         [exist setValue:board.max forKey:@"max"];// board.max;
         [exist setValue:[NSString stringWithFormat:@"%i",board.page ] forKey:@"page"];
     }else{  //存储部分数据
