@@ -280,6 +280,8 @@ int page_num = 9;//页数
 
 //查询远程数据
 -(void)loadNextWebData{
+    if(_isCacheMode)return;
+    
     if([[DataMagic Instance] isFinishShow]){
         [[DataMagic Instance] requestPic];
     }

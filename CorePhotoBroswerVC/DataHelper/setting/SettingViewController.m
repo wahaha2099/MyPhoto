@@ -31,7 +31,7 @@ CGFloat maxHeight;
     //self.automaticallyAdjustsScrollViewInsets = false;
     
     
-    UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:1];
+    UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:3];
 
     
     /**/

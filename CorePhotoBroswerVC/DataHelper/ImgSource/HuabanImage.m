@@ -85,6 +85,17 @@ static HuabanImage * instance ;
         return ;
     }
     NSDictionary * rs = [NSJSONSerialization JSONObjectWithData:rsp options:NSJSONReadingMutableLeaves error:&error];
+    
+    if([rs objectForKey:@"board"] == 0){
+        NSLog(@"no data huaban error");
+        
+        [DataMagic Instance].loading_page--;
+        
+        //通知界面更新
+        [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:nil userInfo:nil];
+        return ;
+    }
+    
     NSDictionary * board = [rs objectForKey:@"board"];
     
     NSString * board_id = [board objectForKey:@"board_id"] ;

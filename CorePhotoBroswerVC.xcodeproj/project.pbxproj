@@ -13,6 +13,7 @@
 		1878937E1B207FC400EC6024 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1878937D1B207FC400EC6024 /* iAd.framework */; };
 		187BB8511B25C24B00993116 /* MainTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB8501B25C24B00993116 /* MainTabbar.m */; };
 		187BB8551B25E18400993116 /* DataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB8541B25E18400993116 /* DataHolder.m */; };
+		187BB8581B26B45B00993116 /* CacheViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB8571B26B45B00993116 /* CacheViewController.m */; };
 		1883B6E01B145710009E0271 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6DF1B145710009E0271 /* HttpHelper.m */; };
 		1883B6E31B146652009E0271 /* DataMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6E21B146652009E0271 /* DataMagic.m */; };
 		188EE9EA1B22E9DC00FC44DE /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188EE9E91B22E9DC00FC44DE /* SettingViewController.m */; };
@@ -129,6 +130,8 @@
 		187BB8501B25C24B00993116 /* MainTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabbar.m; sourceTree = "<group>"; };
 		187BB8531B25E18400993116 /* DataHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataHolder.h; sourceTree = "<group>"; };
 		187BB8541B25E18400993116 /* DataHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataHolder.m; sourceTree = "<group>"; };
+		187BB8561B26B45B00993116 /* CacheViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheViewController.h; sourceTree = "<group>"; };
+		187BB8571B26B45B00993116 /* CacheViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheViewController.m; sourceTree = "<group>"; };
 		1883B6DE1B145710009E0271 /* HttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpHelper.h; sourceTree = "<group>"; };
 		1883B6DF1B145710009E0271 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
 		1883B6E11B146652009E0271 /* DataMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMagic.h; sourceTree = "<group>"; };
@@ -331,6 +334,8 @@
 			children = (
 				187BB84F1B25C24B00993116 /* MainTabbar.h */,
 				187BB8501B25C24B00993116 /* MainTabbar.m */,
+				187BB8561B26B45B00993116 /* CacheViewController.h */,
+				187BB8571B26B45B00993116 /* CacheViewController.m */,
 			);
 			path = tabbar;
 			sourceTree = "<group>";
@@ -1082,6 +1087,7 @@
 				89F704161AFB395700B048E8 /* UITableViewCell+Extend.m in Sources */,
 				892DD8E81B0C20720038CC9A /* ViewController.m in Sources */,
 				89F704101AFB395700B048E8 /* UIFont+Extend.m in Sources */,
+				187BB8581B26B45B00993116 /* CacheViewController.m in Sources */,
 				892DD8D71B0C1FFD0038CC9A /* PBBlurImageView.m in Sources */,
 				18C079B91B17009300F92123 /* BoardInfo.m in Sources */,
 				892DD8D51B0C1FFD0038CC9A /* PhotoModel.m in Sources */,

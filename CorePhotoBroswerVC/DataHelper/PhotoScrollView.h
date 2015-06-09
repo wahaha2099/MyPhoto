@@ -22,6 +22,9 @@
 //当前显示的界面
 @property NSInteger * currentPage;
 
+//是否离线模式
+@property bool isCacheMode;
+
 //添加image到view
 -(void)showImages:(Pin *)image ;
 

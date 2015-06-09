@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PhotoBroswerVC.h"
-#import "PhotoCotentView.h"
+#import "PhotoScrollView.h"
 #import "DataMagic.h"
 #import "UIImage+ReMake.h"
 #import "PhotoScrollView.h"
@@ -18,6 +18,8 @@
 #import "UIImage+MultiFormat.h"
 
 @interface ViewController : UIViewController
+
+
 
 @property (nonatomic,strong) NSMutableArray *pins;
 
@@ -29,6 +31,12 @@
 
 //显示广告
 -(void)showADBanner;
+
+//对应不同的tab,如network 和cache设置不同的内容
+-(void)initTab;
+
+//获取当前的scrollView
+-(id) getScrollView;
 
 @end
 

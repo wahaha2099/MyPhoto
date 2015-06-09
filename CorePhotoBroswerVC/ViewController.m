@@ -25,22 +25,15 @@
 
 @implementation ViewController
 
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
-    self.automaticallyAdjustsScrollViewInsets = false;
+    _pins = [[NSMutableArray alloc]init];
     
-    UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
-
-    /**/
-    self.tabBarItem.title=@"美图";
-    self.tabBarItem.image= tempBarItem.selectedImage;
-    self.tabBarItem.badgeValue=@"10";
-    //[self showViewPhoto];
-    
+    [self initTab];
     [self initController];
-    [[iAdHelper Instance] addADBanner:self.view];
 }
 /*
 -(void)showViewPhoto{
@@ -52,7 +45,18 @@
 }
 */
 
+-(void)initTab{
+    UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
+
+    self.tabBarItem.title=@"美图";
+    self.tabBarItem.image= tempBarItem.selectedImage;
+    self.tabBarItem.badgeValue=@"10";
+}
+
 - (void)initController {
+    self.automaticallyAdjustsScrollViewInsets = false;
+    
+    [[iAdHelper Instance] addADBanner:self.view];
     
     [[SDImageCache sharedImageCache]setMaxMemoryCost:10 ];
     [[SDImageCache sharedImageCache] setShouldDecompressImages:NO];
@@ -60,7 +64,7 @@
 
     //[[SDImageCache sharedImageCache]setMaxCacheSize:];
     
-    _pins = [[NSMutableArray alloc]init];
+
     
     //展示数据
     [self contentViewDataPrepare];
@@ -69,14 +73,13 @@
     //请求远程图片
     //[self performSelectorInBackground:@selector(loadWebData) withObject:nil];
     
-    
     //添加注册
     [self loadWebData];
     
     //事件
     [self event];
-    
-    [_scrollView initScrollView:self];
+
+    [[self getScrollView] initScrollView:self];
     //_scrollView.delegate = self;
     
 }
@@ -100,25 +103,16 @@
         pin.is_local = true;
         pin.idx = i;
         [_pins addObject:pin];
-        [_scrollView showImages:pin];
+        [[self getScrollView] showImages:pin];
     }
     //return;
-    NSArray * files = [[SDImageCache sharedImageCache]getDiskKeys];
-    [files enumerateObjectsUsingBlock:^(NSURL * url, NSUInteger idx, BOOL *stop) {
-        Pin * pin = [[Pin alloc]init];
-        pin.url658 = [url path];
-        pin.url320 = [url path];
-        //pin.image = [pin loadLocalImage];
-        pin.is_cache = true;
-        pin.idx = [_pins count];
-        [_pins addObject:pin];
-    }];
+   
 }
 
 /** 事件 */
 -(void)event{
-    
-    _scrollView.ClickImageBlock = ^(NSUInteger index){
+    PhotoScrollView* v = (PhotoScrollView*)[self getScrollView];
+    v.ClickImageBlock = ^(NSUInteger index){
         
         //本地图片展示
         //        [self localImageShow:index];
@@ -232,7 +226,7 @@
         [__pins addObject:pin];
         
         //if([_pins count] < 18)//2页
-        //[_scrollView showImages:pin];
+        //[[self getScrollView] showImages:pin];
     }];
 
     //清除board里面的数据
@@ -245,7 +239,7 @@
     
     [[DataMagic Instance]finishShowPage];
     
-    [_scrollView pinsRefresh];
+    [[self getScrollView] pinsRefresh];
 }
 
 -(void)showTabBarController:(bool)show{
@@ -271,6 +265,10 @@
 -(void)showADBanner{
     [[iAdHelper Instance] showADBanner:self.view];
     [self showTabBarController:NO];
+}
+
+-(PhotoScrollView*) getScrollView{
+    return self.scrollView;
 }
 
 @end
