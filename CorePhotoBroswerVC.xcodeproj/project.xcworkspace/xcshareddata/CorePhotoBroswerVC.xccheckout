@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>05CD173A-6C04-4DCC-938A-7CC12F524984</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>CorePhotoBroswerVC</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>EAB38066E64D1A0F9CC77D809DA0CC093D052958</key>
 		<string>https://github.com/wahaha2099/MyPhoto.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>CorePhotoBroswerVC.xcodeproj/project.xcworkspace</string>
+	<string>CorePhotoBroswerVC.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>EAB38066E64D1A0F9CC77D809DA0CC093D052958</key>

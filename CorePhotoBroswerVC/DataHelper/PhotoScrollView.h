@@ -19,6 +19,8 @@
 
 @property (nonatomic,copy) void (^ClickImageBlock)(NSUInteger index);
 
+
+
 //当前显示的界面
 @property NSInteger * currentPage;
 

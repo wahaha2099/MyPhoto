@@ -9,7 +9,7 @@
 #import "MainTabbar.h"
 #import "SettingViewController.h"
 #import "ViewController.h"
-
+#import "CacheViewController.h"
 @interface MainTabbar ()
 
 @end
@@ -21,9 +21,11 @@
     
     //ViewController *view = [self viewControllers][0];
     SettingViewController *setting = [self viewControllers][1];
+    CacheViewController *cacheView = [self viewControllers][2];
     
     self.delegate = self;
-    [setting viewDidLoad];
+    [setting initTabItem];
+    [cacheView initTabItem];
     // Do any additional setup after loading the view.
 }
 

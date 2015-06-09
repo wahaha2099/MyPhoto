@@ -24,20 +24,22 @@
 CGFloat maxWidth;
 CGFloat maxHeight;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self extendedLayout];
-    //self.automaticallyAdjustsScrollViewInsets = false;
-    
-    
+//设置tabItem名称
+-(void)initTabItem{
     UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:3];
-
+    
     
     /**/
     self.tabBarItem.title=@"设置";
     self.tabBarItem.image= tempBarItem.selectedImage;
     
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self extendedLayout];
+    //self.automaticallyAdjustsScrollViewInsets = false;
     
     //table view
     _settingView = [[UITableView alloc] initWithFrame:CGRectMake(0, _headOffset, _maxWidth, _maxHeight) style:UITableViewStyleGrouped] ;

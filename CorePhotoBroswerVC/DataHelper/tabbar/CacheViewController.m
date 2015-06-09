@@ -9,20 +9,21 @@
 #import "CacheViewController.h"
 
 @interface CacheViewController ()
-@property (weak, nonatomic) IBOutlet PhotoScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet PhotoScrollView *cacheView;
 
 @end
 
 @implementation CacheViewController
 
--(void)initTab{
+-(void)initTabItem{
     UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemDownloads tag:2];
     
     /**/
     self.tabBarItem.title=@"离线";
     self.tabBarItem.image= tempBarItem.selectedImage;
-//    self.tabBarItem.badgeValue=@"10";
-    
+}
+
+-(void)initTab{
     NSArray * files = [[SDImageCache sharedImageCache]getDiskKeys];
     [files enumerateObjectsUsingBlock:^(NSURL * url, NSUInteger idx, BOOL *stop) {
         Pin * pin = [[Pin alloc]init];
@@ -31,15 +32,21 @@
         //pin.image = [pin loadLocalImage];
         pin.is_cache = true;
         pin.idx = [super.pins count];
+        
+        if( idx < 18 )
+           [_cacheView showImages:pin];
+        
         [super.pins addObject:pin];
     }];
     
     //    PhotoScrollView* v = (PhotoScrollView*)[self getScrollView];
-    self.scrollView.isCacheMode = true;
+    self.cacheView.isCacheMode = true;
+    
+    [[self getScrollView] initScrollView:self];
 }
 
 -(PhotoScrollView*) getScrollView{
-    return self.scrollView;
+    return self.cacheView;
 }
 
 

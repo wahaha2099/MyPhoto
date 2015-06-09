@@ -18,7 +18,7 @@
 */
 @interface ViewController ()<ADBannerViewDelegate>
 
-@property (weak, nonatomic) IBOutlet PhotoScrollView *scrollView;
+//@property (weak, nonatomic) IBOutlet PhotoScrollView *scrollView;
 //@property (nonatomic,strong) NSMutableArray *pins;
 
 @end
@@ -46,11 +46,7 @@
 */
 
 -(void)initTab{
-    UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
 
-    self.tabBarItem.title=@"美图";
-    self.tabBarItem.image= tempBarItem.selectedImage;
-    self.tabBarItem.badgeValue=@"10";
 }
 
 - (void)initController {
@@ -64,8 +60,15 @@
 
     //[[SDImageCache sharedImageCache]setMaxCacheSize:];
     
+    //事件
+    [self event];
 
+//    [[self getScrollView] initScrollView:self];
+    //_scrollView.delegate = self;
     
+}
+
+-(void)initNetMode{
     //展示数据
     [self contentViewDataPrepare];
     //[self performSelectorInBackground:@selector(contentViewDataPrepare) withObject:nil];
@@ -75,13 +78,6 @@
     
     //添加注册
     [self loadWebData];
-    
-    //事件
-    [self event];
-
-    [[self getScrollView] initScrollView:self];
-    //_scrollView.delegate = self;
-    
 }
 
 //请求远程图片
@@ -130,7 +126,7 @@
 
 /*
  *  本地图片展示
- */
+
 -(void)localImageShow:(NSUInteger)index{
     
     __weak typeof(self) weakSelf=self;
@@ -162,7 +158,7 @@
         return modelsM;
     }];
 }
-
+ */
 
 /*
  *  展示网络图片
@@ -267,8 +263,8 @@
     //[self showTabBarController:NO];
 }
 
--(PhotoScrollView*) getScrollView{
-    return self.scrollView;
+-(id) getScrollView{
+    return nil;
 }
 
 @end

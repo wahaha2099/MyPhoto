@@ -11,6 +11,8 @@
 
 @interface PhotoScrollView()<UIScrollViewDelegate>
 
+@property (nonatomic) ViewController * controller;
+
 @end
 
 @implementation PhotoScrollView
@@ -20,7 +22,7 @@ int last_idx;       //最后的图片的index
 int layout_count;     //layoutSubviews处理了的长度
 
 
-ViewController * controller;
+
 //初始化scrollview
 -(void)initScrollView:(ViewController* )cont{
     [self setScrollEnabled:YES];
@@ -34,7 +36,7 @@ ViewController * controller;
     [self performSelectorInBackground:@selector(loadNextWebData) withObject:nil];
     
     cachePage = [[NSMutableSet alloc]init];
-    controller = cont;
+    _controller = cont;
 }
 
 //add subview 后,UIView调用此方法进行布局管理
@@ -325,7 +327,7 @@ bool loadingNext2Page = false;
         
         loadingNext2Page = false;
         
-        [controller showADBanner];
+        [_controller showADBanner];
     }
     else if(pageOnScrollView > ((int)scrollOffset.y/scroll.frame.size.height))//避免回弹回来导致数据错误
     {
@@ -335,7 +337,7 @@ bool loadingNext2Page = false;
         
         pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
         
-        [controller hideADBanner];
+        [_controller hideADBanner];
     }
 }
 
@@ -350,25 +352,25 @@ bool needFillToPage = false;
     if(page < 0 )return ;
 
     for (int i =page * page_num; i < ( page+1) * page_num; i++) {
-        if([controller.pins count] <= i){
+        if([_controller.pins count] <= i){
             needFillToPage = true;
             break;
         }
         
         if([self viewWithTag:i] == nil){
-            Pin * pin = [controller.pins objectAtIndex:i];
+            Pin * pin = [_controller.pins objectAtIndex:i];
             [self showImages:pin];
         }
     }
     if( page == 0 ){
-        Pin * pin = [controller.pins objectAtIndex:0];//0的在viewWithTag中返回不为空,需要手动加
+        Pin * pin = [_controller.pins objectAtIndex:0];//0的在viewWithTag中返回不为空,需要手动加
         [self showImages:pin];
     }
     
-    if( [controller.pins count] >= (page + 1 ) * page_num )
+    if( [_controller.pins count] >= (page + 1 ) * page_num )
         [cachePage addObject:[NSNumber numberWithInt:page]];
     
-    if([controller.pins count] <=  ( page + 3 ) * page_num){ //保证后面2页是有数据的
+    if([_controller.pins count] <=  ( page + 3 ) * page_num){ //保证后面2页是有数据的
         [self loadNextWebData];
     }
 }

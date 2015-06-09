@@ -13,4 +13,7 @@
 
 @property (nonatomic) UITableView * settingView;
 
+//设置tabItem名称
+-(void)initTabItem;
+
 @end

@@ -32,8 +32,8 @@
 //显示广告
 -(void)showADBanner;
 
-//对应不同的tab,如network 和cache设置不同的内容
--(void)initTab;
+//初始化网络模式
+-(void)initNetMode;
 
 //获取当前的scrollView
 -(id) getScrollView;

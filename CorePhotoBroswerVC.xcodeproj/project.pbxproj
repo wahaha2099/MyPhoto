@@ -14,6 +14,7 @@
 		187BB8511B25C24B00993116 /* MainTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB8501B25C24B00993116 /* MainTabbar.m */; };
 		187BB8551B25E18400993116 /* DataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB8541B25E18400993116 /* DataHolder.m */; };
 		187BB8581B26B45B00993116 /* CacheViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB8571B26B45B00993116 /* CacheViewController.m */; };
+		187BB85E1B26DCD500993116 /* NetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB85D1B26DCD500993116 /* NetViewController.m */; };
 		1883B6E01B145710009E0271 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6DF1B145710009E0271 /* HttpHelper.m */; };
 		1883B6E31B146652009E0271 /* DataMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6E21B146652009E0271 /* DataMagic.m */; };
 		188EE9EA1B22E9DC00FC44DE /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188EE9E91B22E9DC00FC44DE /* SettingViewController.m */; };
@@ -132,6 +133,8 @@
 		187BB8541B25E18400993116 /* DataHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataHolder.m; sourceTree = "<group>"; };
 		187BB8561B26B45B00993116 /* CacheViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheViewController.h; sourceTree = "<group>"; };
 		187BB8571B26B45B00993116 /* CacheViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheViewController.m; sourceTree = "<group>"; };
+		187BB85C1B26DCD500993116 /* NetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetViewController.h; sourceTree = "<group>"; };
+		187BB85D1B26DCD500993116 /* NetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetViewController.m; sourceTree = "<group>"; };
 		1883B6DE1B145710009E0271 /* HttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpHelper.h; sourceTree = "<group>"; };
 		1883B6DF1B145710009E0271 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
 		1883B6E11B146652009E0271 /* DataMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMagic.h; sourceTree = "<group>"; };
@@ -336,6 +339,8 @@
 				187BB8501B25C24B00993116 /* MainTabbar.m */,
 				187BB8561B26B45B00993116 /* CacheViewController.h */,
 				187BB8571B26B45B00993116 /* CacheViewController.m */,
+				187BB85C1B26DCD500993116 /* NetViewController.h */,
+				187BB85D1B26DCD500993116 /* NetViewController.m */,
 			);
 			path = tabbar;
 			sourceTree = "<group>";
@@ -1063,6 +1068,7 @@
 				89F703D51AFB37B500B048E8 /* SVProgressHUD.m in Sources */,
 				89E38DFB1AFB4A51000B273A /* UIImageView+SD.m in Sources */,
 				89F7040A1AFB395700B048E8 /* NSDate+Extend.m in Sources */,
+				187BB85E1B26DCD500993116 /* NetViewController.m in Sources */,
 				89F7040B1AFB395700B048E8 /* NSObject+Extend.m in Sources */,
 				892DD8D81B0C1FFD0038CC9A /* PBPGView.m in Sources */,
 				89E38DED1AFB4A51000B273A /* SDWebImageCompat.m in Sources */,
