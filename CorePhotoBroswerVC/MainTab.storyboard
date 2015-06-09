@@ -30,7 +30,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="96e-bz-EcN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-170" y="1033"/>
+            <point key="canvasLocation" x="650" y="713"/>
         </scene>
         <!--Setting-->
         <scene sceneID="Wgl-Xk-obH">
@@ -49,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V7K-fh-lwA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="650" y="644"/>
+            <point key="canvasLocation" x="1386" y="704"/>
         </scene>
         <!--NetPhoto-->
         <scene sceneID="lrl-9q-0Im">
@@ -90,8 +90,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="7rJ-Qw-onB" kind="relationship" relationship="viewControllers" id="s70-U5-3b9"/>
-                        <segue destination="Ne9-vA-eRY" kind="relationship" relationship="viewControllers" id="nYT-dA-y8r"/>
                         <segue destination="Jzn-Lv-aFC" kind="relationship" relationship="viewControllers" id="xCL-DF-0Y8"/>
+                        <segue destination="Ne9-vA-eRY" kind="relationship" relationship="viewControllers" id="PWO-oI-Fe6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKJ-gm-qfN" userLabel="First Responder" sceneMemberID="firstResponder"/>

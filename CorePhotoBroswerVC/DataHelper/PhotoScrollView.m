@@ -327,7 +327,7 @@ bool loadingNext2Page = false;
         
         loadingNext2Page = false;
         
-        [_controller showADBanner];
+        //[_controller showADBanner];
     }
     else if(pageOnScrollView > ((int)scrollOffset.y/scroll.frame.size.height))//避免回弹回来导致数据错误
     {
@@ -337,7 +337,7 @@ bool loadingNext2Page = false;
         
         pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
         
-        [_controller hideADBanner];
+        //[_controller hideADBanner];
     }
 }
 
