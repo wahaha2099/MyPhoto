@@ -12,14 +12,26 @@
 @interface PhotoScrollView()<UIScrollViewDelegate>
 
 @property (nonatomic) ViewController * controller;
+@property int last_idx;       //最后的图片的index
+@property int layout_count;     //layoutSubviews处理了的长度
+//第几页显示
+@property int pageOnScrollView ;//= -1;
+
+//显示中的cachePage,用于判断是否需要重新load
+@property NSMutableSet * cachePage ;
+
+//拉取下面2页的同步器
+@property bool loadingNext2Page ;//= false;
+
+//不够图片显示,有数据来通知界面更新
+@property bool needFillToPage ;//
 
 @end
 
 @implementation PhotoScrollView
 
 
-int last_idx;       //最后的图片的index
-int layout_count;     //layoutSubviews处理了的长度
+
 
 
 
@@ -35,7 +47,8 @@ int layout_count;     //layoutSubviews处理了的长度
     self.delegate =self;
     [self performSelectorInBackground:@selector(loadNextWebData) withObject:nil];
     
-    cachePage = [[NSMutableSet alloc]init];
+    _pageOnScrollView = -1;
+    _cachePage = [[NSMutableSet alloc]init];
     _controller = cont;
 }
 
@@ -58,7 +71,7 @@ int layout_count;     //layoutSubviews处理了的长度
     //设置content size
     //int newHeight = height * ([self.subviews count] / maxCol );
     
-    int newHeight = height * (pageOnScrollView + 2) * 4;//页数*4行
+    int newHeight = height * (_pageOnScrollView + 2) * 4;//页数*4行
     
     if( newHeight > myFrame.size.height ){
         if([self.subviews count] % maxCol > 0){//不足3条多一行
@@ -142,8 +155,8 @@ int layout_count;     //layoutSubviews处理了的长度
     if([tap.view isKindOfClass:[UIImageView class]]){
         UIImageView * view = (UIImageView*)tap.view;
         if(_ClickImageBlock != nil) _ClickImageBlock(view.tag);
-        [self removePrevious:(pageOnScrollView - 2)];
-        [self removeNewest:(pageOnScrollView + 3)];
+        [self removePrevious:(_pageOnScrollView - 2)];
+        [self removeNewest:(_pageOnScrollView + 3)];
     }else{
         NSLog(@"touch img %@" , tap.view);
     }
@@ -193,7 +206,7 @@ int layout_count;     //layoutSubviews处理了的长度
     
     //NSLog(@"add tag %i , %@" , (int)imageV.tag , pin.url320 );
     
-    last_idx = (int)pin.idx ;
+    self.last_idx = (int)pin.idx ;
     
     //NSLog(@"adding image %i" , (int)pin.idx);
     //默认隐藏
@@ -221,7 +234,7 @@ int page_num = 9;//页数
 
 //往上拉,删除最新的数据
 -(void)removeNewest:(int)page{
-    [cachePage removeObject:[NSNumber numberWithInt:page]];
+    [_cachePage removeObject:[NSNumber numberWithInt:page]];
     //NSLog(@"remove newest %i" , page);
     int start = page * page_num;
     
@@ -241,7 +254,7 @@ int page_num = 9;//页数
 
 //往下拉,删除上面的数据
 -(void)removePage:(int)page{
-    [cachePage removeObject:[NSNumber numberWithInt:page]];
+    [_cachePage removeObject:[NSNumber numberWithInt:page]];
     //NSLog(@"remove previous %i" , page);
 
     int end = (page + 1)* page_num;
@@ -289,14 +302,7 @@ int page_num = 9;//页数
     }
 }
 
-//第几页显示
-int pageOnScrollView = -1;
 
-//显示中的cachePage,用于判断是否需要重新load
-NSMutableSet * cachePage ;
-
-//拉取下面2页的同步器
-bool loadingNext2Page = false;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -305,46 +311,46 @@ bool loadingNext2Page = false;
     
     int pagAtual = scrollOffset.y/scroll.superview.frame.size.height;
     
-    if(pagAtual == pageOnScrollView) return ;
+    if(pagAtual == _pageOnScrollView) return ;
     
     //NSLog(@"current %i " ,pagAtual);
     
-    if(pageOnScrollView < ((int)scrollOffset.y/scroll.frame.size.height))
+    if(_pageOnScrollView < ((int)scrollOffset.y/scroll.frame.size.height))
     {
-        if(loadingNext2Page)return ;
+        if(_loadingNext2Page)return ;
         
         if(pagAtual - 2 > -1 ){
             [self removePrevious:pagAtual - 2];
         }
         
-        loadingNext2Page = true;
+        _loadingNext2Page = true;
         //load the next page
         //[self loadNextPage:(pagAtual)];
         [self loadNextPage:(pagAtual + 1)];
         //[self loadNextPage:(pagAtual + 2)];
         
-        pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
+       _pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
         
-        loadingNext2Page = false;
+        _loadingNext2Page = false;
         
         //[_controller showADBanner];
     }
-    else if(pageOnScrollView > ((int)scrollOffset.y/scroll.frame.size.height))//避免回弹回来导致数据错误
+    else if(_pageOnScrollView > ((int)scrollOffset.y/scroll.frame.size.height))//避免回弹回来导致数据错误
     {
         [self removeNewest:pagAtual + 3 ];
         
         [self loadNextPage: pagAtual - 1 ];
         
-        pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
+        _pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
         
         //[_controller hideADBanner];
     }
 }
 
-bool needFillToPage = false;
+
 -(void)loadNextPage:(int)page{
 
-    if([cachePage containsObject:[NSNumber numberWithInt:page]])
+    if([_cachePage containsObject:[NSNumber numberWithInt:page]])
         return ;
     
     //NSLog(@"loading page %i" , page);
@@ -353,7 +359,7 @@ bool needFillToPage = false;
 
     for (int i =page * page_num; i < ( page+1) * page_num; i++) {
         if([_controller.pins count] <= i){
-            needFillToPage = true;
+            _needFillToPage = true;
             break;
         }
         
@@ -368,7 +374,7 @@ bool needFillToPage = false;
     }
     
     if( [_controller.pins count] >= (page + 1 ) * page_num )
-        [cachePage addObject:[NSNumber numberWithInt:page]];
+        [_cachePage addObject:[NSNumber numberWithInt:page]];
     
     if([_controller.pins count] <=  ( page + 3 ) * page_num){ //保证后面2页是有数据的
         [self loadNextWebData];
@@ -377,9 +383,9 @@ bool needFillToPage = false;
 
 //数据到了的通知
 -(void)pinsRefresh{
-    if(needFillToPage){
-        [self loadNextPage: pageOnScrollView + 1];
-        needFillToPage = false;
+    if(_needFillToPage){
+        [self loadNextPage: _pageOnScrollView + 1];
+        _needFillToPage = false;
     }
 }
 
