@@ -11,10 +11,11 @@
 		187893611B1D60D200EC6024 /* BaiduImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 187893601B1D60D200EC6024 /* BaiduImage.m */; };
 		187893641B2007FF00EC6024 /* HuabanImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 187893631B2007FF00EC6024 /* HuabanImage.m */; };
 		1878937E1B207FC400EC6024 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1878937D1B207FC400EC6024 /* iAd.framework */; };
+		187BB8511B25C24B00993116 /* MainTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB8501B25C24B00993116 /* MainTabbar.m */; };
+		187BB8551B25E18400993116 /* DataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB8541B25E18400993116 /* DataHolder.m */; };
 		1883B6E01B145710009E0271 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6DF1B145710009E0271 /* HttpHelper.m */; };
 		1883B6E31B146652009E0271 /* DataMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6E21B146652009E0271 /* DataMagic.m */; };
 		188EE9EA1B22E9DC00FC44DE /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188EE9E91B22E9DC00FC44DE /* SettingViewController.m */; };
-		188EE9ED1B22F41100FC44DE /* SettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188EE9EC1B22F41100FC44DE /* SettingTableView.m */; };
 		18903BAA1B21DE3800C7155F /* iAdHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 18903BA91B21DE3800C7155F /* iAdHelper.m */; };
 		18C079B91B17009300F92123 /* BoardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C079B81B17009300F92123 /* BoardInfo.m */; };
 		18C079BC1B1700A200F92123 /* Pin.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C079BB1B1700A200F92123 /* Pin.m */; };
@@ -124,14 +125,16 @@
 		187893621B2007FF00EC6024 /* HuabanImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuabanImage.h; sourceTree = "<group>"; };
 		187893631B2007FF00EC6024 /* HuabanImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuabanImage.m; sourceTree = "<group>"; };
 		1878937D1B207FC400EC6024 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		187BB84F1B25C24B00993116 /* MainTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabbar.h; sourceTree = "<group>"; };
+		187BB8501B25C24B00993116 /* MainTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabbar.m; sourceTree = "<group>"; };
+		187BB8531B25E18400993116 /* DataHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataHolder.h; sourceTree = "<group>"; };
+		187BB8541B25E18400993116 /* DataHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataHolder.m; sourceTree = "<group>"; };
 		1883B6DE1B145710009E0271 /* HttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpHelper.h; sourceTree = "<group>"; };
 		1883B6DF1B145710009E0271 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
 		1883B6E11B146652009E0271 /* DataMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMagic.h; sourceTree = "<group>"; };
 		1883B6E21B146652009E0271 /* DataMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMagic.m; sourceTree = "<group>"; };
 		188EE9E81B22E9DC00FC44DE /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		188EE9E91B22E9DC00FC44DE /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
-		188EE9EB1B22F41100FC44DE /* SettingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableView.h; sourceTree = "<group>"; };
-		188EE9EC1B22F41100FC44DE /* SettingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableView.m; sourceTree = "<group>"; };
 		18903BA81B21DE3800C7155F /* iAdHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iAdHelper.h; sourceTree = "<group>"; };
 		18903BA91B21DE3800C7155F /* iAdHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iAdHelper.m; sourceTree = "<group>"; };
 		18C079B71B17009300F92123 /* BoardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardInfo.h; sourceTree = "<group>"; };
@@ -323,9 +326,29 @@
 			path = ImgSource;
 			sourceTree = "<group>";
 		};
+		187BB84E1B25C23B00993116 /* tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				187BB84F1B25C24B00993116 /* MainTabbar.h */,
+				187BB8501B25C24B00993116 /* MainTabbar.m */,
+			);
+			path = tabbar;
+			sourceTree = "<group>";
+		};
+		187BB8521B25E14200993116 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				187BB8531B25E18400993116 /* DataHolder.h */,
+				187BB8541B25E18400993116 /* DataHolder.m */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		1883B6DD1B1456FE009E0271 /* DataHelper */ = {
 			isa = PBXGroup;
 			children = (
+				187BB8521B25E14200993116 /* data */,
+				187BB84E1B25C23B00993116 /* tabbar */,
 				188EE9E41B22E76F00FC44DE /* setting */,
 				18903BA71B21DE3800C7155F /* iAd */,
 				1878935E1B1D60D200EC6024 /* ImgSource */,
@@ -345,8 +368,6 @@
 			children = (
 				188EE9E81B22E9DC00FC44DE /* SettingViewController.h */,
 				188EE9E91B22E9DC00FC44DE /* SettingViewController.m */,
-				188EE9EB1B22F41100FC44DE /* SettingTableView.h */,
-				188EE9EC1B22F41100FC44DE /* SettingTableView.m */,
 			);
 			path = setting;
 			sourceTree = "<group>";
@@ -1066,6 +1087,7 @@
 				892DD8D51B0C1FFD0038CC9A /* PhotoModel.m in Sources */,
 				898355531AF88AF9008E0489 /* LFRoundProgressView.m in Sources */,
 				89F7040D1AFB395700B048E8 /* NSString+Password.m in Sources */,
+				187BB8551B25E18400993116 /* DataHolder.m in Sources */,
 				89E38DF91AFB4A51000B273A /* UIView+WebCacheOperation.m in Sources */,
 				89E38DF21AFB4A51000B273A /* SDWebImagePrefetcher.m in Sources */,
 				89F7040C1AFB395700B048E8 /* NSString+Extend.m in Sources */,
@@ -1076,13 +1098,13 @@
 				187893611B1D60D200EC6024 /* BaiduImage.m in Sources */,
 				89F704171AFB395700B048E8 /* UIView+Extend.m in Sources */,
 				89F704121AFB395700B048E8 /* UIImage+Cut.m in Sources */,
+				187BB8511B25C24B00993116 /* MainTabbar.m in Sources */,
 				892DD8E51B0C20690038CC9A /* PhotoCotentView.m in Sources */,
 				892DD8D41B0C1FFD0038CC9A /* PhotoBroswerLayout.m in Sources */,
 				89E38DEA1AFB4A51000B273A /* MKAnnotationView+WebCache.m in Sources */,
 				18C079BC1B1700A200F92123 /* Pin.m in Sources */,
 				89E38DF01AFB4A51000B273A /* SDWebImageDownloaderOperation.m in Sources */,
 				89F703D21AFB37B500B048E8 /* CoreSVP.m in Sources */,
-				188EE9ED1B22F41100FC44DE /* SettingTableView.m in Sources */,
 				892DD8D21B0C1FFD0038CC9A /* UIView+PBExtend.m in Sources */,
 				89E38DE81AFB4A51000B273A /* UIImage+ReMake.m in Sources */,
 				89E38DF81AFB4A51000B273A /* UIImageView+WebCache.m in Sources */,

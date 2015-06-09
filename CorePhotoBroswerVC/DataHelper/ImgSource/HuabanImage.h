@@ -10,6 +10,7 @@
 #import "BoardInfo.h"
 #import "HttpHelper.h"
 #import "DataMagic.h"
+#import "DataHolder.h"
 
 @interface HuabanImage : NSObject
 

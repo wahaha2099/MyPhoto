@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SettingTableView.h"
 #import "SDImageCache.h"
 
 @interface SettingViewController : UIViewController
+
+@property (nonatomic) UITableView * settingView;
 
 @end

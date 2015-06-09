@@ -8,19 +8,28 @@
 
 #import "SettingViewController.h"
 
-@interface SettingViewController ()
+@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView * settingView;
-@property (weak, nonatomic) IBOutlet UINavigationBar * navBar;
+
+@property (nonatomic) UINavigationBar * navBar;
+
+@property CGFloat maxWidth;
+@property CGFloat maxHeight;
+@property CGFloat headOffset;
 
 @end
 
 @implementation SettingViewController
 
+CGFloat maxWidth;
+CGFloat maxHeight;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self extendedLayout];
     //self.automaticallyAdjustsScrollViewInsets = false;
+    
     
     UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:1];
 
@@ -29,13 +38,39 @@
     self.tabBarItem.title=@"设置";
     self.tabBarItem.image= tempBarItem.selectedImage;
     
-    self.navBar.frame = CGRectMake(0 , 0 ,self.view.frame.size.width, self.view.frame.size.height-100);
     
+    //table view
+    _settingView = [[UITableView alloc] initWithFrame:CGRectMake(0, _headOffset, _maxWidth, _maxHeight) style:UITableViewStyleGrouped] ;
+    _settingView.delegate = self;
+    _settingView.dataSource = self;
     
-    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.settingView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:_settingView];
     
-    NSLog(@"width %i" , (int)self.view.frame.size.height);
+    //navBar
+    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, _headOffset)];
+    navBar.backgroundColor = [UIColor whiteColor];
+    
+    UINavigationItem *navItem = [[UINavigationItem alloc] init];
+    navItem.title = @"Setting";
+    navBar.items = @[ navItem ];
+    self.navBar = navBar;
+    [self.view addSubview:navBar];
+    
+}
+
+- (void)extendedLayout
+{
+    BOOL iOS7 = [UIDevice currentDevice].systemVersion.floatValue >= 7.0;
+    if (iOS7) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    CGFloat offset = _headOffset = iOS7 ? 64 : 44;
+    _maxWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
+    _maxHeight = CGRectGetHeight(self.view.frame)-offset;
+    
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,9 +95,9 @@
 
 /**
  3、设置行的高度
- */
+*/
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 88.0f;
+    return 50.0f;
 }
 
 /**
@@ -70,17 +105,43 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    UITableViewCell *Cell = [tableView dequeueReusableCellWithIdentifier:@"cache_cell"];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     
-    UIButton *objectOfButton = (UIButton *)[Cell viewWithTag:1];
-    UILabel * label = (UILabel*)[Cell viewWithTag:2];
-    [objectOfButton addTarget:self action:@selector(YourSelector:) forControlEvents:UIControlEventTouchUpInside];
-    NSUInteger size = [[SDImageCache sharedImageCache] getSize ];
-    [label setText:[NSString stringWithFormat:@"%lu M" , size / 1000 / 1000]];
-    
-    [[SDImageCache sharedImageCache] getDiskKeys];
-    return Cell;
+    switch (indexPath.row) {
+        case 0:{
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            NSUInteger size = [[SDImageCache sharedImageCache] getSize ];
+            [cell.textLabel setText:[NSString stringWithFormat:@"Cache Size :%lu M" , size / 1000 / 1000]];
+            
+            //添加按钮
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            button.translatesAutoresizingMaskIntoConstraints = NO;
+            [button addTarget:self action:@selector(ClearCache:) forControlEvents:UIControlEventTouchUpInside];
+            [button setTitle:@"Clear" forState:UIControlStateNormal];
+            [cell.contentView addSubview:button];
+            
+            //相对于contentView右对齐,向左30
+            NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:-30.f];
+            
+            //和textLabel保持同一行
+            NSLayoutConstraint * lineConstraint =[NSLayoutConstraint constraintWithItem:button
+                                                       attribute:NSLayoutAttributeBaseline
+                                                       relatedBy:NSLayoutRelationEqual
+                                                          toItem:cell.textLabel
+                                                       attribute:NSLayoutAttributeBaseline
+                                                      multiplier:1                                                        constant:0];
+
+            [cell.contentView addConstraint:constraint];
+            [cell.contentView addConstraint:lineConstraint];
+            
+            break;
+        }
+    }
+
+    return cell;
 }
+
+
 
 /**
  5、点击单元格时的处理
@@ -89,39 +150,19 @@
     
 }
 
--(IBAction)YourSelector:(UIButton * )sender{
-    // Your Button in Cell is selected.
-    // Do your stuff.
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dete" message:@"Are you sure you want to delete the cache?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+-(void)ClearCache:(UIButton * )sender{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete" message:@"Are you sure you want to delete the cache?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
     [alert show];
-    
-    NSLog(@"Button Clicked Index = %i" , (int)sender.tag);
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if([[alertView title] isEqualToString:@"Dete"]){
+    //删除按钮点击
+    if([[alertView title] isEqualToString:@"Delete"] && buttonIndex == 1)
+    {
         [[SDImageCache sharedImageCache] clearDisk];
         [_settingView reloadData];
-         NSLog(@"has delete ");
-    }
-
-    //NSLog(@"%d", _tmpIndexPath.row);
-    if(buttonIndex == 1)
-    {
-      //  NSLog(@"%d", _tmpIndexPath.row);
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

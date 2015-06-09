@@ -54,8 +54,10 @@ static HuabanImage * instance ;
     BoardInfo * b = [_Boards objectForKey:key];
     if(b == nil){
         b = [BoardInfo initByUrl:board_url];
+        b.magic_type = 1;
         [_Boards setObject:b forKey: key];
     }
+    [[DataHolder sharedInstance]loadBoard:b];
     
     NSLog(@"request %@",board_url);
     //b.max =@"46420493";
@@ -85,14 +87,26 @@ static HuabanImage * instance ;
     NSDictionary * rs = [NSJSONSerialization JSONObjectWithData:rsp options:NSJSONReadingMutableLeaves error:&error];
     NSDictionary * board = [rs objectForKey:@"board"];
     
-    NSString * board_id = [board objectForKey:@"board_id"];
+    NSString * board_id = [board objectForKey:@"board_id"] ;
     NSArray * pins = [board objectForKey:@"pins"];
     
     NSMutableDictionary * _Boards = [[DataMagic Instance]Boards];
+    
+    BoardInfo * b = [_Boards objectForKey:[NSNumber numberWithLongLong:[[NSString stringWithFormat:@"%@",board_id ] longLongValue]]];
+    
     [pins enumerateObjectsUsingBlock:^(NSDictionary * pin_dic, NSUInteger idx, BOOL *stop) {
+        
         Pin* pin = [Pin initPin:pin_dic];
-        [[_Boards objectForKey:[NSNumber numberWithLongLong:[pin.board_id longLongValue]]] addPin:pin];
+       
+        if([b.max isEqualToString:@"999999999"]){
+            if( idx == 0 ){
+                b.start = pin.pin_id;
+            }
+        }
+        [b addPin:pin];
     }];
+    
+    [[DataHolder sharedInstance] saveBoard:b];
     
     //通知界面更新
     [[NSNotificationCenter defaultCenter] postNotificationName:_finish_notify object:board_id userInfo:nil];

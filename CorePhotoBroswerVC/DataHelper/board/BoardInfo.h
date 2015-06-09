@@ -14,7 +14,9 @@
 @property NSString * idx;//主键id
 @property NSString * url;//board url
 @property int total;//总共多少张
-@property NSString * max;//最后一张图片id大小
+@property int magic_type;//1=花瓣 , 2=百度
+@property NSString * start;//第一张图片的id,花瓣是通过id去取图片,分页的
+@property NSString * max;//最后一张图片id,分页的
 @property long timestamp ; //当前这张图片时间戳
 @property NSMutableArray * pins;//图片具体信息
 @property int pin_idx;//最后显示的pin在pins的index下标

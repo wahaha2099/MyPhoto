@@ -120,11 +120,11 @@
     if(isNetWorkShow){//网络请求
         
         //创建imageView
-        //UIImage *image = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
-        UIImage * image = nil;
-        //self.photoImageView.image = image;
+        UIImage *image = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
+        //UIImage * image = nil;
+        self.photoImageView.image = image;
         
-        //if(image == nil) return;
+        if(image == nil) return;
         
         [self.photoImageView imageWithUrlStr:_photoModel.image_HD_U phImage:image progressBlock:^(NSInteger receivedSize, NSInteger expectedSize) {
             

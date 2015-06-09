@@ -47,6 +47,7 @@ BaiduImage * instance;
     BoardInfo * b = [[[DataMagic Instance] Boards] objectForKey:key];
     if(b == nil){
         b = [BoardInfo initByInt:url idx:baidu_board_id];
+        b.magic_type = 2;
         [[[DataMagic Instance] Boards] setObject:b forKey: key];
     }
     

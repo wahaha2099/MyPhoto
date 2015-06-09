@@ -38,7 +38,7 @@
 -(void) addPin:(Pin*)pin{
     [_pins addObject:pin];
     //获取最后文件的max
-    _max = pin.pin_id;
+    _max = [NSString stringWithFormat:@"%@", pin.pin_id ];
 }
 /**
  "board":{
