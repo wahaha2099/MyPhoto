@@ -28,15 +28,15 @@ static iAdHelper * iAdInstance ;
 }
 
 //显示广告
--(void)showADBanner:(UIView*)view{
-    [self addADBanner:view];
+-(void)showADBanner:(UIView*)view top:(bool)isTop{
+    [self addADBanner:view top:isTop];
     
     if(_adView != nil){
         [_adView setHidden:NO];
     }
 }
 
--(void)addADBanner:(UIView * )view{
+-(void)addADBanner:(UIView * )view top:(bool)isTop{
     if(_adView == nil){
         _adView = [[ADBannerView alloc] initWithFrame:CGRectZero];
         //_adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
@@ -44,18 +44,26 @@ static iAdHelper * iAdInstance ;
         
         // 登陆ADBannerView的delegate，这里我们设定其父窗口自己
         _adView.delegate = self;
-        // 在父窗口下方表示
-        _adView.frame = CGRectOffset(_adView.frame, 0, view.frame.size.height - _adView.frame.size.height);
+        
         // 添加到父窗口中
         [view addSubview:_adView];
-        [_adView setHidden:YES];
+        //[_adView setHidden:YES];
     }else{
         if([_adView superview] != view){
             // 添加到父窗口中
             [view addSubview:_adView];
         }
     }
+
+    CGRect frame = [[UIScreen mainScreen] bounds];
+
     
+    if(isTop)
+        _adView.frame = CGRectOffset(frame, 0, 0);
+    else{
+        // 在父窗口下方表示
+        _adView.frame = CGRectOffset(frame, 0, frame.size.height - _adView.frame.size.height);
+    }
 }
 
 

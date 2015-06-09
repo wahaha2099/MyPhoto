@@ -56,7 +56,7 @@
 - (void)initController {
     self.automaticallyAdjustsScrollViewInsets = false;
     
-    [[iAdHelper Instance] addADBanner:self.view];
+    [[iAdHelper Instance] addADBanner:self.view top:YES];
     
     [[SDImageCache sharedImageCache]setMaxMemoryCost:10 ];
     [[SDImageCache sharedImageCache] setShouldDecompressImages:NO];
@@ -170,7 +170,7 @@
 -(void)networkImageShow:(NSUInteger)index{
     
     
-    __weak typeof(self) weakSelf=self;
+    //__weak typeof(self) weakSelf=self;
     __weak NSMutableArray * __pins = _pins;
     
     [PhotoBroswerVC show:self type:PhotoBroswerVCTypeModal index:index photoModelBlock:^NSArray *{
@@ -258,13 +258,13 @@
 //隐藏广告
 -(void)hideADBanner{
     [[iAdHelper Instance] hideADBanner];
-    [self showTabBarController:YES];
+    //[self showTabBarController:YES];
 }
 
 //显示广告
 -(void)showADBanner{
-    [[iAdHelper Instance] showADBanner:self.view];
-    [self showTabBarController:NO];
+    [[iAdHelper Instance] showADBanner:self.view top:YES];
+    //[self showTabBarController:NO];
 }
 
 -(PhotoScrollView*) getScrollView{

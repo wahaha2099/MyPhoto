@@ -125,7 +125,7 @@
     [pbVC show];
     
     //显示广告
-    [[iAdHelper Instance] showADBanner:pbVC.view];
+    [[iAdHelper Instance] showADBanner:pbVC.view top:NO];
 }
 
 
@@ -370,7 +370,7 @@
     if(show){    //显示广告
         [[iAdHelper Instance] hideADBanner];
     }else
-        [[iAdHelper Instance] showADBanner:self.view];
+        [[iAdHelper Instance] showADBanner:self.view top:NO];
 }
 
 

@@ -62,7 +62,7 @@ NSString * const keyAccount = @"accounts";
         [exist setValue:[NSString stringWithFormat:@"%i",board.page ] forKey:@"page"];
         
     }
-    NSLog(@" save b %@ start=%@ max=%@ page=%i" , board.idx , board.start , board.max , board.page);
+    //NSLog(@" save b %@ start=%@ max=%@ page=%i" , board.idx , board.start , board.max , board.page);
 
     //3.本地存储
     [_boards setValue:exist forKey:[board idx]];//add to array
@@ -84,7 +84,7 @@ NSString * const keyAccount = @"accounts";
             b.max = [e objectForKey:@"max"];
             b.page = [[e objectForKey:@"page"] intValue];
         }
-        NSLog(@" load b %@ start=%@ max=%@ page=%i" , b.idx , b.start , b.max , b.page);
+        //NSLog(@" load b %@ start=%@ max=%@ page=%i" , b.idx , b.start , b.max , b.page);
     }
 }
 

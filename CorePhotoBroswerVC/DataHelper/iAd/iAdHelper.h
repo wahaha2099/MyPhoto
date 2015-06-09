@@ -20,9 +20,9 @@
 -(void)hideADBanner;
 
 //显示广告
--(void)showADBanner:(UIView* ) view;
+-(void)showADBanner:(UIView* ) view top:(bool)isTop;
 
 //添加ad到view中
--(void)addADBanner:(UIView * )view;
+-(void)addADBanner:(UIView * )view top:(bool)isTop;
 
 @end
