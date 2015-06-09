@@ -1,0 +1,1249 @@
+<script>
+    (function(rt) {
+var templates = rt.templates,
+attrs = function() {
+return rt.attrs.apply(rt, arguments)
+},
+_ = function() {
+return rt._.apply(rt, arguments)
+},
+img = function() {
+return rt.img.apply(rt, arguments)
+},
+imgURL = function() {
+return rt.imgURL.apply(rt, arguments)
+},
+gifURL = function() {
+return rt.gifURL.apply(rt, arguments)
+},
+imgSuffixIsRetinaDisplay = function() {
+return rt.imgSuffixIsRetinaDisplay.apply(rt, arguments)
+},
+imgSize = function() {
+return rt.imgSize.apply(rt, arguments)
+},
+avatar = function() {
+return rt.avatar.apply(rt, arguments)
+},
+isVerified = function() {
+return rt.isVerified.apply(rt, arguments)
+},
+url = function() {
+return rt.url.apply(rt, arguments)
+},
+mkurl = function() {
+return rt.mkurl.apply(rt, arguments)
+},
+GACampaignURL = function() {
+return rt.GACampaignURL.apply(rt, arguments)
+},
+format_text = function() {
+return rt.format_text.apply(rt, arguments)
+},
+escape = function() {
+return rt.escape.apply(rt, arguments)
+},
+__t = rt.templates,
+emerge = function() {
+return rt.renderSync.apply(rt, arguments)
+};
+__t["dialog/dialog_add"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "Add",
+title: "添加",
+body: emerge("dialog/dialog_add_body"),
+className: "PaddingLess"
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_add_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+id: "OpenLinks"
+})), buf.push("><a"), buf.push(attrs({
+id: "OpenScrapePin",
+"class": "cell"
+})), buf.push("><div"), buf.push(attrs({
+id: "scrape",
+"class": "icon"
+})), buf.push("></div><span>采集网页图片</span></a><a"), buf.push(attrs({
+id: "OpenUploadPin",
+"class": "cell"
+})), buf.push("><div"), buf.push(attrs({
+id: "upload",
+"class": "icon"
+})), buf.push("></div><span>上传本地图片</span></a><a"), buf.push(attrs({
+id: "OpenCreateBoard",
+"class": "cell"
+})), buf.push("><div"), buf.push(attrs({
+id: "board",
+"class": "icon"
+})), buf.push("></div><span>新建画板</span></a><p"), buf.push(attrs({
+"class": "pin-tools"
+})), buf.push("><span>使用花瓣网的采集工具，你可以更高效地收集网络上的图片、视频或者网页截图</span><br"), buf.push(attrs({})), buf.push("/>花瓣上90%的采集都来自采集工具，<a"), buf.push(attrs({
+href: "/about/goodies/"
+})), buf.push('>去安装采集工具</a></p></div><script>(function(){function a(a){app.req.user?a():(app.hideDialog(),app.showSheet("login",{modal:!0,login_prompt:"请先登录，登录后才能继续刚才的操作"}))}document.id("OpenScrapePin").addEvent("click",function(){return a(function(){app.showDialog("scrape_pin")}),!1}),document.id("OpenUploadPin").addEvent("click",function(){return app.showUploadDialog(),!1}),document.id("OpenCreateBoard").addEvent("click",function(){return a(function(){app.showDialog("create_board")}),!1})})()</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_already_promoted"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_base", {
+id: "already_promoted",
+title: "推荐自己",
+body: emerge("dialog/dialog_already_promoted_body"),
+destroyOnClose: !0
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_already_promoted_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<p>你已经在推荐用户里了，不用再推荐自己了，你的采集被人喜欢的越多，你就越有可能出现在最前面。</p><a"), buf.push(attrs({
+href: "#",
+onclick: "return false;",
+"class": "btn btn18 rbtn"
+})), buf.push('><strong> 确定</strong><span></span></a><script>$$("#already_promoted a.btn").addEvent("click",function(a){a.stop(),app.hideDialog()})</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_appeal"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "Appeal",
+title: "申诉",
+body: emerge("dialog/dialog_appeal_body"),
+destroyOnClose: !0
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_appeal_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<form"), buf.push(attrs({
+action: "",
+"class": "Form StaticForm nm"
+})), buf.push("><ul><li"), buf.push(attrs({
+    "class": "nbt"
+    })), buf.push("><input"), buf.push(attrs({
+    id: "username",
+    type: "text",
+    name: "username",
+    value: "",
+    "class": "clear-input"
+    })), buf.push("/><label>用户名</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></li><li"), buf.push(attrs({
+    "class": "nbt"
+    })), buf.push("><input"), buf.push(attrs({
+    id: "url",
+    type: "text",
+    name: "url",
+    value: "",
+    "class": "clear-input"
+    })), buf.push("/><label>个性网址</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></li><li"), buf.push(attrs({
+    "class": "nbt"
+    })), buf.push("><input"), buf.push(attrs({
+    id: "email",
+    type: "text",
+    name: "email",
+    value: "",
+    "class": "clear-input"
+    })), buf.push("/><label>Email</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></li><li"), buf.push(attrs({
+    "class": "nbt"
+    })), buf.push("><input"), buf.push(attrs({
+    id: "sina",
+    type: "text",
+    name: "sina",
+    value: "",
+    "class": "clear-input"
+    })), buf.push("/><label>新浪微博昵称</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></li><li"), buf.push(attrs({
+    "class": "nbt"
+    })), buf.push("><input"), buf.push(attrs({
+    id: "douban",
+    type: "text",
+    name: "douban",
+    value: "",
+    "class": "clear-input"
+    })), buf.push("/><label>豆瓣昵称</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></li></ul><div"), buf.push(attrs({
+"class": "Submit"
+})), buf.push("><a"), buf.push(attrs({
+href: "#",
+onclick: "return false;",
+"class": "btn btn18 rbtn"
+})), buf.push('><strong> 提交</strong><span></span></a></div></form><script>(function(){var a=$("Appeal");if(a.retrieve("initialized"))return;var b=$("username"),c=$("url"),d=$("email"),e=$("sina"),f=$("douban");new Button(a.getElement(".Submit a"),{click:function(){var a=b.get("value").trim(),g=c.get("value").trim(),h=d.get("value").trim(),i=e.get("value").trim(),j=f.get("value").trim();if(a==""&&g==""&&h==""&&i==""&&j==""){app.showTip(b,"至少输入其中一项",{width:150}),app.showTip(c,"至少输入其中一项",{width:150}),app.showTip(d,"至少输入其中一项",{width:150}),app.showTip(e,"至少输入其中一项",{width:150}),app.showTip(f,"至少输入其中一项",{width:150});return}return this.disable(),(new Request.JSON({url:"/appeal/",data:{username:a,url:g,email:h,sina:i,douban:j},onSuccess:function(a){a.err?app.error(a.msg):app.hideDialog()},onFailure:function(){app.error(app.COMMON_ERRMSG)},onComplete:function(){this.enable()}.bind(this)})).post(),!1}}),a.getElements("input").addEvent("blur",function(a){app.hideTip(a.target)}),a.store("initialized",!0)})()</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_base"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+id: "" + id + "",
+style: "display:none;",
+"class": "modal-container " + (typeof destroyOnClose == "undefined" ? "" : " destroy")
+})), buf.push("><div"), buf.push(attrs({
+"class": "overlay"
+})), buf.push("></div><div"), buf.push(attrs({
+style: "z-index: 99999",
+"class": "dialog-box " + (typeof className == "undefined" ? "" : " " + className)
+})), buf.push("><div"), buf.push(attrs({
+"class": "box-title"
+})), buf.push(">" + escape((interp = title) == null ? "" : interp) + "<div"), buf.push(attrs({
+"class": "close-btn"
+})), buf.push("><i></i></div></div><div"), buf.push(attrs({
+"class": "box-inner"
+})), buf.push(">");
+var __val__ = body;
+buf.push(null == __val__ ? "" : __val__), buf.push('</div></div></div><script>$$(".modal-container .dialog-box .close-btn").addEvent("click",function(){return this.getParent(".modal-container").hasClass("destroy")&&this.fireEvent("destroy"),app.hideDialog(),!1})</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_board_cover"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, board = page.board;
+buf.push("<div"), buf.push(attrs({
+id: "board_cover",
+style: "display:none;",
+"class": "ModalContainer"
+})), buf.push("><div"), buf.push(attrs({
+"class": "modal wide"
+})), buf.push("><div"), buf.push(attrs({
+"class": "header"
+})), buf.push("><a"), buf.push(attrs({
+href: "#",
+onclick: "app.hideDialog(); return false",
+"class": "close"
+})), buf.push("><strong>Close</strong><span></span></a><h2>设置封面</h2></div><div"), buf.push(attrs({
+"class": "cover-option"
+})), buf.push("><div"), buf.push(attrs({
+"class": "sub-arrow"
+})), buf.push("></div><span"), buf.push(attrs({
+"class": "first"
+})), buf.push("><input"), buf.push(attrs({
+type: "radio",
+name: "cover-option",
+id: "cover-option-default",
+value: "default",
+checked: !0
+})), buf.push("/><label"), buf.push(attrs({
+"for": "cover-option-default"
+})), buf.push(">使用默认封面（最新采集）</label></span><span><input"), buf.push(attrs({
+				type: "radio",
+				name: "cover-option",
+				id: "cover-option-custom",
+				value: "custom",
+				checked: "checked"
+			})), buf.push("/><label"), buf.push(attrs({
+				"for": "cover-option-custom"
+			})), buf.push(">使用自定义封面</label></span></div><div"), buf.push(attrs({
+"class": "cover no-select"
+})), buf.push("><ul"), buf.push(attrs({
+style: "left: 226px",
+"class": "cover-imgs"
+})), buf.push("></ul><div"), buf.push(attrs({
+"class": "left arrow none"
+})), buf.push("><div"), buf.push(attrs({
+"class": "arrow-img"
+})), buf.push("></div></div><div"), buf.push(attrs({
+"class": "right arrow"
+})), buf.push("><div"), buf.push(attrs({
+"class": "arrow-img"
+})), buf.push("></div></div></div><div"), buf.push(attrs({
+"class": "prompt"
+})), buf.push("><i"), buf.push(attrs({
+"class": "icon"
+})), buf.push("></i>还没找到合适的封面吗？<a"), buf.push(attrs({
+href: "/boards/board_id/?setcover=1",
+"class": "x"
+})), buf.push(">点击进入画板选择</a></div><a"), buf.push(attrs({
+href: "#",
+onclick: "return false;",
+"class": "change-btn btn btn18 rbtn"
+})), buf.push("><span"), buf.push(attrs({
+"class": "text"
+})), buf.push("> 保存设置</span></a><a"), buf.push(attrs({
+onclick: "app.hideDialog(); return false",
+href: "#",
+"class": "btn btn18"
+})), buf.push("><span"), buf.push(attrs({
+"class": "text"
+})), buf.push("> 取消</span></a></div><div"), buf.push(attrs({
+"class": "overlay"
+})),
+buf.push('></div></div><script>(function(){
+    var a=document.getElement(".cover-imgs"),
+            b=new Fx.Tween(a,{property:"left",duration:300}),
+            c=document.getElement(".left.arrow"),
+            d=document.getElement(".right.arrow"),e=!1;
+}document.getElement("#board_cover .left").
+        addEvent("click",function(){if(this.hasClass("none")||e)return;
+            d.hasClass("none")&&d.removeClass("none");
+            var f=parseInt(a.getStyle("left"));
+            e=!0,b.start(f,f+226).chain(function(){e=!1,app.dialog.moveIndex--,
+                    app.dialog.moveIndex<=0&&c.addClass("none")})}),
+        document.getElement("#board_cover .right").
+                addEvent("click",function(){if(this.hasClass("none")||e)return;
+                    c.hasClass("none")&&c.removeClass("none");
+                    var g=parseInt(a.getStyle("left"));e=!0,b.start(g,g-226).chain(
+                            function(){e=!1,app.dialog.moveIndex++;
+                                var a=$$(".cover-imgs img").length;
+                                if(app.dialog.moveIndex>=a-1)d.addClass("none");
+                                else if(app.dialog.moveIndex==a-3){
+                                    var b=$$(".cover-imgs img")[a-1].get("data-id");
+                                }f(b)}app.dialog.moveIndex==10&&i()})});
+
+
+    var f=function(a){(new Request.JSON(
+            {url:"/boards/"+app.dialog.board_id+"/?limit=3&max="+a+"&wfl=1",
+                onSuccess:function(a){a.err?alert(a.msg||app.COMMON_ERRMSG):
+                        g(a.board.pins)},
+                onFailure:function(){alert(app.COMMON_ERRMSG)}})).get()},
+            g=function(a){var b="";a.map(function(a){
+                var c="http://"+app.settings.imgHosts[a.file.bucket]+"/"+a.file.key+"_sq235";
+            }b+="<li><img src=\'"+c+"\' data-id= \'"+a.pin_id+"\' />"+"</li>"});
+var c=document.getElement(".cover-imgs").get("html");
+document.getElement(".cover-imgs").set("html",c+b)};
+$$(".change-btn").addEvent("click",function(){
+    var a=app.dialog.board_id,b=document.id("cover-option-default"),
+            c=b.get("checked"),d=$$(".cover-imgs img")[app.dialog.moveIndex].get("data-id");
+    if(c)var e={_method:"DELETE"},f=$$(".cover-imgs img")[0].get("src");else var e={pin_id:d},
+            f=$$(".cover-imgs img")[app.dialog.moveIndex].get("src");
+    return(new Request.JSON({url:"/boards/"+a+"/board-cover",
+        data:e,onSuccess:function(b){b.err?app.error(b.err):(
+                app.msg(b.msg),app.dialog.boards[a].cover=c?!1:!0),h(f)}})).post(),
+            this.getParent(".ModalContainer").hasClass("destroy")&&this.fireEvent("destroy"),
+            app.hideDialog(),!1});var h=function(a){var b=document.getElement(".cover-change");
+    b.getElement(".large").set("src",a),b.removeClass("cover-change")},i=function(){
+    var a=document.getElement("#board_cover .prompt");a.show().fade("in"),
+            document.getElement("#board_cover .prompt a").set
+            ("href","/boards/"+app.dialog.board_id+"/?setcover=1")}})()</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_board_cover_pinitem"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, board = page.board;
+buf.push("<div"), buf.push(attrs({
+id: "board_cover_pinitem",
+style: "display:none;",
+"class": "ModalContainer"
+})), buf.push("><div"), buf.push(attrs({
+style: "width: 478px; margin-left: -239px;",
+"class": "modal"
+})), buf.push("><div"), buf.push(attrs({
+"class": "header"
+})), buf.push("><a"), buf.push(attrs({
+href: "#",
+onclick: "app.hideDialog(); return false",
+"class": "close"
+})), buf.push("><strong>Close</strong><span></span></a><h2>封面预览 / " + escape((interp = board.title) == null ? "" : interp) + "</h2></div><div"), buf.push(attrs({
+"class": "body"
+})), buf.push("><div"), buf.push(attrs({
+"class": "cover"
+})), buf.push("><img"), buf.push(attrs({
+src: ""
+})), buf.push("/></div><a"), buf.push(attrs({
+href: "#",
+onclick: "return false;",
+"class": "change-btn btn btn18 rbtn"
+})), buf.push("><span"), buf.push(attrs({
+"class": "text"
+})), buf.push("> 确定</span></a><a"), buf.push(attrs({
+onclick: "app.hideDialog(); return false",
+href: "#",
+"class": "btn btn18"
+})), buf.push("><span"), buf.push(attrs({
+"class": "text"
+})), buf.push("> 取消</span></a></div></div><div"), buf.push(attrs({
+"class": "overlay"
+})), buf.push('></div></div><script>(function(){$$(".change-btn").addEvent("click",function(){var a=app.dialog.board_id,b=app.dialog.pin_id;(new Request.JSON({url:"/boards/"+a+"/board-cover",data:{pin_id:b},onSuccess:function(a){a.err?app.error(a.err):app.msg(a.msg),app.hideDialog()}})).post()})})()</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_copyright_aftersale"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<form><ul><li"), buf.push(attrs({
+    "class": "nbt"
+    })), buf.push("><select"), buf.push(attrs({
+    "class": "after_sale_type"
+    })), buf.push("><option>请选择类型</option><option>其他类型</option></select><label>类型</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></li><li"), buf.push(attrs({
+    "class": "nbt"
+    })), buf.push("><textarea"), buf.push(attrs({
+    "class": "clear-input after_sale_des"
+    })), buf.push("></textarea><label>简要描述</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></li></ul><div"), buf.push(attrs({
+    "class": "Submit"
+    })), buf.push("><a"), buf.push(attrs({
+    href: "#",
+    onclick: "return false;",
+    "class": "submit_btn btn btn18 rbtn"
+    })), buf.push("><strong> 提交</strong><span></span></a><a"), buf.push(attrs({
+    onclick: "$('after_sale_dialog').hide();return false;",
+    href: "#",
+    "class": "btn btn18 wbtn"
+    })), buf.push("><strong> 取消</strong><span></span></a></div></form>")
+}
+return buf.join("")
+}, __t["dialog/dialog_copyright_price_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<form"), buf.push(attrs({
+"class": "creation_pub_dialog"
+})), buf.push("><ul"), buf.push(attrs({
+style: "width:300px;margin:0 auto;"
+})), buf.push("><li"), buf.push(attrs({
+"class": "nbt"
+})), buf.push("><label><input"), buf.push(attrs({
+    type: "radio",
+    name: "auth_method",
+    value: "edit",
+    style: "margin-right: 12px;"
+    })), buf.push("/>原创编辑授权</label><input"), buf.push(attrs({
+type: "text",
+name: "price",
+style: "margin:12px;",
+"class": "clear-input edit"
+})), buf.push("/>元<a"), buf.push(attrs({
+href: "/cc/help#item_9"
+})), buf.push("><i></i></a><input"), buf.push(attrs({
+type: "hidden",
+name: "creation_id"
+})), buf.push("/><span"), buf.push(attrs({
+"class": "fff"
+})), buf.push("></span></li><li"), buf.push(attrs({
+"class": "nbt"
+})), buf.push("><label><input"), buf.push(attrs({
+    type: "radio",
+    name: "auth_method",
+    value: "business",
+    style: "margin-right: 12px;"
+    })), buf.push("/>原创商业授权</label><input"), buf.push(attrs({
+type: "text",
+name: "price",
+style: "margin:12px;",
+"class": "clear-input business"
+})), buf.push("/>元<a"), buf.push(attrs({
+href: "/cc/help#item_9"
+})), buf.push("><i></i></a><input"), buf.push(attrs({
+type: "hidden",
+name: "creation_id"
+})), buf.push("/><span"), buf.push(attrs({
+"class": "fff"
+})), buf.push("></span></li><li"), buf.push(attrs({
+style: "margin: 12px 0 12px 0;",
+"class": "nbt"
+})), buf.push("><label><input"), buf.push(attrs({
+    type: "radio",
+    name: "auth_method",
+    value: "noright",
+    style: "margin-right: 12px;"
+    })), buf.push("/>原创作品，只展示不出售</label><a"), buf.push(attrs({
+href: "/cc/help#item_9"
+})), buf.push("><i></i></a><input"), buf.push(attrs({
+type: "hidden",
+name: "creation_id"
+})), buf.push("/><span"), buf.push(attrs({
+"class": "fff"
+})), buf.push("></span></li></ul></form><div"), buf.push(attrs({
+style: "text-align:center;padding-top:12px;",
+"class": "Submit"
+})), buf.push("><a"), buf.push(attrs({
+id: "public_btn",
+style: "margin-right:12px;",
+href: "#",
+onclick: "return false;",
+"class": "btn btn18 wbtn"
+})), buf.push("><strong> 上架</strong><span></span></a><a"), buf.push(attrs({
+onclick: "$('price_dialog').hide();return false;",
+href: "#",
+"class": "btn btn18 wbtn"
+})), buf.push('><strong> 取消</strong><span></span></a></div><style>input[type=text] {\n    width: 100px;\n}\n.creation_pub_dialog i {\n    background: url(/img/design/infor.png) -1px -1px no-repeat;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    margin-left: 8px;\n    display: inline-block;\n}\n.creation_pub_dialog i:hover {\n    background: url(/img/design/infor.png) -1px -17px no-repeat;\n}\n</style><script>(function(){var a=$("price_dialog"),b=null;a.getElements("input[type=radio]").addEvent("click",function(){b&&app.hideTip(b)}),a.getElement(".close").addEvent("click",function(){a.hide()}),$("public_btn").addEvent("click",function(c){var d=a.getElement("input[type=radio]:checked");b=d.getParent("li").getElement("input[name=price]");if(!d)return app.error("请选择授权方式");b&&b.addEvent("focus",function(){app.hideTip(b)});var e=0;if(d.get("value")!="noright"){e=b.get("value").trim();if(!e.length)return app.showTip(b,"请填写大于或等于0的价格")}var f=a.getElement("input[name=creation_id]").get("value");e=e&&e.toFloat();if(!f)return;if(e<0||isNaN(e)){app.showTip(b,"请填写大于或等于0的价格");return}var g=d.get("value");(new Request.JSON({url:"/cc/creation/public/",data:{price:e,auth_method:g,creation_id:f},onSuccess:function(c){if(c=="success"){a.hide(),app.msg("已经上架");var d=$$(".creation"+f)[0];d.getElement(".price_td").set("text",e),d.remove();var g=$("user_center_creations").getElement(".public").getElement("span"),h=$("user_center_creations").getElement(".unpublic").getElement("span"),i=Number(g.get("text")),j=Number(h.get("text"));j>0&&--j,g.set("text",++i),h.set("text",j)}else c.err&&alert(c.msg||"操作失败"),b.fireEvent("focus")}})).post()})})()</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_creation_success"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "CreationSuccess",
+title: "上传成功",
+destroyOnClose: !0,
+body: emerge("base/creation_success")
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_design_apply_board"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "design_apply_board",
+title: "推荐你的设计类画板",
+body: emerge("dialog/dialog_design_apply_board_body"),
+destroyOnClose: !0
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_design_apply_board_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<form"), buf.push(attrs({
+action: "",
+"class": "Form StaticForm nm"
+})), buf.push("><div"), buf.push(attrs({
+"class": "cover"
+})), buf.push("><img"), buf.push(attrs({
+src: "",
+"class": "big"
+})), buf.push("/><img"), buf.push(attrs({
+src: ""
+})), buf.push("/><img"), buf.push(attrs({
+src: ""
+})), buf.push("/><img"), buf.push(attrs({
+src: "",
+"class": "last"
+})), buf.push("/></div><div"), buf.push(attrs({
+"class": "info"
+})), buf.push("><p>选择推荐的画板，每周只能推荐<b>一个</b></p><p>以下只显示你的<b>设计类画板</b>。</p><input"), buf.push(attrs({
+id: "id_category",
+type: "hidden",
+name: "category",
+value: ""
+})), buf.push("/>");
+var __val__ = emerge("base/board_list", {
+categorys: ["illustration", "design", "web_app_icon"]
+});
+buf.push(null == __val__ ? "" : __val__), buf.push("<div"), buf.push(attrs({
+"class": "Submit"
+})), buf.push("><a"), buf.push(attrs({
+href: "#",
+onclick: "return false;",
+"class": "btn btn18 wbtn"
+})), buf.push("><strong>确定</strong><span></span></a></div></div></form><div"), buf.push(attrs({
+"class": "noboard"
+})), buf.push("><p>抱歉，你还没有设计类画板。或者，你忘记为你的画板指定正确的分类？</p><p><a"), buf.push(attrs({
+    href: "/" + req.user.urlname + "/",
+    "class": "noboard-href"
+    })), buf.push(">去我的个人主页管理画板</a></p><a"), buf.push(attrs({
+onclick: "app.hideDialog(); return false",
+href: "#",
+"class": "btn btn18 rbtn"
+})), buf.push('><strong> 关闭</strong><span></span></a></div><script>(function(){var a=$("design_apply_board"),b=new BoardList(a.getElement(".board-list")),c=a.getElement(".board-list"),d=function(){var b=a.getElement(".Submit a");b.addClass("rbtn"),new Button(b,{click:function(){var a=c.get("data-board-id"),b=c.get("data-select-category");return this.disable(),(new Request.JSON({url:"/creative/apply/",data:{board_id:a,category:b,type:"board"},onSuccess:function(a){a.err?app.error(a.msg):(app.hideDialog(),app.msg("恭喜你，推荐已成功提交。"),$$(".apply-nav-board").addClass("disable"),$$(".apply-nav-board").set("text","推荐画板（本周已推荐）"))},onFailure:function(){app.error(app.COMMON_ERRMSG)},onComplete:function(){this.enable()}.bind(this)})).post(),!1}})};b.addEvent("select",function(){var b=c.get("data-board-id");(new Request.JSON({url:"/boards/"+b+"/preview/",onSuccess:function(b){if(b.board&&(b.board.cover||b.board.pins.length)){var c=[];if(b.board.cover){c.unshift(b.board.cover);for(var d=0;d<b.board.pins.length;d++)b.board.pins[d].pin_id!==b.board.cover.pin_id&&c.length<4&&c.push(b.board.pins[d])}else c=b.board.pins;e(c)}else a.getElements(".cover img").set("src","")}})).get(),d(),app.hideTip(c)}),b.addEvent("noboard",function(){a.getElement(".Form").hide(),a.getElement(".noboard").show()});var e=function(b){var c=a.getElements(".cover img");b.map(function(a,b){var d=b?"sq75":"sq235",e=app.imgURL(a.file,d);c[b].set("src",e)})};a.getElement(".Submit .btn").addEvent("click",function(){var a=c.get("data-board-id");if(!a)return app.showTip(c,"请选择画板",{width:120})})})()</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_design_apply_user"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "design_apply_user",
+title: "推荐你自己",
+body: emerge("dialog/dialog_design_apply_user_body"),
+destroyOnClose: !0
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_design_apply_user_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<form"), buf.push(attrs({
+action: "",
+"class": "Form nm"
+})), buf.push("><h3>向花瓣设计推荐你自己，每周只能推荐一次。</h3><ul"), buf.push(attrs({
+"class": "apply-body"
+})), buf.push("><li><input"), buf.push(attrs({
+    id: "id_category",
+    type: "hidden",
+    name: "category",
+    value: ""
+    })), buf.push("/><div"), buf.push(attrs({
+    "class": "BoardListOverlay"
+    })), buf.push("></div><div"), buf.push(attrs({
+    "class": "BoardSelector BoardPicker CategoryPicker"
+    })), buf.push("><div"), buf.push(attrs({
+    "class": "current"
+    })), buf.push("><span"), buf.push(attrs({
+    "class": "CurrentBoard"
+    })), buf.push(">选择从业领域</span><span"), buf.push(attrs({
+    "class": "DownArrow"
+    })), buf.push("></span></div><div"), buf.push(attrs({
+    "class": "BoardList"
+    })), buf.push("><div"), buf.push(attrs({
+    "class": "BoardListBody"
+    })), buf.push("><ul></ul></div></div></div></li><li"), buf.push(attrs({
+"class": "nbt"
+})), buf.push("><input"), buf.push(attrs({
+id: "apply_job",
+type: "text",
+name: "job",
+value: "",
+placeholder: "你的职业",
+"class": "clear-input"
+})), buf.push("/><span"), buf.push(attrs({
+"class": "fff"
+})), buf.push("></span></li></ul><div"), buf.push(attrs({
+"class": "Submit"
+})), buf.push("><a"), buf.push(attrs({
+href: "#",
+onclick: "return false;",
+"class": "btn btn18 rbtn"
+})), buf.push("><strong>确定</strong><span></span></a></div><ul"), buf.push(attrs({
+id: "apply_list",
+style: "display:none"
+})), buf.push("><li"), buf.push(attrs({
+data: "web_app_icon",
+"class": "BoardCategory"
+})), buf.push("><span>UI 设计</span></li><li"), buf.push(attrs({
+data: "design",
+"class": "BoardCategory"
+})), buf.push("><span>平面设计</span></li><li"), buf.push(attrs({
+data: "illustration",
+"class": "BoardCategory"
+})), buf.push("><span>插画</span></li><li"), buf.push(attrs({
+data: "design",
+"class": "BoardCategory"
+})), buf.push("><span>工业设计</span></li><li"), buf.push(attrs({
+data: "illustration",
+"class": "BoardCategory"
+})), buf.push('><span>建筑设计</span></li></ul></form><script>(function(){var a=$("design_apply_user");if(a.retrieve("initialized"))return;var b=$("apply_job"),c=a.getElement(".CategoryPicker"),d=a.getElement(".BoardListBody ul");applyListEl=a.getElement("#apply_list");var e=new CategoryPicker(c),f=applyListEl.get("html");d.set("html",f),new Button(a.getElement(".Submit a"),{click:function(){var a=e.getSelected();if(!a)return app.showTip(e.element,"请选择从业领域",{width:120});var c=b.get("value").trim();return c==""?app.showTip(b,"请输入职业",{width:100}):(this.disable(),(new Request.JSON({url:"/creative/apply/",data:{job:c,category:a,type:"user"},onSuccess:function(a){a.err?app.error(a.msg):(app.hideDialog(),app.msg("恭喜你，推荐已成功提交。"),$$(".apply-nav-self").addClass("disable"),$$(".apply-nav-self").set("text","推荐自己（本周已推荐）"))},onFailure:function(){app.error(app.COMMON_ERRMSG)},onComplete:function(){this.enable()}.bind(this)})).post(),!1)}}),e.addEvent("select",function(){app.hideTip(e.element)}),a.getElements("input").addEvent("blur",function(a){app.hideTip(a.target)}),a.store("initialized",!0)})()</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_find_submit_tip"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "find_submit_tip",
+title: "提交成功",
+body: emerge("dialog/dialog_find_submit_tip_body"),
+className: ""
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_find_submit_tip_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<p>提交成功，我们将在5个工作日内完成审核。请留意系统消息。</p><a"), buf.push(attrs({
+onclick: "$('find_submit_tip').hide();return false;",
+href: "#",
+"class": "btn btn18 rbtn"
+})), buf.push('><strong> 我知道了</strong><span></span></a><script>$$("#already_promoted a.btn").addEvent("click",function(a){a.stop(),app.hideDialog()})</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_frame"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+id: "" + id + "",
+style: "display:none;",
+"class": "ModalContainer " + (typeof destroyOnClose == "undefined" ? "" : "destroy")
+})), buf.push("><div"), buf.push(attrs({
+"class": "modal wide " + (typeof className == "undefined" ? "" : " " + className)
+})), buf.push("><div"), buf.push(attrs({
+"class": "header"
+})), buf.push("><a"), buf.push(attrs({
+href: "#",
+"class": "close"
+})), buf.push("><strong>Close</strong><span></span></a><h2>" + escape((interp = title) == null ? "" : interp) + "</h2></div>");
+var __val__ = body;
+buf.push(null == __val__ ? "" : __val__), buf.push("</div><div"), buf.push(attrs({
+"class": "overlay"
+})), buf.push('></div></div><script>$$(".ModalContainer .modal.wide .header a.close").addEvent("click",function(){return this.getParent(".ModalContainer").hasClass("destroy")&&this.fireEvent("destroy"),app.hideDialog(),!1})</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_mv"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+id: "mv_holder",
+style: "display:none;",
+"class": "ModalContainer"
+})), buf.push("><div"), buf.push(attrs({
+"class": "modal wide"
+})), buf.push("><div"), buf.push(attrs({
+"class": "header"
+})), buf.push("><a"), buf.push(attrs({
+href: "#",
+onclick: "app.hideDialog(); return false",
+"class": "close"
+})), buf.push("><strong>Close</strong><span></span></a><h2>了解花瓣</h2></div>"), navigator.userAgent.toLowerCase().match("ipad") ? (buf.push("<video"), buf.push(attrs({
+id: "youku-html5-player-video",
+width: "450px",
+height: "300px",
+"x-webkit-airplay": "allow",
+controls: "",
+autoplay: "",
+preload: "",
+src: "http://www.youku.com/player/getM3U8/vid/80315531/type/flv/v.m3u8"
+})), buf.push("></video>")) : (buf.push("<embed"), buf.push(attrs({
+src: "http://player.youku.com/player.php/sid/XMzIxMjU2OTY4/v.swf",
+allowFullScreen: "true",
+quality: "high",
+width: "480",
+height: "400",
+align: "middle",
+type: "application/x-shockwave-flash",
+flashvars: "winType=index",
+style: "visibility:visible;"
+})), buf.push("></embed>")), buf.push("</div><div"), buf.push(attrs({
+"class": "overlay"
+})), buf.push("></div></div>")
+}
+return buf.join("")
+}, __t["dialog/dialog_myboard"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "myboard",
+title: "提交画板",
+body: emerge("dialog/dialog_myboard_body"),
+className: "PaddingLess"
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_myboard_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<form"), buf.push(attrs({
+action: "",
+"class": "Form StaticForm nm"
+})), buf.push("><ul><li"), buf.push(attrs({
+    "class": "nbt"
+    })), buf.push("><label>选择画板</label>");
+    var __val__ = emerge("base/board_list");
+    buf.push(null == __val__ ? "" : __val__), buf.push("<span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></li><li"), buf.push(attrs({
+    "class": "nbt"
+    })), buf.push("><textarea"), buf.push(attrs({
+    id: "board_des",
+    name: "board_des",
+    value: "",
+    placeholder: "精确的画板介绍，提升入选几率",
+    "class": "clear-input"
+    })), buf.push("></textarea><label>画板介绍</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></li><li"), buf.push(attrs({
+    "class": "nbt"
+    })), buf.push("><input"), buf.push(attrs({
+    id: "email",
+    type: "text",
+    name: "email",
+    value: "",
+    placeholder: "邮箱/手机号/QQ",
+    "class": "clear-input"
+    })), buf.push("/><label>联系方式</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></li></ul><div"), buf.push(attrs({
+"class": "Submit"
+})), buf.push("><a"), buf.push(attrs({
+href: "#",
+onclick: "return false;",
+"class": "btn btn18 rbtn"
+})), buf.push("><strong> 提交</strong><span></span></a></div></form><style>#myboard .board-list {margin-left: 150px;}\n#myboard .board-list .current .name { overflow: visible;}\n.board-list .drop-list .filter {display: none;}\n.board-list .drop-list {width: 375px;}</style>")
+}
+return buf.join("")
+}, __t["dialog/dialog_report"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_base", {
+id: "Report",
+title: "举报",
+body: emerge("dialog/dialog_report_body"),
+className: "PaddingLess"
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_report_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+id: "ReportForm"
+})), buf.push("><span"), buf.push(attrs({
+"class": "ReportTitle"
+})), buf.push(">举报原因：</span><div"), buf.push(attrs({
+"class": "ReportRadio"
+})), buf.push("><label"), buf.push(attrs({
+"class": "InputBlock"
+})), buf.push("><input"), buf.push(attrs({
+type: "radio",
+name: "reason",
+value: 0,
+checked: !0
+})), buf.push("/>&nbsp;&nbsp;垃圾广告</label><label"), buf.push(attrs({
+"class": "InputBlock"
+})), buf.push("><input"), buf.push(attrs({
+type: "radio",
+name: "reason",
+value: 1
+})), buf.push("/>&nbsp;&nbsp;淫秽色情</label><label"), buf.push(attrs({
+"class": "InputBlock"
+})), buf.push("><input"), buf.push(attrs({
+type: "radio",
+name: "reason",
+value: 2
+})), buf.push("/>&nbsp;&nbsp;虚假中奖</label><label"), buf.push(attrs({
+"class": "InputBlock"
+})), buf.push("><input"), buf.push(attrs({
+type: "radio",
+name: "reason",
+value: 3
+})), buf.push("/>&nbsp;&nbsp;敏感信息</label><label"), buf.push(attrs({
+"class": "InputBlock"
+})), buf.push("><input"), buf.push(attrs({
+type: "radio",
+name: "reason",
+value: 4
+})), buf.push("/>&nbsp;&nbsp;人身攻击</label><label"), buf.push(attrs({
+"class": "InputBlock"
+})), buf.push("><input"), buf.push(attrs({
+type: "radio",
+name: "reason",
+value: 5
+})), buf.push("/>&nbsp;&nbsp;骚扰他人</label></div><div"), buf.push(attrs({
+"class": "Submit"
+})), buf.push("><a"), buf.push(attrs({
+href: "#",
+onclick: "return false;",
+"class": "btn btn18 rbtn"
+})), buf.push('><strong> 提交</strong><span></span></a></div></div><script>$$("#ReportForm .Submit .btn").addEvent("click",function(){var a;for(var b=0;b<$$(".ReportRadio input").length;b++)if($$(".ReportRadio input")[b].checked){a=b;break}return data={type:report_type,reason:a,id:report_id},(new Request.JSON({url:"/feedback/new-report/",data:data,onSuccess:function(a){a.err=="already reported"?app.error("你已经举报过了，我们会及时处理哦，谢谢"):app.msg("谢谢你对花瓣的贡献，花瓣的工作人员会及时处理你的举报的")}})).post(),this.getParent(".modal-container").hasClass("destroy")&&this.fireEvent("destroy"),app.hideDialog(),!1})</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_scrape_pin"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "ScrapePin",
+title: "网址采集",
+destroyOnClose: !0,
+body: emerge("dialog/dialog_scrape_pin_body")
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_scrape_pin_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+"class": "PinTop inputHolder scrapePin"
+})), buf.push("><ul><li><img"), buf.push(attrs({
+    src: "/img/load2.gif",
+    alt: "Loading Indicator",
+    "class": "load"
+    })), buf.push("/><a"), buf.push(attrs({
+    id: "ScrapeButton",
+    href: "#",
+    onclick: "return false;",
+    "class": "fr btn btn18 wbtn"
+    })), buf.push("><strong> 查找图片</strong><span></span></a><input"), buf.push(attrs({
+    id: "scrapePinInput",
+    type: "text",
+    placeholder: "输入页面网址",
+    value: "http://",
+    "class": "clear-input"
+    })), buf.push("/></li></ul></div>");
+var __val__ = emerge("base/pin_form", {
+req: req
+});
+buf.push(null == __val__ ? "" : __val__), buf.push('<script>(function(){var a=$("ScrapePin");if(a.retrieve("initialized"))return;var b=app.settings.minImageWidth,c=$("scrapePinInput"),d=a.getElement(".error"),e=a.getElements("img.load"),f=a.getElement(".pbt"),g=new ImagePicker(a.getElement(".ImagePicker"),{minW:b}),h=(new Button($("ScrapeButton"),{click:function(){var a=c.get("value").trim();if(a=="")return d.set("html","请输入URL"),!1;var f=this.disable();return e.show(),(new Request.JSON({url:"/pins/create/find_images/",data:{url:a},noCache:!0,onSuccess:function(c){if(c.err){d.set("html",c.msg),f.enable(),e.hide();return}var h=c.images.filter(function(a){return a.width==""||a.height==""||a.width.toInt()>=b||a.height.toInt()>=b}).map(function(a){return a.src});f.element.fireEvent("loaded"),g.load(h,a)},onFailure:function(){d.set("html",app.COMMON_ERRMSG),f.enable(),e.hide()}})).get(),!1}})).disable().bind(new FancyInput(c));g.addEvents({startLoading:function(){h.disable(),f.show()},finishLoading:function(){h.enable(),e.hide(),f.show();var a=this.listEl,b=this.listEl.getElements("li");b.sort(function(a,b){var c=a.getElement("img"),d=b.getElement("img");return"undefined"==typeof c.naturalWidth?1:d.naturalWidth-c.naturalWidth}),b.each(function(b){b.inject(a,"bottom")}),this.listEl.getElements("li").length==0&&alert("没有合适的图片")}}),a.store("initialized",!0)})()</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_selection_info"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "SelectionInfo",
+title: "什么是花瓣精选",
+body: emerge("dialog/dialog_selection_info_body")
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_selection_info_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+"class": "body"
+})), buf.push('><p>花瓣每天都有很多认真的用户在收集整理出大量的优质内容，为了让大家能更方便快速地在不同领域中发现优质内容，并学习优秀用户的好习惯，于是我们推出了 —— <em>花瓣精选</em>。</p><h3><em>精选</em>中呈现的内容和用户是通过两种机制推荐给大家。</h3><ol><li>由系统算法结合采集时间、关注数、采集数、被喜欢数、被转采数和更新频率筛选出综合排名靠前的画板。</li><li>看起来并不怎么热门，但我们觉得有价值有趣的优质内容和优秀用户。</li></ol><h3>我们认为<em>精选</em>存在的意义：</h3><ol><li>若你刚接触花瓣，还不知道怎么去使用花瓣，我们推荐优秀用户使用花瓣作为你的学习样本。</li><li>若你每天上花瓣，希望不要错过优质内容与优秀用户，或者你仍然希望在自己的关注点之外，发现一些其他有趣有价值的领域。</li></ol><h3>我们希望<em>精选</em>能帮助到你。</h3><ol><li>若你提供了优质内容，你想要结交更多志同道合的人，欢迎你站在这个大舞台推荐自己。<br />我们感谢你的付出与敬佩你的自信。</li><li>你的每一个关注、每一个采集、每一个喜欢、每一个转采，都影响着你，或者他人在花瓣中的成长。<br />英雄惜英雄，你也可以推荐内容或用户帮助我们一起优化内容的浮现。</li></ol><p>我们还不完美，以及还有很多我们没有发现的不完美。请通过 <a href="/pins/53553/">用户反馈</a> 告诉我们，非常感谢。</p></div>')
+}
+return buf.join("")
+}, __t["dialog/dialog_self_promote"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "self_promote",
+title: "推荐自己",
+body: emerge("dialog/dialog_self_promote_body"),
+destroyOnClose: !0
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_self_promote_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+style: "display: none;",
+"class": "msg"
+})), buf.push("></div><h3>给自己写一段70字以下的推荐理由吧！</h3><form"), buf.push(attrs({
+"class": "self-promote"
+})), buf.push("><textarea"), buf.push(attrs({
+name: "description",
+placeholder: "你的身份+一句最能代表你的话+向大家介绍你的花瓣",
+"class": "clear-input"
+})), buf.push("></textarea><input"), buf.push(attrs({
+type: "submit",
+value: "提交",
+"class": "btn rbtn btn18"
+})), buf.push('/></form><script>function showMsg(a){var b=document.getElement("#self_promote .msg");b.set("text",a),b.show()}$$(".self-promote input[type=submit]").addEvent("click",function(a){a.stop();var b=this;if(b.hasClass("disabled"))return;b.addClass("disabled"),app.requireLogin(function(){var a=app.page.filter.split(":"),c=a[1]==="popular"?"popular":a[2],d=document.getElement(".self-promote textarea[name=description]").get("value").trim();(new Request.JSON({url:"/users/"+app.req.user.user_id+"/promote",data:{category:c,description:d},onSuccess:function(a){a.err?showMsg(a.msg||app.COMMON_ERRMSG):(app.hideDialog(),app.msg("推荐成功"))},onError:function(a,b){showMsg(b)},onComplete:function(){b.removeClass("disabled")}})).post()})})</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_submit_channel_board"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+id: "submit_channel_board_dialog",
+style: "display:none;",
+"class": "ModalContainer"
+})), buf.push("><div"), buf.push(attrs({
+"class": "modal thin"
+})), buf.push("><div"), buf.push(attrs({
+"class": "header lg"
+})), buf.push("><a"), buf.push(attrs({
+href: "#",
+onclick: "$('submit_channel_board_dialog').hide();return false;",
+"class": "close"
+})), buf.push("><strong>Close</strong><span></span></a><h2>提交画板</h2></div><h3>提交你的画板到<em"), buf.push(attrs({
+    style: "color: #FF0000;"
+    })), buf.push(">" + escape((interp = page.channel.name) == null ? "" : interp) + "</em>，和大家分享你的品味</h3>");
+var __val__ = emerge("base/board_picker");
+buf.push(null == __val__ ? "" : __val__), buf.push("<div"), buf.push(attrs({
+"class": "help_text"
+})), buf.push(">采集数超过10个的画板才能提交哦</div><a"), buf.push(attrs({
+href: "#",
+onclick: "return false;",
+"class": "commit btn btn18 rbtn"
+})), buf.push("><strong> 提交</strong><span></span></a><div"), buf.push(attrs({
+style: "display: none;",
+"class": "msgr left-arrow"
+})), buf.push("><span"), buf.push(attrs({
+"class": "txt"
+})), buf.push("></span><span"), buf.push(attrs({
+"class": "arrow"
+})), buf.push(">◣</span><span"), buf.push(attrs({
+"class": "arrow-mask"
+})), buf.push("></span></div></div><div"), buf.push(attrs({
+"class": "overlay"
+})), buf.push('></div></div><script>(function(){var a=$("submit_channel_board_dialog");if(!a)return;var b=$$("#submit_channel_board_dialog a.commit");if(!b)return;$$("#submit_channel_board_dialog a.commit").addEvent("click",function(){var a=(new BoardPicker($("submit_channel_board_dialog").getElement(".BoardPicker"))).getSelected(),b=$$("#submit_channel_board_dialog .msgr")[0],c=new BoardPicker($("submit_channel_board_dialog").getElement(".BoardPicker"));return c.addEvent("select",function(){b.hide()}),$$("#submit_channel_board_dialog a.close").addEvent("click",function(){b.hide()}),(new Request.JSON({url:"/fm/"+app.page.channel.channel_id+"/boards/",data:{board_id:a},onSuccess:function(a){if(a.err)b.getElement("span.txt").set("text",a.msg),b.show("inline-block");else{document.id("submit_channel_board_dialog").hide();var c=$("channel_callout");c&&c.show();var d=new Fx.Scroll(window,{duration:"short"});d.toTop()}}})).post(),!1})})()</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_topic_editor_apply"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_frame", {
+id: "topic_editor_apply",
+title: "申请成为小编",
+body: emerge("dialog/dialog_topic_editor_apply_body"),
+destroyOnClose: !0
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_topic_editor_apply_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<h3>说说你想成为小编的理由吧：</h3><form><p><textarea"), buf.push(attrs({
+    name: "description",
+    "class": "clear-input"
+    })), buf.push("></textarea></p><a"), buf.push(attrs({
+    href: "#",
+    onclick: "return false;",
+    "class": "apply btn btn20 rbtn"
+    })), buf.push('><strong> 提交</strong><span></span></a></form><script>(function(){var a=document.id("topic_editor_apply"),b=a.getElement("textarea"),c=a.getElement(".apply");c.addEvent("click",function(){if(b.value.trim()=="")return;(new Request.JSON({url:"/topics/"+app.page.topic.topic_id+"/apply/",data:{reason:b.value},onSuccess:function(a){if(a.err)return app.error(a.msg||app.COMMON_ERRMSG);app.hideDialog(),app.msg("你的申请已提交")},onComplete:function(){c.removeClass("disabled")}})).post()})})()</script>')
+}
+return buf.join("")
+}, __t["dialog/dialog_upload_error_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<form><div"), buf.push(attrs({
+    style: "size:16px;color:#444;padding-top:10px;",
+    "class": "content"
+    })), buf.push("><img"), buf.push(attrs({
+    src: "/img/error2.png",
+    style: "float:left;margin: 26px 12px 0 30px;"
+    })), buf.push("/><div"), buf.push(attrs({
+    style: "line-height:78px;font-size: 16px; color: #444;",
+    "class": "text"
+    })), buf.push("></div><div"), buf.push(attrs({
+    style: "text-align: right; border-top: 1px solid #ededed; padding: 15px 30px 15px 0; margin-bottom: -21px;background: #fafafa; width: 550px; padding-right: 30px;"
+    })), buf.push("><a"), buf.push(attrs({
+    style: "",
+    onclick: "$$('.modal-container').hide();",
+    href: "#",
+    "class": "btn btn18 rbtn btn wbtn"
+    })), buf.push("><strong> 确定</strong><span></span></a></div></div></form>")
+}
+return buf.join("")
+}, __t["dialog/dialog_upload_pin"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, __val__ = emerge("dialog/dialog_base", {
+id: "UploadPin",
+title: "上传采集",
+destroyOnClose: !0,
+body: emerge("dialog/dialog_upload_pin_body")
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/dialog_upload_pin_body"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp, designer = this.req && this.req.user && this.req.user.status && this.req.user.status.designer;
+buf.push("<div"), buf.push(attrs({
+"class": "PinTop clearfix " + ("" + (designer ? "designer" : "") + "")
+})), buf.push(">"), designer ? (buf.push("<div"), buf.push(attrs({
+"class": "left-side upload-content"
+})), buf.push("><a"), buf.push(attrs({
+id: "creation_upload_button",
+href: "/cc/upload_batch",
+"class": "creation btn btn18 rbtn"
+})), buf.push("><span"), buf.push(attrs({
+"class": "text"
+})), buf.push("> 选择原创作品</span></a><div"), buf.push(attrs({
+"class": "text"
+})), buf.push(">支持 50M 以内单张图片上传</div><div"), buf.push(attrs({
+style: "margin-top: 5px;",
+"class": "text"
+})), buf.push(">图片宽度必须大于1000px</div></div><div"), buf.push(attrs({
+"class": "right-side upload-content"
+})), buf.push("><a"), buf.push(attrs({
+id: "goto_normal",
+href: "#",
+onclick: "return false;",
+"class": "btn btn18"
+})), buf.push("><span"), buf.push(attrs({
+"class": "text"
+})), buf.push("> 选择非原创作品</span></a><div"), buf.push(attrs({
+style: "margin-left: 18px; color: #999;",
+"class": "text"
+})), buf.push(">支持 10M 以内单张图片上传</div></div>")) : (buf.push("<a"), buf.push(attrs({
+id: "upload_button",
+href: "#",
+onclick: "return false;",
+"class": "btn btn18 wbtn"
+})), buf.push("><strong> 选择图片文件</strong><span></span></a><span"), buf.push(attrs({
+style: "margin-left: 10px; color: #999;"
+})), buf.push(">支持 10M 以内单张图片上传</span>")), buf.push("</div>");
+var __val__ = emerge("dialog/dialog_base", {
+id: "upload_error",
+title: "上传出错",
+body: emerge("dialog/dialog_upload_error_body")
+});
+buf.push(null == __val__ ? "" : __val__), buf.push('<script>(function(){var a=$("UploadPin");if(a.retrieve("initialized"))return;var b=$("upload_button"),c=a.getElements("img.load"),d=a.getElement(".pbt");pinTopEl=a.getElement(".PinTop.designer"),$("goto_normal").addEvent("click",function(){app.hideDialog(),app.showDialogBox("upload",!0)});var e=new ImagePicker(a.getElement(".ImagePicker"));if(b)var f=new Uploadr(b);var g=function(){var b=a.getElement(".board-list").master;b.showCreationBoards()},h=function(){var a=document.getElement("#UploadPin .pbt .pin-form"),b=a.getElement(".share-opts"),c=a.getElement(".InputArea .pin-desc"),d=a.getSiblings(".creation-property")[0],e=a.getElement("div.Buttons");a.addClass("designer"),b.hide(),d&&d.show(),c.setStyle("height",110),e.setStyle("margin-top",120),e.getElement("a.rbtn").set("text","上传").setStyle("margin-bottom",20)},i={start:function(){pinTopEl&&pinTopEl.hasClass("designer")&&(pinTopEl.hide(),d.setStyle("border-top","none"),this.element.hasClass("creation")&&(h(),g())),c.show(),d.show()},failed:function(a){c.hide(),d.hide(),$("upload_error").getElement(".text").set("text",a.msg||app.COMMON_ERRMSG),$("upload_error").show(),$("UploadPin").getElement(".box-title").hide()},complete:function(a){c.hide();if(a.creation)var d="http://"+a.bucket+".b0.upaiyun.com/"+a.key+"_fw192?_upt="+a.upt;else var d=app.imgURL(a,"fw192");e.load([d],null,!1,function(b){b&&b[0]&&b[0].store("file",a)}),b.fireEvent("success")}};f&&f.addEvents(i),a.store("initialized",!0)})()</script>');
+var __val__ = emerge("base/pin_form", {
+req: req
+});
+buf.push(null == __val__ ? "" : __val__)
+}
+return buf.join("")
+}, __t["dialog/sheet_chrome_addon"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+id: "sheet",
+"class": "destroy"
+})), buf.push("><div"), buf.push(attrs({
+"class": "sheet"
+})), buf.push("><div"), buf.push(attrs({
+"class": "body chrome-addon-error"
+})), buf.push(">在线安装碰上问题了，试试本地下载安装吧<a"), buf.push(attrs({
+href: "http://hbfile.b0.upaiyun.com/extensions/huaban-chrome-extension.crx",
+"class": "download btn btn18 rbtn"
+})), buf.push("><strong> 本地下载 Chrome 扩展</strong><span></span></a></div><a"), buf.push(attrs({
+href: "#",
+title: "关闭",
+onclick: "app.hideSheet();return false;",
+"class": "close"
+})), buf.push('></a></div></div><script>document.getElement("#sheet .chrome-addon-error .download").addEvent("click",function(){return app.showDialogBox("chrome_addon"),window.open(this.href),!1})</script>')
+}
+return buf.join("")
+}, __t["dialog/sheet_comment_captcha"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+id: "sheet",
+"class": "destroy comment-captcha"
+})), buf.push("><div"), buf.push(attrs({
+id: "sheet_comment_captcha",
+"class": "sheet"
+})), buf.push("><div"), buf.push(attrs({
+"class": "body"
+})), buf.push("><h3>请输入下方验证码以提交评论</h3><form"), buf.push(attrs({
+method: "post"
+})), buf.push("><input"), buf.push(attrs({
+type: "hidden",
+name: "captcha_challenge"
+})), buf.push("/><input"), buf.push(attrs({
+name: "captcha",
+type: "text",
+"class": "clear-input"
+})), buf.push("/><span"), buf.push(attrs({
+"class": "captcha"
+})), buf.push("><img"), buf.push(attrs({
+width: "160",
+height: "30",
+alt: "验证码"
+})), buf.push("/></span><a"), buf.push(attrs({
+href: "#",
+"class": "reload"
+})), buf.push(">换一张</a><div"), buf.push(attrs({
+"class": "buttons"
+})), buf.push("><button"), buf.push(attrs({
+type: "submit",
+"class": "btn rbtn"
+})), buf.push(">提交</button><button"), buf.push(attrs({
+type: "reset",
+"class": "btn wbtn"
+})), buf.push('>取消</button></div></form></div></div></div><script>(function(){function a(){var a=new Date/1,b="callback=app.tdcaptcha.showcode&rand="+a,c=app.settings.tdcaptcha.create_url;c+="?pubkey="+app.settings.tdcaptcha.public_key,c+="&"+b;var d=document.id("captcha_script");d&&d.destroy(),d=new Element("script",{id:"captcha_script",src:c}),document.body.appendChild(d)}$$("#sheet_comment_captcha button[type=reset]").addEvent("click",function(){app.hideSheet()}),$$("#sheet_comment_captcha button[type=submit]").addEvent("click",function(a){a.stop();var b=this.getParent("form"),c=b.getElement("input[name=captcha]");c.addEvent("focus",function(a){app.hideTip(c)});var d="/pins/"+app.$form.pinId+"/comments/",e=b.getElement("input[name=captcha_challenge]").get("value");(new Request.JSON({url:d,data:{text:app.$form.text,captcha:c.get("value"),captchaChallenge:e},onSuccess:function(a){a.err?app.showTip(c,"验证码不正确"):(app.$form=undefined,app.hideSheet(function(){if(app.$captcha_callback){var b=app.$captcha_callback;delete app.$captcha_callback,b(a)}else window.location=app.page.$url}))},onFailure:function(a){alert(app.COMMON_ERRMSG)}})).post()}),$$("#sheet_comment_captcha .reload").addEvent("click",function(b){b.stop(),a()}),app.tdcaptcha={},app.tdcaptcha.showcode=function(a){$$("#sheet_comment_captcha input[name=captcha_challenge]").set("value",a);var b=app.settings.tdcaptcha.code_url;b+="?pubkey="+app.settings.tdcaptcha.public_key,b+="&clientsonid="+a+"&"+Math.random(),document.getElement("#sheet_comment_captcha .captcha img").set("src",b)},a()})()</script>')
+}
+return buf.join("")
+}, __t["dialog/sheet_login"] = function(locals) {
+var buf = [];
+with(locals || {}) {
+var interp;
+buf.push("<div"), buf.push(attrs({
+id: "sheet",
+"class": "destroy"
+})), buf.push("><div"), buf.push(attrs({
+id: "sheet_login",
+"class": "sheet"
+})), buf.push("><div"), buf.push(attrs({
+"class": "head"
+})), buf.push(">");
+var prompt = typeof login_prompt == "undefined" ? "登录花瓣" : login_prompt;
+buf.push("<h2>" + escape((interp = prompt) == null ? "" : interp) + "</h2></div><div"), buf.push(attrs({
+"class": "body"
+})), buf.push("><div"), buf.push(attrs({
+"class": "login-connect"
+})), buf.push("><h5>使用合作网站帐号登录</h5><div"), buf.push(attrs({
+"class": "connections clearfix"
+})), buf.push("><a"), buf.push(attrs({
+href: "/oauth/weibo/instant_login/",
+onclick: "return false;",
+"class": "weibo login-button"
+})), buf.push(">新浪微博</a><a"), buf.push(attrs({
+href: "/oauth/douban/instant_login/",
+onclick: "return false;",
+"class": "douban login-button"
+})), buf.push(">豆瓣</a><a"), buf.push(attrs({
+href: "/oauth/renren/instant_login/",
+onclick: "return false;",
+"class": "renren login-button"
+})), buf.push(">人人网</a><a"), buf.push(attrs({
+href: "/oauth/qzone/instant_login/",
+onclick: "return false;",
+"class": "qzone login-button"
+})), buf.push(">QQ</a></div><p"), buf.push(attrs({
+"class": "less"
+})), buf.push(">未注册过花瓣也可以直接登录哦</p></div><div"), buf.push(attrs({
+"class": "login-form"
+})), buf.push("><h5>使用注册邮箱登录</h5><form"), buf.push(attrs({
+id: "auth_form",
+action: "/auth/",
+method: "post",
+action: url("/auth/", !0),
+"class": "Form FancyForm AuthForm"
+})), buf.push("><ul><li><div"), buf.push(attrs({
+    "class": "input email"
+    })), buf.push("><input"), buf.push(attrs({
+    id: "login_email",
+    name: "email",
+    type: "text",
+    value: ""
+    })), buf.push("/><label>花瓣注册邮箱</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></div></li><li><div"), buf.push(attrs({
+    "class": "input password"
+    })), buf.push("><input"), buf.push(attrs({
+    id: "login_password",
+    name: "password",
+    type: "password"
+    })), buf.push("/><label>密码</label><span"), buf.push(attrs({
+    "class": "fff"
+    })), buf.push("></span></div></li></ul><div"), buf.push(attrs({
+"class": "non_inputs"
+})), buf.push("><a"), buf.push(attrs({
+id: "login_btn",
+href: "#",
+onclick: "return false;",
+"class": "btn btn18 rbtn"
+})), buf.push("><strong> 登录</strong><span></span></a><a"), buf.push(attrs({
+id: "reset_password",
+href: "#",
+onclick: "return false;",
+"class": "less fr"
+})), buf.push(">忘记了密码？</a><a"), buf.push(attrs({
+id: "back_to_login",
+href: "#",
+style: "display: none;",
+onclick: "return false;",
+"class": "less fr"
+})), buf.push(">哦，又想起来了!</a></div></form><div"), buf.push(attrs({
+id: "reset_msg",
+style: "display: none;",
+"class": "common-message success"
+})), buf.push("></div></div><div"), buf.push(attrs({
+"class": "clear"
+})), buf.push("></div></div><a"), buf.push(attrs({
+href: "#",
+title: "关闭",
+onclick: "app.hideSheet();return false;",
+"class": "close"
+})), buf.push('></a></div></div><script>(function(a){function f(a,b){app.showTip(a,b,{width:170})}function g(a){app.hideTip(a)}function h(a){if(a.err)return a.err==404?window.location.reload():(d.enable(),app.alert(a.msg));window.oauth_callback(a.user)}function k(){var g=b.get("value"),h=c.get("value");return g.trim()==""?f(b,"请输入您的邮箱地址"):~g.indexOf("@")?e=="login"&&h.trim()==""?f(c,"请输入密码"):(d.disable(),e=="reset"?((new Request.JSON({url:"/password/reset/",data:{email:g},onSuccess:function(b){if(b.err)return b.err==404?window.location.reload():(d.enable(),app.alert(b.msg));a("auth_form").hide(),a("reset_msg").set("html","<p>我们发送了一个密码重置链接发送到"+g+"，请查收。</p>").show()}})).post(),!1):(Browser.ie&&Browser.version<9?i.post({email:g,password:h}):(j.onFailure=function(){i.post({email:g,password:h}),d.removeClass("disabled")},j.post({email:g,password:h})),!1)):f(b,"邮箱格式不正确")}var b,c,d,e="login";window.oauth_callback=function(a){"string"==typeof a&&(a=JSON.parse(a)),app.req.user=a,app.hideSheet(function(){if(app.$login_callback){var a=app.$login_callback;a.reload?location.reload():a.redraw&&app.redraw(),delete app.$login_callback,a()}else window.location=app.page.$url})},$$("a.login-button").addEvent("click",function(a){a.stop();var b=window.open(this.get("href"),"binding_win","status=no,resizable=no,scrollbars=yes,personalbar=no,directories=no,location=no,toolbar=no,menubar=no,width=680,height=500,left=50,top=40");window.focus&&b.focus()});var i=new Request.JSON({url:"/auth/",onSuccess:h,onFailure:function(a){d.removeClass("disabled")}}),j=new Request.JSON({withCredentials:!0,url:"https://"+app.host+"/auth/",onSuccess:h});(function(){b=a("login_email"),c=a("login_password"),new FancyInput(b),new FancyInput(c),c.addEvent("keyup",function(a){return a.code===13&&k(),!1}),d=new Button("login_btn",{click:k,disabledTitle:"登录..."}),a("sheet").store("onShow",function(){try{a("login_email").focus()}catch(b){}}),$$("input").addEvent("blur",function(a){g(a.target)});var f=a("reset_password"),h=a("back_to_login"),i=c.getParent("div.input");f.addEvent("click",function(){i.store("normal_height",i.getStyle("height")),i.setStyle("overflow","hidden").tween("height",0),i.getFirst().fade("out"),f.hide(),h.show(),e="reset",d.setTitle("重置")}),h.addEvent("click",function(){i.tween("height",0,i.retrieve("normal_height")),i.getFirst().fade("in"),f.show(),h.hide(),e="login",d.setTitle("登录")})})()})(document.id)</script>')
+}
+return buf.join("")
+}
+})(app)
+
+</script>
