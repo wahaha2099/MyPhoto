@@ -63,7 +63,7 @@
     
     CGRect myFrame = [[UIScreen mainScreen] bounds];
 
-    NSUInteger maxCol = 3;
+    NSUInteger maxCol = 2;
     //NSUInteger maxRow = 3;
     //CGFloat width = myFrame.size.width / maxRow;
     
@@ -71,7 +71,7 @@
     //设置content size
     //int newHeight = height * ([self.subviews count] / maxCol );
     
-    int newHeight = height * (_pageOnScrollView + 2) * 4;//页数*4行
+    int newHeight = height * (_pageOnScrollView + 2) * 3;//页数*4行
     
     if( newHeight > myFrame.size.height ){
         if([self.subviews count] % maxCol > 0){//不足3条多一行
@@ -87,8 +87,8 @@
 -(void)layoutImageView:(UIImageView*)view pin:(Pin*)pin{
     CGRect myFrame = [[UIScreen mainScreen] bounds];
     
-    NSUInteger maxCol = 3;
-    NSUInteger maxRow = 3;
+    NSUInteger maxCol = 2;
+    NSUInteger maxRow = 2;
     
     CGFloat width = myFrame.size.width / maxRow;
     CGFloat height = myFrame.size.height / maxCol;
@@ -102,15 +102,25 @@
     NSUInteger col = imgIndex / maxCol;
         
     CGFloat x = width * row;
-        
-    CGFloat y = height * col;
-        
+
+    CGFloat y = height * col + 10;
+
     //NSLog(@"i , x , y = %i ,%f , %f " , imgIndex , x , y  );
 
     CGRect frame = CGRectMake(x, y, width, height);
         
     subView.frame = frame;
-        
+    
+    CALayer *paddingLayer = subView.layer;
+    //subView.layer.backgroundColor=[UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
+    //CALayer *paddingLayer = [CALayer layer];
+    //paddingLayer.frame=CGRectMake(0, height - 3.0f, width, 100.f);
+    paddingLayer.frame = CGRectInset(subView.layer.frame, 0.5, 0.5);
+    paddingLayer.borderColor=[UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
+    paddingLayer.borderWidth=1.0;
+    //[subView.layer addSublayer:paddingLayer];
+    
+    
     //添加手势
     [subView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchImage:)]];
     [subView setHidden:NO];
@@ -176,6 +186,7 @@
     //NSLog(@"adding image %i" , (int)pin.idx);
     //默认隐藏
     [imageV setHidden:YES];
+    
     [self addSubview:imageV];
     
     [self layoutImageView:imageV pin:pin];
@@ -194,7 +205,7 @@
     return YES;
 }*/
 
-int page_num = 9;//页数
+int page_num = 4;//页数
 
 //往上拉,删除最新的数据
 -(void)removeNewest:(int)page{
