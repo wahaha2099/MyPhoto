@@ -51,4 +51,7 @@
 
 //读取本地图片,缩小一倍
 -(UIImage*) loadSmallImage;
+
+//读取本地图片,缩小一倍 工具类
++(UIImage*) fixSmallPic:(UIImage*)image;
 @end

@@ -58,10 +58,14 @@ NSString * const keyAccount = @"accounts";
         
         [exist setValue:board.max forKey:@"max"];// board.max;
         [exist setValue:[NSString stringWithFormat:@"%i",board.page ] forKey:@"page"];
+        [exist setValue:board.last_start forKey:@"last_start"];
+        
     }else{  //存储部分数据
         exist = [[NSMutableDictionary alloc]init];
         [exist setValue:board.max forKey:@"max"];// board.max;
         [exist setValue:board.start forKey:@"start"];
+        [exist setValue:board.last_start forKey:@"last_start"];
+        
         [exist setValue:board.idx forKey:@"idx"];
         [exist setValue:board.url forKey:@"url"];
         [exist setValue:[NSString stringWithFormat:@"%i",board.page ] forKey:@"page"];
@@ -86,10 +90,11 @@ NSString * const keyAccount = @"accounts";
         NSDictionary *e = [acc objectForKey:b.idx];
         if(e!=nil){
             b.start = [e objectForKey:@"start"];
+            b.last_start = [e objectForKey:@"last_start"];
             b.max = [e objectForKey:@"max"];
             b.page = [[e objectForKey:@"page"] intValue];
         }
-        //NSLog(@" load b %@ start=%@ max=%@ page=%i" , b.idx , b.start , b.max , b.page);
+        NSLog(@" load b %@ start=%@ max=%@ page=%i" , b.idx , b.start , b.max , b.page);
     }
 }
 

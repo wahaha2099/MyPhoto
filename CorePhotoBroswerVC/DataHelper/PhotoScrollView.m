@@ -143,11 +143,13 @@
     
     UIImageView * imageV = [[UIImageView alloc]init];
     
+    __weak UIImageView * _weakImageV = imageV;
+    __weak Pin * _weakPin = pin;
+    
     if( pin.is_local ){//9张默认的本地图片
         imageV.image = pin.image;
     }else if( pin.is_cache ){
-        __weak UIImageView * _weakImageV = imageV;
-        __weak Pin * _weakPin = pin;
+
         
         //[self loadCacheImage:[NSArray arrayWithObjects:_weakImageV,_weakPin, nil]];
         [self performSelectorInBackground:@selector(loadCacheImage:) withObject:[NSArray arrayWithObjects:_weakImageV,_weakPin, nil]];
@@ -161,7 +163,10 @@
          */
         //异步方式
      // [imageV imageWithUrlStr: pin.url_320 phImage:nil];
-        [imageV imageWithUrlStr: pin.url_658 phImage:nil];
+        
+        [self performSelectorInBackground:@selector(loadWebImage:) withObject:[NSArray arrayWithObjects:_weakImageV,_weakPin, nil]];
+        
+//        [imageV imageWithUrlStr: pin.url_658 phImage:nil];
     }
     
     //开启事件
@@ -197,7 +202,70 @@
     __weak UIImageView* imageV = array[0];
     __weak Pin * pin = array[1];
     __weak UIImage * img = [pin loadSmallImage];
+    
+//    UIImage *img =[UIImage imageNamed:@"1"];
     imageV.image = img;
+}
+
+//下载网络图片,参考UIImageView (SD).h
+-(void)loadWebImage:(NSArray*)array{//(NSString*)urlStr (UIImageView*):view{
+
+    __weak UIImageView* imageV = array[0];
+    __weak Pin * pin = array[1];
+    NSString * urlStr = pin.url_658;
+    
+    if(urlStr==nil) return;
+    
+    NSURL *url=[NSURL URLWithString:urlStr];
+    
+    SDWebImageOptions options = SDWebImageLowPriority | SDWebImageRetryFailed;
+
+    //id <SDWebImageOperation> operation =
+    [SDWebImageManager.sharedManager downloadImageWithURL:url options:options progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+       if (!imageV || !pin) return;
+        //dispatch_main_sync_safe(^{
+            if (!imageV || !pin) return;
+            if (image && pin) {
+                //set the key to url658
+                //imageV.image = image;
+                
+                //pin.url320 = pin.url658 = [SDWebImageManager.sharedManager cacheKeyForURL:imageURL];
+                NSData *imageData = UIImagePNGRepresentation(image);
+                UIImage * pngImage = [UIImage imageWithData:imageData];
+                
+                imageV.image = [Pin fixSmallPic:pngImage];
+            } else {
+ //              imagev.image =
+            }
+            
+       // });
+    }];
+/**
+ __weak UIImageView* imageV = array[0];
+ __weak Pin * pin = array[1];
+ NSString * urlStr = pin.url_658;
+ 
+ if(urlStr==nil) return;
+ 
+ NSURL *url=[NSURL URLWithString:urlStr];
+ 
+ SDWebImageOptions options = SDWebImageLowPriority | SDWebImageRetryFailed;
+ 
+ id <SDWebImageOperation> operation = [SDWebImageManager.sharedManager downloadImageWithURL:url options:options progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+ if (!imageV) return;
+ dispatch_main_sync_safe(^{
+ if (!imageV) return;
+ if (image) {
+ imageV.image = image;
+ imageV.image = [pin loadSmallImage];
+ } else {
+ //              imagev.image =
+ }
+ 
+ });
+ }];
+
+ */
 }
 
 /*

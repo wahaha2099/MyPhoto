@@ -7,6 +7,7 @@
 //
 
 #import "BoardInfo.h"
+#import "DataHolder.h"
 
 @implementation BoardInfo
 
@@ -39,6 +40,12 @@
     [_pins addObject:pin];
     //获取最后文件的max
     _max = [NSString stringWithFormat:@"%@", pin.pin_id ];
+}
+
+//上次读取过后的,记录了start和max,重新更新max,让从头再来拉取,和start比对id,如果id小于start,则忽略
+-(void)resetBoard{
+    _max =@"999999999";
+    [[DataHolder sharedInstance]saveBoard:self];
 }
 /**
  "board":{
