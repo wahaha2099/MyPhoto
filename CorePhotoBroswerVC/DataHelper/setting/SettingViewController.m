@@ -168,6 +168,7 @@ CGFloat maxHeight;
     if([[alertView title] isEqualToString:@"Delete"] && buttonIndex == 1)
     {
         [[SDImageCache sharedImageCache] clearDisk];
+        _cacheSize = 0 ;
         [_settingView reloadData];
     }
 }
