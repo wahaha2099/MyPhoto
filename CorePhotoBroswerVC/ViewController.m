@@ -70,7 +70,7 @@
 
 -(void)initNetMode{
     //展示数据
-    [self contentViewDataPrepare];
+    //[self contentViewDataPrepare];
     //[self performSelectorInBackground:@selector(contentViewDataPrepare) withObject:nil];
     
     //请求远程图片
@@ -102,7 +102,6 @@
         [[self getScrollView] showImages:pin];
     }
     //return;
-   
 }
 
 /** 事件 */

@@ -330,7 +330,8 @@ int page_num = 9;//页数
             [self showImages:pin];
         }
     }
-    if( page == 0 ){
+    if( page == 0 && [_controller.pins count] > 0 ){
+        
         Pin * pin = [_controller.pins objectAtIndex:0];//0的在viewWithTag中返回不为空,需要手动加
         [self showImages:pin];
     }
