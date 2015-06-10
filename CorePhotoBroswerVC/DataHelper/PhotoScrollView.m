@@ -351,4 +351,21 @@ int page_num = 9;//页数
     }
 }
 
+#pragma mark ========切换tab时,删除和重新显示======
+//回收全部imageView
+-(void)removeAllPage{
+    [self removePrevious:_pageOnScrollView + 3];
+    [_cachePage removeAllObjects];
+}
+//显示当前page的imageView
+-(void)addCurrentPage{
+    if (_pageOnScrollView == -1 ) {
+        _pageOnScrollView = 0;
+    }
+    [self loadNextPage:_pageOnScrollView - 1];
+    [self loadNextPage:_pageOnScrollView];
+    [self loadNextPage:_pageOnScrollView + 1];
+}
+#pragma mark ========切换tab时,删除和重新显示======
+
 @end

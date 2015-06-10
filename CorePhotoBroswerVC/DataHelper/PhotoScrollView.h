@@ -36,4 +36,12 @@
 //数据到了的通知
 -(void)pinsRefresh;
 
+
+#pragma mark ========切换tab时,删除和重新显示======
+//回收全部imageView
+-(void)removeAllPage;
+//显示当前page的imageView
+-(void)addCurrentPage;
+#pragma mark ========切换tab时,删除和重新显示======
+
 @end

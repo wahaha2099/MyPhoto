@@ -14,6 +14,10 @@
 
 @interface MainTabbar ()
 
+@property NetViewController *netView ;//= [self viewControllers][0];
+@property SettingViewController *setting;// = [self viewControllers][1];
+@property CacheViewController *cacheView ;//= [self viewControllers][2];
+
 @end
 
 @implementation MainTabbar
@@ -21,15 +25,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NetViewController *netView = [self viewControllers][0];
-    SettingViewController *setting = [self viewControllers][1];
-    CacheViewController *cacheView = [self viewControllers][2];
+    _netView = [self viewControllers][0];
+    _cacheView = [self viewControllers][1];
+    _setting = [self viewControllers][2];
     
     self.delegate = self;
     
-    [netView initTabItem];
-    [setting initTabItem];
-    [cacheView initTabItem];
+    [_netView initTabItem];
+    [_setting initTabItem];
+    [_cacheView initTabItem];
     // Do any additional setup after loading the view.
 }
 
@@ -45,6 +49,14 @@
         [setting.settingView reloadData];
     }else{
         [[iAdHelper Instance]showADBanner:viewController.view top:YES];
+    }
+    
+    if( [viewController isKindOfClass:[CacheViewController class]]){
+        [_netView removeAllPage];
+        [_cacheView addCurrentPage];
+    }else if( [viewController isKindOfClass:[NetViewController class]]){
+        [_cacheView removeAllPage];
+        [_netView addCurrentPage];
     }
 }
 /*
