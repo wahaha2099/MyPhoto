@@ -115,41 +115,6 @@
     [subView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchImage:)]];
     [subView setHidden:NO];
 }
-/*
--(void)setImages:(NSArray *)images{
-    
-    _images = images;
-    
-    [images enumerateObjectsUsingBlock:^(UIImage *image, NSUInteger idx, BOOL *stop) {
-        
-        UIImageView *imageV = [[UIImageView alloc] initWithImage:image];
-        
-        //开启事件
-        imageV.userInteractionEnabled = YES;
-        
-        //模式
-        imageV.contentMode=UIViewContentModeScaleAspectFill;
-        
-        imageV.clipsToBounds = YES;
-        
-        //添加手势
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchImage:)];
-        singleTap.numberOfTapsRequired = 1;
-        [imageV addGestureRecognizer:singleTap];
-        
-        singleTap.enabled = YES;
-        [singleTap setCancelsTouchesInView:NO];
-        
-        [imageV setClipsToBounds:YES];
-        [imageV setUserInteractionEnabled:YES];
-        //设置tag
-        imageV.tag = idx;
-        
-        
-        last_idx++;
-        [self addSubview:imageV];
-    }];
-}*/
 
 -(void)touchImage:(UITapGestureRecognizer *)tap{
     if([tap.view isKindOfClass:[UIImageView class]]){
@@ -224,11 +189,10 @@
     imageV.image = img;
 }
 
+/*
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
-    //UIView *view = [touch view];
-    //NSLog(@"is hit %@" , view);
     return YES;
-}
+}*/
 
 int page_num = 9;//页数
 
@@ -302,20 +266,18 @@ int page_num = 9;//页数
     }
 }
 
-
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     UIScrollView * scroll = scrollView;
     CGPoint scrollOffset=scrollView.contentOffset;
-    
-    int pagAtual = scrollOffset.y/scroll.superview.frame.size.height;
+    CGRect frame = scroll.superview.frame;
+    int pagAtual = scrollOffset.y/frame.size.height;
     
     if(pagAtual == _pageOnScrollView) return ;
     
     //NSLog(@"current %i " ,pagAtual);
     
-    if(_pageOnScrollView < ((int)scrollOffset.y/scroll.frame.size.height))
+    if(_pageOnScrollView < ((int)scrollOffset.y/frame.size.height))
     {
         if(_loadingNext2Page)return ;
         
@@ -329,19 +291,19 @@ int page_num = 9;//页数
         [self loadNextPage:(pagAtual + 1)];
         //[self loadNextPage:(pagAtual + 2)];
         
-       _pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
+       _pageOnScrollView=scrollOffset.y/frame.size.height;
         
         _loadingNext2Page = false;
         
         //[_controller showADBanner];
     }
-    else if(_pageOnScrollView > ((int)scrollOffset.y/scroll.frame.size.height))//避免回弹回来导致数据错误
+    else if(_pageOnScrollView > ((int)scrollOffset.y/frame.size.height))//避免回弹回来导致数据错误
     {
         [self removeNewest:pagAtual + 3 ];
         
         [self loadNextPage: pagAtual - 1 ];
         
-        _pageOnScrollView=scrollOffset.y/scroll.frame.size.height;
+        _pageOnScrollView=scrollOffset.y/frame.size.height;
         
         //[_controller hideADBanner];
     }

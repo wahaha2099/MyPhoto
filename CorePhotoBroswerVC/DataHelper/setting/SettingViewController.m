@@ -16,7 +16,7 @@
 @property CGFloat maxWidth;
 @property CGFloat maxHeight;
 @property CGFloat headOffset;
-
+@property NSInteger cacheSize;
 @end
 
 @implementation SettingViewController
@@ -33,6 +33,7 @@ CGFloat maxHeight;
     self.tabBarItem.title=@"设置";
     self.tabBarItem.image= tempBarItem.selectedImage;
     
+    [self performSelectorInBackground:@selector(showCacheSize) withObject:nil];
 }
 
 - (void)viewDidLoad {
@@ -112,8 +113,9 @@ CGFloat maxHeight;
     switch (indexPath.row) {
         case 0:{
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            NSUInteger size = [[SDImageCache sharedImageCache] getSize ];
-            [cell.textLabel setText:[NSString stringWithFormat:@"Cache Size :%lu M" , size / 1000 / 1000]];
+            [cell.textLabel setText:[NSString stringWithFormat:@"Cache Size :%lu M" , _cacheSize / 1000 / 1000]];
+            
+            [self performSelectorInBackground:@selector(showCacheSize) withObject:nil];
             
             //添加按钮
             UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -143,6 +145,9 @@ CGFloat maxHeight;
     return cell;
 }
 
+-(void)showCacheSize{
+    _cacheSize = [[SDImageCache sharedImageCache] getSize ];
+}
 
 
 /**

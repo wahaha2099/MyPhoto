@@ -23,7 +23,7 @@ static DataMagic * instance ;
         instance.NOTIFY_HTTP_PIC_REQ = @"NOTIFY_HTTP_PIC_REQ";
         instance.NOTIFY_FINISH_PIC_REQ = @"NOTIFY_FINISH_PIC_REQ";
         instance.NOTIFY_FINISH_PIC_PARSE = @"NOTIFY_FINISH_PIC_PARSE";
-        //instance.isHuaban = true;
+        instance.isHuaban = true;
     }
     return instance;
 }
