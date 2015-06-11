@@ -104,6 +104,7 @@ static HuabanImage * instance ;
         //设置b的start和max
         if([b.max isEqualToString:@"999999999"]){
             //0.....实际测试,因为max=9999,所以进入此逻辑的,一定是新开始的请求,只要判断last_start和start一致即可,代码没改
+            //第一次,start=nil和last_start=nil,第二次进逻辑,start应该不等于last_start
             //1.idx = 0, max =999 表示,此次循环是第一次返回的数据
             if(idx == 0){
                 NSLog(@"last_start = %@" , pin.pin_id);
