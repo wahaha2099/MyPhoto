@@ -101,9 +101,20 @@
     
     if(self.photoModel == nil) return;
     
+    //创建imageView
+    UIImage *image = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
+    //UIImage * image = nil;
+    self.photoImageView.image = image;
+    
+    //全屏时候的frame,避免本地图片过小,直接按原来尺寸显示(PhotoItemView默认是小图片居中,因为网络图片没设置frame所以没起作用)
+    CGRect full_screen_frame = self.photoImageView.calF;
+    
     if( _photoModel.is_local_cache && _photoModel.image == nil ){
-        UIImage * img = [_photoModel.pin loadLocalImage];
+        UIImage * img = [_photoModel.pin loadLocalImage] ;//] remakeImageWithFullSize:[UIScreen mainScreen].bounds.size  zoom:.3f];
+        
+        
         _photoModel.image = img;
+        
         
         /*
         NSData *data = [NSData dataWithContentsOfFile:_photoModel.image_HD_U];
@@ -118,11 +129,6 @@
     BOOL isNetWorkShow = _photoModel.image == nil;
     
     if(isNetWorkShow){//网络请求
-        
-        //创建imageView
-        UIImage *image = [UIImage phImageWithSize:[UIScreen mainScreen].bounds.size zoom:.3f];
-        //UIImage * image = nil;
-        self.photoImageView.image = image;
         
         if(image == nil) return;
         
@@ -170,7 +176,8 @@
         
         [UIView animateWithDuration:timeInterval delay:0 usingSpringWithDamping:.52f initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
-            self.photoImageView.frame = self.photoImageView.calF;
+            //self.photoImageView.frame = self.photoImageView.calF;
+            self.photoImageView.frame = full_screen_frame;
             
         } completion:nil];
         
@@ -178,9 +185,8 @@
         self.photoModel.isFromSourceFrame = NO;
         
     }else{
-       self.photoImageView.frame = self.photoImageView.calF; 
+       self.photoImageView.frame = full_screen_frame;
     }
-
 
     //标题
     _titleLabel.text = _photoModel.title;
