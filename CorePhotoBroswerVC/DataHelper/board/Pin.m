@@ -44,7 +44,7 @@
 -(UIImage*) loadLocalImage{
     NSData * data = [NSData dataWithContentsOfFile:_url658];
     UIImage *image = [UIImage sd_imageWithData:data];
-    //image = SDScaledImageForKey(_url658, image);
+    image = SDScaledImageForKey(_url658, image);
     //UIImage *image=[UIImage imageWithContentsOfFile:_url658];
     return image;
 }

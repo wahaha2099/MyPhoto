@@ -36,7 +36,7 @@ inline UIImage *SDScaledImageForKey(NSString *key, UIImage *image) {
                     scale = 2.0;
                 }
             }
-            
+
             UIImage *scaledImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:scale orientation:image.imageOrientation];
             image = scaledImage;
         }

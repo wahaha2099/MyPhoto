@@ -33,7 +33,7 @@ NSString * const keyAccount = @"accounts";
                       _sharedInstance = [[self alloc] init];
                   });
     
-    //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accounts"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accounts"];
     return _sharedInstance;
 }
 
