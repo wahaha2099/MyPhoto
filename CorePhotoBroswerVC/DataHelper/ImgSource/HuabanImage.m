@@ -45,7 +45,7 @@ static HuabanImage * instance ;
     }else{
         board_url = [list objectAtIndex:_loading_page % [list count]];
     }
-    [[DataHolder sharedInstance] saveBoardIndex:_loading_page++];
+    [[DataHolder sharedInstance] saveBoardIndex:++_loading_page];
 
     //根据url获取board_id,就是key
     NSNumber * key = [NSNumber numberWithLongLong:[[board_url lastPathComponent]longLongValue ]];
