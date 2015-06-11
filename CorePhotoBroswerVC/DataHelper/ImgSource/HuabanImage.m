@@ -38,13 +38,14 @@ static HuabanImage * instance ;
 
     //轮训 board
     NSString * board_url = nil;
-    int _loading_page = [DataMagic Instance].loading_page;
+    int _loading_page = [[DataHolder sharedInstance] getBoardsIndex];
     
     if(_loading_page < [list count]){
         board_url = [list objectAtIndex:_loading_page];
     }else{
         board_url = [list objectAtIndex:_loading_page % [list count]];
     }
+    [[DataHolder sharedInstance] saveBoardIndex:_loading_page++];
 
     //根据url获取board_id,就是key
     NSNumber * key = [NSNumber numberWithLongLong:[[board_url lastPathComponent]longLongValue ]];
@@ -107,15 +108,15 @@ static HuabanImage * instance ;
             //第一次,start=nil和last_start=nil,第二次进逻辑,start应该不等于last_start
             //1.idx = 0, max =999 表示,此次循环是第一次返回的数据
             if(idx == 0){
-                NSLog(@"last_start = %@" , pin.pin_id);
-                NSLog(@"start %@" , b.start);
+                //NSLog(@"last_start = %@" , pin.pin_id);
+                //NSLog(@"start %@" , b.start);
 
                 //2.last_start存储的是上次请求来的第一条数据
                 if(b.last_start != nil && b.start != nil){
                     
                     //3.如果上次请求的第一条数据,与该board第一条记录id一致,认为已经读取过
                     if([b.last_start longLongValue] == [b.start longLongValue]){//last_start != nil ,说明不是新的一次请求
-                        NSLog(@"max pin = %@" , b.last_start);
+                        //NSLog(@"max pin = %@" , b.last_start);
                         b.hasAddBefore = YES;
                     }
                 }
@@ -130,16 +131,16 @@ static HuabanImage * instance ;
             if([pin.pin_id longLongValue ] >= [b.start longLongValue] || [b.last_start longLongValue]<= [b.start longLongValue]){
                 [b addPin:pin];
             }else{
-                NSLog(@"min pin = %@" , pin.pin_id);
+                //NSLog(@"min pin = %@" , pin.pin_id);
                 [b resetBoard];
-                NSLog(@" board end ");
+                //NSLog(@" board end ");
             }
         }
     }];
     
     if ([pins count]==0) {
         [b resetBoard];
-        NSLog(@" board end ");
+        //NSLog(@" board end ");
     }
     
     if(b.start == nil || [b.start longLongValue] < [b.last_start longLongValue]){

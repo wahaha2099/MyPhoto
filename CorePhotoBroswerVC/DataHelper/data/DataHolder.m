@@ -33,6 +33,7 @@ NSString * const keyAccount = @"accounts";
                       _sharedInstance = [[self alloc] init];
                   });
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accounts"];
     return _sharedInstance;
 }
 
@@ -98,5 +99,16 @@ NSString * const keyAccount = @"accounts";
     }
 }
 
+#pragma mark ------------save page info ---------
+//保存当前请求到哪个board
+-(void) saveBoardIndex:(int )index{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%i",index ] forKey:@"boardIndex"];//save
+}
+
+//获取当前请求的board数
+-(int) getBoardsIndex{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"boardIndex"] intValue];
+}
+#pragma mark ------------save page info end---------
 
 @end
