@@ -54,7 +54,7 @@ BaiduImage * instance;
     
     url = [url stringByAppendingString:[NSString stringWithFormat:@"&pn=%i", b.page  * 20 ] ];
 
-    NSLog(@"request %@",url);
+    //NSLog(@"request %@",url);
     
     //NSString * url = [NSString stringWithFormat:@"%@?max=%@&limit=20&wfl=1",board_url,b.max];//381205601,999999999
     [[HttpHelper Instance] request:url notify:notify isJson:false];

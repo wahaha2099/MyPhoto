@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "896339DE1AF7BA1A0085A721"
-               BuildableName = "&#x6027;&#x611f;&#x5973;&#x795e;.app"
-               BlueprintName = "&#x6027;&#x611f;&#x5973;&#x795e;"
-               ReferencedContainer = "container:CorePhotoBroswerVC.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "896339F71AF7BA1A0085A721"
-               BuildableName = "CorePhotoBroswerVCTests.xctest"
-               BlueprintName = "CorePhotoBroswerVCTests"
+               BlueprintIdentifier = "18CCCBCB1B29A52800855F06"
+               BuildableName = "CorePhotoBroswerVC copy.app"
+               BlueprintName = "CorePhotoBroswerVC copy"
                ReferencedContainer = "container:CorePhotoBroswerVC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,23 +28,13 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "896339F71AF7BA1A0085A721"
-               BuildableName = "CorePhotoBroswerVCTests.xctest"
-               BlueprintName = "CorePhotoBroswerVCTests"
-               ReferencedContainer = "container:CorePhotoBroswerVC.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "896339DE1AF7BA1A0085A721"
-            BuildableName = "&#x6027;&#x611f;&#x5973;&#x795e;.app"
-            BlueprintName = "&#x6027;&#x611f;&#x5973;&#x795e;"
+            BlueprintIdentifier = "18CCCBCB1B29A52800855F06"
+            BuildableName = "CorePhotoBroswerVC copy.app"
+            BlueprintName = "CorePhotoBroswerVC copy"
             ReferencedContainer = "container:CorePhotoBroswerVC.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -76,9 +52,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "896339DE1AF7BA1A0085A721"
-            BuildableName = "&#x6027;&#x611f;&#x5973;&#x795e;.app"
-            BlueprintName = "&#x6027;&#x611f;&#x5973;&#x795e;"
+            BlueprintIdentifier = "18CCCBCB1B29A52800855F06"
+            BuildableName = "CorePhotoBroswerVC copy.app"
+            BlueprintName = "CorePhotoBroswerVC copy"
             ReferencedContainer = "container:CorePhotoBroswerVC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -95,9 +71,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "896339DE1AF7BA1A0085A721"
-            BuildableName = "&#x6027;&#x611f;&#x5973;&#x795e;.app"
-            BlueprintName = "&#x6027;&#x611f;&#x5973;&#x795e;"
+            BlueprintIdentifier = "18CCCBCB1B29A52800855F06"
+            BuildableName = "CorePhotoBroswerVC copy.app"
+            BlueprintName = "CorePhotoBroswerVC copy"
             ReferencedContainer = "container:CorePhotoBroswerVC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

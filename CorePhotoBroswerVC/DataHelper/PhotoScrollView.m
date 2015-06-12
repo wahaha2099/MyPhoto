@@ -42,6 +42,10 @@
     self.delaysContentTouches = NO;
     CGRect myFrame = [[UIScreen mainScreen] bounds];
     [ self setContentSize:myFrame.size];
+    
+    self.frame = myFrame;
+    //NSLog(@"scrollvewi %i " , (int)self.frame.size.height);
+    //NSLog(@"main %i " , (int)myFrame.size.height);
     self.showsHorizontalScrollIndicator=NO;
     self.showsVerticalScrollIndicator=NO;
     self.delegate =self;

@@ -41,7 +41,7 @@
             pin.idx = [super.pins count];
             
         }else{
-            UIImage *imagae =[UIImage imageNamed:[NSString stringWithFormat:@"%@",@(i+1)]];
+            UIImage *imagae =[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpeg",@(i+1)]];
             pin.idx = i;
             pin.image = imagae;
             pin.is_local = true;
