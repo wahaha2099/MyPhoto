@@ -113,7 +113,7 @@ CGFloat maxHeight;
     switch (indexPath.row) {
         case 0:{
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            [cell.textLabel setText:[NSString stringWithFormat:@"Cache Size :%lu M" , _cacheSize / 1000 / 1000]];
+            [cell.textLabel setText:[NSString stringWithFormat:@"离线图片大小:%lu M" , _cacheSize / 1000 / 1000]];
             
             [self performSelectorInBackground:@selector(showCacheSize) withObject:nil];
             
@@ -121,7 +121,7 @@ CGFloat maxHeight;
             UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             button.translatesAutoresizingMaskIntoConstraints = NO;
             [button addTarget:self action:@selector(ClearCache:) forControlEvents:UIControlEventTouchUpInside];
-            [button setTitle:@"Clear" forState:UIControlStateNormal];
+            [button setTitle:@"清空" forState:UIControlStateNormal];
             [cell.contentView addSubview:button];
             
             //相对于contentView右对齐,向左30

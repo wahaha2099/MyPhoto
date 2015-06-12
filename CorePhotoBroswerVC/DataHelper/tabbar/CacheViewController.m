@@ -16,7 +16,7 @@
 @implementation CacheViewController
 
 -(void)initTabItem{
-    UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemDownloads tag:2];
+    UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:2];
     
     /**/
     self.tabBarItem.title=@"离线";

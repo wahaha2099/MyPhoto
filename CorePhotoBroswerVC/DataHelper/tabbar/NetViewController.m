@@ -17,11 +17,11 @@
 @implementation NetViewController
 
 -(void)initTabItem{
-    UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
+    UITabBarItem * tempBarItem =  [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemDownloads tag:1];
     
-    self.tabBarItem.title=@"美图";
+    self.tabBarItem.title=@"下载";
     self.tabBarItem.image= tempBarItem.selectedImage;
-    self.tabBarItem.badgeValue=@"10";
+    //self.tabBarItem.badgeValue=@"10";
 }
 
 -(void)initTab{
