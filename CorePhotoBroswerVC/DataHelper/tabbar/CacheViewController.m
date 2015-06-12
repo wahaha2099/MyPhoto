@@ -39,6 +39,19 @@
         [super.pins addObject:pin];
     }];
     
+    if( [files count] < 9 ){
+        for (int i = 0; i < 9 - [files count] ; i++) {
+            Pin * pin = [[Pin alloc]init];
+            UIImage *imagae =[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpeg",@(i+1)]];
+            pin.idx = i;
+            pin.image = imagae;
+            pin.is_local = true;
+            
+            [_cacheView showImages:pin];
+            [super.pins addObject:pin];
+        }
+    }
+
     //    PhotoScrollView* v = (PhotoScrollView*)[self getScrollView];
     self.cacheView.isCacheMode = true;
     
