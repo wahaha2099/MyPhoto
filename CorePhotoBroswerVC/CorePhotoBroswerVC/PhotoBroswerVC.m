@@ -51,7 +51,7 @@
 
 
 /** 相册数组 */
-@property (nonatomic,strong) NSArray *photoModels;
+@property (nonatomic,strong) NSMutableArray *photoModels;
 
 /** 总页数 */
 @property (nonatomic,assign) NSUInteger pageCount;
@@ -500,7 +500,11 @@
     _page = page;
     
     //设置标题
-    NSString *text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(self.pageCount)];
+//    NSString *text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(self.pageCount)];
+    PhotoModel * pb = _photoModels[page];
+    int pageCount = pb.PageCountBlock();
+    
+    NSString *text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(pageCount)];
     
     dispatch_async(dispatch_get_main_queue(), ^{
     
@@ -533,6 +537,88 @@
 - (IBAction)leftBtnClick:(id)sender {
     
     [self dismiss];
+}
+
+-(IBAction)deleteClick :(id)sender{
+    //取出对应模型
+    PhotoModel *itemModel = (PhotoModel *)self.photoModels[self.page];
+    
+    if (itemModel.pin.is_local) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"系统图片无法删除." delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alert show];
+        return ;
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"删除" message:@"删除这张照片?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //删除按钮点击
+    if([[alertView title] isEqualToString:@"删除"] && buttonIndex == 1)
+    {
+        //取出itemView
+        PhotoItemView *itemView = self.currentItemView;
+        
+        //取出对应模型
+        PhotoModel *itemModel = (PhotoModel *)self.photoModels[self.page];
+        
+        if(!itemView.hasImage){
+            return;
+        }
+        bool isUrl = [[SDImageCache sharedImageCache]diskImageExistsWithKey:itemModel.image_HD_U];
+        
+        
+        if(isUrl){
+            [[SDImageCache sharedImageCache ] removeImageForKey:itemModel.image_HD_U fromDisk:YES];
+        }else if( itemModel.pin.is_cache ){
+            [[SDImageCache sharedImageCache] removeDiskImage:itemModel.image_HD_U withCompletion:nil];
+        }
+        
+        /**
+         [self.visiblePhotoItemViewDictM setObject:photoItemView forKey:@(page)];
+         
+         //传递数据
+         //设置页标
+         photoItemView.pageIndex = page;
+         photoItemView.type = self.type;
+         photoItemView.photoModel = self.photoModels[page];
+         
+         [self.scrollView addSubview:photoItemView];
+         */
+        
+        if ([_photoModels objectAtIndex:itemModel.pin.idx ] != nil) {
+            [_photoModels removeObjectAtIndex:itemModel.pin.idx];
+        }
+        if ([_visiblePhotoItemViewDictM objectForKey:@(self.page )] != nil) {
+            [self.visiblePhotoItemViewDictM removeObjectForKey:@(self.page)];
+        }
+
+        //通知界面更新
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"REMOVE_PIN" object:itemModel.pin userInfo:nil];
+        
+        if( self.page >= [self.photoModels count]){
+            //已经是最后一张了
+            [self dismiss];
+            return;
+        }
+        //显示对应的页面
+        [self showWithPage: self.page];
+        
+        NSString *text = [NSString stringWithFormat:@"%@ / %@", @(self.page + 1) , @( [_photoModels count] )];
+        self.topBarLabel.text = text;
+
+        //remove掉其他页面的
+        //[self reuserAndVisibleHandle:self.page];
+
+        //获取当前显示中的photoItemView
+        self.currentItemView = [self.visiblePhotoItemViewDictM objectForKey:@(self.page)];
+        
+        //CGPoint p = _scrollView.contentOffset;
+        //p.x += _scrollView.bounds.size.width;
+        //[_scrollView setContentOffset:p animated:YES];
+    }
 }
 
 - (IBAction)rightBtnClick:(id)sender {

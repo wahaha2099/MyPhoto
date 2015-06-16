@@ -119,7 +119,7 @@
         
         [self addSubview:imageV];
     
-            [self setUserInteractionEnabled:YES];
+        [self setUserInteractionEnabled:YES];
    
 }
 

@@ -17,7 +17,7 @@
 @property (assign) int score;
 
 //boards的信息
-@property NSMutableDictionary* boards;
+@property (strong) NSMutableDictionary* boards;
 
 #pragma mark ------------save board---------
 //保存Board信息

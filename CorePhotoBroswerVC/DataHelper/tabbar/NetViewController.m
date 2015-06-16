@@ -22,6 +22,8 @@
     self.tabBarItem.title=@"下载";
     self.tabBarItem.image= tempBarItem.selectedImage;
     //self.tabBarItem.badgeValue=@"10";
+    
+    [self tabSelected];
 }
 
 -(void)initTab{
@@ -51,6 +53,12 @@
         [super.pins addObject:pin];
     }
     [self addCurrentPage];
+    
+}
+
+//删除按钮后的通知
+-(void) removeCachePinNotify:(NSNotification*) aNotification{
+    [super removePinNotify:aNotification];
 }
 
 - (void)viewDidLoad {
@@ -66,5 +74,24 @@
 -(PhotoScrollView*) getScrollView{
     return self.scrollView;
 }
+
+#pragma mark ====tab切换操作======
+//选中当前controller
+-(void)tabSelected{
+    //子类实现
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"REMOVE_PIN"  object:nil ];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeCachePinNotify:) name:@"REMOVE_PIN" object:nil];
+    
+    [_scrollView addCurrentPage];
+}
+//没选中当前controller
+-(void)tabNotSelected{
+    //子类实现
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"REMOVE_PIN"  object:nil ];
+    
+    [_scrollView removeAllPage];
+}
+#pragma mark ====tab切换操作======
+
 
 @end

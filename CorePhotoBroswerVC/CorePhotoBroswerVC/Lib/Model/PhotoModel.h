@@ -83,7 +83,8 @@
  */
 -(void)save;
 
-
+//获取页数的回调方法
+@property (nonatomic,copy) int (^PageCountBlock)( void );
 
 
 

@@ -52,11 +52,11 @@
     }
     
     if( [viewController isKindOfClass:[CacheViewController class]]){
-        [_netView removeAllPage];
-        [_cacheView addCurrentPage];
+        [_netView tabNotSelected];
+        [_cacheView tabSelected];
     }else if( [viewController isKindOfClass:[NetViewController class]]){
-        [_cacheView removeAllPage];
-        [_netView addCurrentPage];
+        [_cacheView tabNotSelected];
+        [_netView tabSelected];
     }
 }
 /*

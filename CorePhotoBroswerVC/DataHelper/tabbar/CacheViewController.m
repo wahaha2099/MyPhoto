@@ -43,7 +43,7 @@
         for (int i = 0; i < 9 - [files count] ; i++) {
             Pin * pin = [[Pin alloc]init];
             UIImage *imagae =[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpeg",@(i+1)]];
-            pin.idx = i;
+            pin.idx = [files count ] + i;
             pin.image = imagae;
             pin.is_local = true;
             
@@ -56,11 +56,36 @@
     self.cacheView.isCacheMode = true;
     
     [[self getScrollView] initScrollView:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeNetPinNotify:) name:@"REMOVE_PIN" object:nil];
+
+}
+
+//删除按钮后的通知
+-(void) removeNetPinNotify:(NSNotification*) aNotification{
+    [super removePinNotify:aNotification];
 }
 
 -(PhotoScrollView*) getScrollView{
     return self.cacheView;
 }
 
+#pragma mark ====tab切换操作======
+//选中当前controller
+-(void)tabSelected{
+    //子类实现
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"REMOVE_PIN"  object:nil ];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeNetPinNotify:) name:@"REMOVE_PIN" object:nil];
+
+    [_cacheView addCurrentPage];
+}
+//没选中当前controller
+-(void)tabNotSelected{
+    //子类实现
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"REMOVE_PIN"  object:nil ];
+    
+    [_cacheView removeAllPage];
+}
+#pragma mark ====tab切换操作======
 
 @end

@@ -21,7 +21,7 @@
 
 
 
-@property (nonatomic,strong) NSMutableArray *pins;
+@property (atomic,strong) NSMutableArray *pins;
 
 //显示隐藏tabBar
 -(void)showTabBarController:(bool)show;
@@ -45,5 +45,13 @@
 -(void)addCurrentPage;
 #pragma mark ========切换tab时,删除和重新显示======
 
+//删除按钮后的通知
+-(void) removePinNotify:(NSNotification*) aNotification;
+
+//选中当前controller
+-(void)tabSelected;
+
+//切换tab,没选中当前
+-(void)tabNotSelected;
 @end
 

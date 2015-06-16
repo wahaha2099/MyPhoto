@@ -44,4 +44,7 @@
 -(void)addCurrentPage;
 #pragma mark ========切换tab时,删除和重新显示======
 
+/**删除图片后重排序*/
+-(void)relayout:(int)idx;
+
 @end

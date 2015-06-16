@@ -26,6 +26,8 @@
 //不够图片显示,有数据来通知界面更新
 @property bool needFillToPage ;//
 
+@property (strong , atomic)NSMutableDictionary * uiViewTag;//tag = index 存在这里,用于替代viewWithTag的遍历问题
+
 @end
 
 @implementation PhotoScrollView
@@ -49,17 +51,20 @@
     self.showsHorizontalScrollIndicator=NO;
     self.showsVerticalScrollIndicator=NO;
     self.delegate =self;
-    [self performSelectorInBackground:@selector(loadNextWebData) withObject:nil];
-    
+
     _pageOnScrollView = -1;
+    _uiViewTag = [[NSMutableDictionary alloc]init];
     _cachePage = [[NSMutableSet alloc]init];
     _controller = cont;
+    
+    [self performSelectorInBackground:@selector(loadNextWebData) withObject:nil];
+    
 }
 
 //add subview 后,UIView调用此方法进行布局管理
 -(void)layoutSubviews{
     
-    [super layoutSubviews];
+    //[super layoutSubviews];
     
     //int finish_idx = layout_count;
     //if(layout_count == last_idx)return;//只有新加入的subview才需要进行布局修改
@@ -78,7 +83,8 @@
     int newHeight = height * (_pageOnScrollView + 2) * 3;//页数*4行
     
     if( newHeight > myFrame.size.height ){
-        if([self.subviews count] % maxCol > 0){//不足3条多一行
+        //if([self.subviews count] % maxCol > 0){//不足3条多一行
+        if([_uiViewTag count] % maxCol > 0){//不足3条多一行
             newHeight += height;
         }
     }
@@ -89,6 +95,9 @@
 }
 
 -(void)layoutImageView:(UIImageView*)view pin:(Pin*)pin{
+    __weak UIImageView * subView = view;
+    
+    /*
     CGRect myFrame = [[UIScreen mainScreen] bounds];
     
     NSUInteger maxCol = 2;
@@ -97,7 +106,7 @@
     CGFloat width = myFrame.size.width / maxRow;
     CGFloat height = myFrame.size.height / maxCol;
 
-    __weak UIImageView * subView = view;
+
     
     int imgIndex =  (int) (subView.tag);
     
@@ -113,7 +122,9 @@
 
     CGRect frame = CGRectMake(x, y, width, height);
         
-    subView.frame = frame;
+    subView.frame = frame;*/
+    
+    [self layoutView:subView idx:(int)view.tag];
     
     CALayer *paddingLayer = subView.layer;
     //subView.layer.backgroundColor=[UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
@@ -124,10 +135,38 @@
     paddingLayer.borderWidth=1.0;
     //[subView.layer addSublayer:paddingLayer];
     
-    
     //添加手势
-    [subView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchImage:)]];
+    if( [subView gestureRecognizers] == nil || [[subView gestureRecognizers] count] == 0 )
+        [subView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchImage:)]];
+    
     [subView setHidden:NO];
+}
+
+/**按id排序*/
+-(void)layoutView:(UIView*)subView idx:(int)idx{
+    CGRect myFrame = [[UIScreen mainScreen] bounds];
+    
+    NSUInteger maxCol = 2;
+    NSUInteger maxRow = 2;
+    
+    CGFloat width = myFrame.size.width / maxRow;
+    CGFloat height = myFrame.size.height / maxCol;
+    
+    int imgIndex =  (int) (subView.tag);
+    
+    NSUInteger row = imgIndex % maxRow;
+    
+    NSUInteger col = imgIndex / maxCol;
+    
+    CGFloat x = width * row;
+    
+    CGFloat y = height * col + 10;
+    
+    //NSLog(@"i , x , y = %i ,%f , %f " , imgIndex , x , y  );
+    
+    CGRect frame = CGRectMake(x, y, width, height);
+    
+    subView.frame = frame;
 }
 
 -(void)touchImage:(UITapGestureRecognizer *)tap{
@@ -141,6 +180,10 @@
     }
 }
 
+-(void)showImages0:(Pin *)pin {
+    __weak Pin * _weakPin = pin;
+    [self performSelectorInBackground:@selector(showImages0:) withObject:_weakPin];
+}
 
 -(void)showImages:(Pin *)pin {
     //pin.url320 = @"http://imgt8.bdstatic.com/it/u=2,971217956&fm=25&gp=0.jpg";
@@ -155,7 +198,7 @@
     }else if( pin.is_cache ){
 
         
-        //[self loadCacheImage:[NSArray arrayWithObjects:_weakImageV,_weakPin, nil]];
+        //[self loadCacheImage:[NSArray arrayWithObjects:imageV,pin, nil]];
         [self performSelectorInBackground:@selector(loadCacheImage:) withObject:[NSArray arrayWithObjects:_weakImageV,_weakPin, nil]];
         
     }else{//其他网络图片
@@ -169,36 +212,19 @@
      // [imageV imageWithUrlStr: pin.url_320 phImage:nil];
         
         [self performSelectorInBackground:@selector(loadWebImage:) withObject:[NSArray arrayWithObjects:_weakImageV,_weakPin, nil]];
-        
+        //[self loadWebImage:[NSArray arrayWithObjects:imageV,pin, nil]];
 //        [imageV imageWithUrlStr: pin.url_658 phImage:nil];
     }
     
-    //开启事件
-    imageV.userInteractionEnabled = YES;
-    
-    //模式
-    imageV.contentMode=UIViewContentModeScaleAspectFill;
-    
-    imageV.clipsToBounds = YES;
-    
-    //添加手势
-    //[imageV addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchImage:)]];
-    
-    [imageV setUserInteractionEnabled:YES];
-    //设置tag
-    imageV.tag = pin.idx ;//(last_idx++);
-    
-    //NSLog(@"add tag %i , %@" , (int)imageV.tag , pin.url320 );
-    
-    self.last_idx = (int)pin.idx ;
-    
-    //NSLog(@"adding image %i" , (int)pin.idx);
+    [self prepareImageView:imageV pin:pin];
     //默认隐藏
     [imageV setHidden:YES];
-    
     [self addSubview:imageV];
-    
     [self layoutImageView:imageV pin:pin];
+    //[NSString stringWithFormat:@"%i" , (int)imageV.tag]；
+    
+    //NSLog(@"tag is %i" , (int)imageV.tag);
+    [_uiViewTag setValue:imageV forKey: @(imageV.tag)];
 }
 
 //异步读取本地图片
@@ -209,6 +235,8 @@
     
 //    UIImage *img =[UIImage imageNamed:@"1"];
     imageV.image = img;
+    
+    //[self prepareImageView:imageV pin:pin];
 }
 
 //下载网络图片,参考UIImageView (SD).h
@@ -244,6 +272,7 @@
             
        // });
     }];
+    //[self prepareImageView:imageV pin:pin];
 /**
  __weak UIImageView* imageV = array[0];
  __weak Pin * pin = array[1];
@@ -272,6 +301,29 @@
  */
 }
 
+//设置ImageView属性
+-(void)prepareImageView:(UIImageView*)imageV pin:(Pin *)pin{
+    //开启事件
+    imageV.userInteractionEnabled = YES;
+    
+    //模式
+    imageV.contentMode=UIViewContentModeScaleAspectFill;
+    
+    imageV.clipsToBounds = YES;
+    
+    //添加手势
+    //[imageV addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchImage:)]];
+    
+    [imageV setUserInteractionEnabled:YES];
+    //设置tag
+    imageV.tag = pin.idx ;//(last_idx++);
+    
+    //NSLog(@"add tag %i , %@" , (int)imageV.tag , pin.url320 );
+    
+    self.last_idx = (int)pin.idx ;
+    
+    //NSLog(@"adding image %i" , (int)pin.idx);
+}
 /*
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
     return YES;
@@ -285,12 +337,24 @@ int page_num = 4;//页数
     //NSLog(@"remove newest %i" , page);
     int start = page * page_num;
     
+    NSMutableArray * needRemove = [[NSMutableArray alloc]init];
+    /*
     [[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
         if(v.tag >= start){
             if ([v isKindOfClass:UIImageView.class]) {
-                [self removeImageView:v];
+                //[self removeImageView:v];
+                [needRemove addObject:v];
             }
         }
+    }];*/
+    
+    [_uiViewTag enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if( [key intValue] >= start){
+            [needRemove addObject:obj];
+        }
+    }];
+    [needRemove enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [self removeImageView:obj];
     }];
 }
 
@@ -306,11 +370,23 @@ int page_num = 4;//页数
 
     int end = (page + 1)* page_num;
     
-    [[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
+    NSMutableArray * needRemove = [[NSMutableArray alloc]init];
+    /*[[self subviews]enumerateObjectsUsingBlock:^( UIView * v , NSUInteger idx, BOOL *stop) {
         
         if(v.tag < end){
-            [self removeImageView:v];
+            [needRemove addObject:v];
+            //[_uiViewTag removeObjectForKey:@(v.tag)];
+//            [self removeImageView:v];
         }
+    }];*/
+    [_uiViewTag enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if( [key intValue] < end){
+            [needRemove addObject:obj];
+        }
+    }];
+    
+    [needRemove enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [self removeImageView:obj];
     }];
 }
 
@@ -324,6 +400,7 @@ int page_num = 4;//页数
         }
         [v.layer removeAllAnimations];//remove git 动画?
         [v removeFromSuperview];
+        [_uiViewTag removeObjectForKey:@(v.tag)];
         v = nil;
     }
 }
@@ -362,6 +439,7 @@ int page_num = 4;//页数
     
     if(_pageOnScrollView < ((int)scrollOffset.y/frame.size.height))
     {
+        //往下拉
         if(_loadingNext2Page)return ;
         
         if(pagAtual - 2 > -1 ){
@@ -382,6 +460,7 @@ int page_num = 4;//页数
     }
     else if(_pageOnScrollView > ((int)scrollOffset.y/frame.size.height))//避免回弹回来导致数据错误
     {
+        //往上拉
         [self removeNewest:pagAtual + 3 ];
         
         [self loadNextPage: pagAtual - 1 ];
@@ -408,14 +487,17 @@ int page_num = 4;//页数
             break;
         }
         
-        if([self viewWithTag:i] == nil){
+        //if([self viewWithTag:i] == nil){
+        if( [_uiViewTag objectForKey:@(i)] == nil){
             Pin * pin = [_controller.pins objectAtIndex:i];
+            //pin.idx = i;//重新设置tag,有可能有删除或其他情况,pin排序会变
             [self showImages:pin];
         }
     }
     if( page == 0 && [_controller.pins count] > 0 ){
         
         Pin * pin = [_controller.pins objectAtIndex:0];//0的在viewWithTag中返回不为空,需要手动加
+        pin.idx = 0;
         [self showImages:pin];
     }
     
@@ -452,4 +534,49 @@ int page_num = 4;//页数
 }
 #pragma mark ========切换tab时,删除和重新显示======
 
+/**删除图片后重排序*/
+-(void)relayout:(int)idx{
+    NSMutableDictionary * tmp = [[NSMutableDictionary alloc]init];
+    __weak NSMutableDictionary * weakTmp = tmp;
+    //[tmp addEntriesFromDictionary:_uiViewTag];
+    
+    [self removeImageView:[_uiViewTag objectForKey:@(idx)] ];
+
+    NSString * lastIdKey = @"lastIdKey";
+    __weak NSString * weakIdKey = lastIdKey;
+    
+    [weakTmp setValue:@"0" forKey:lastIdKey];
+    [_uiViewTag enumerateKeysAndObjectsUsingBlock:^(id key, UIView* obj, BOOL *stop) {
+        if ([key intValue] >= idx ) {
+            //1.如果是reload,那key都得变啊
+            obj.tag = [key intValue ] -1;
+            
+            if( [weakTmp objectForKey:weakIdKey] == nil || [[weakTmp objectForKey:weakIdKey]intValue] < [key intValue]){
+                [weakTmp setObject:key forKey:weakIdKey];
+            }
+            
+            //NSLog(@"relayout %i", (int)obj.tag);
+            //2.重新布局
+            [self layoutView:obj idx:(int)obj.tag];
+            
+            [weakTmp setObject:obj forKey:@([key intValue]-1)];
+
+        }else if([key intValue] < idx ) {
+            [weakTmp setObject:obj forKey:key];
+        }
+    }];
+    
+
+    int lastIdx = [[weakTmp objectForKey:lastIdKey] intValue];//最后一张的下一张
+    [weakTmp removeObjectForKey:lastIdKey];
+    _uiViewTag = tmp;
+    
+    //NSLog(@" current_page %i , last idx %i , pins count %i" , _pageOnScrollView ,lastIdx , (int)[_controller.pins count] );
+    //3.添加多一张图片进来
+    if(lastIdx != 0 && [_controller.pins count] > lastIdx){
+        [self showImages: [_controller.pins objectAtIndex:lastIdx]];
+    }
+
+
+}
 @end

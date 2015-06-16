@@ -183,6 +183,11 @@
             //pbModel.title = pin.raw_text;
             //pbModel.desc = pin.raw_text;
             
+            //设置回调
+            pbModel.PageCountBlock = ^(void){
+                return (int)[__pins count];
+            };
+            
             if(pin.is_local)
                 pbModel.image = pin.image;
             if( pin.is_cache ){
@@ -216,6 +221,9 @@
 -(void)addPin2UI:(BoardInfo*)board{
     __weak NSMutableArray * __pins = _pins;
     [board.pins enumerateObjectsUsingBlock:^(Pin * pin, NSUInteger idx, BOOL *stop) {
+        if( pin == nil){
+            NSLog(@"ViewController 神奇了,pin 居然=nil");
+        }
         pin.idx = [__pins count];
         
         [__pins addObject:pin];
@@ -277,4 +285,37 @@
 }
 #pragma mark ========切换tab时,删除和重新显示======
 
+//删除按钮后的通知
+-(void) removePinNotify:(NSNotification*) aNotification{
+    Pin* pin = aNotification.object ;
+    if ( [_pins objectAtIndex:pin.idx ] != nil) {
+        //NSLog(@"removeing %i" , (int)pin.idx );
+        [self.pins removeObjectAtIndex:pin.idx];
+        //    [self.pins objectAtIndex:pin.idx];
+        
+        //pin的下标
+        [_pins enumerateObjectsUsingBlock:^(Pin * obj, NSUInteger idx, BOOL *stop) {
+            if( idx >= pin.idx){
+                obj.idx = obj.idx - 1;
+            }
+        }];
+        
+        //重新布局
+        [[self getScrollView]relayout:(int)pin.idx];
+        
+        //[[self getScrollView]removeAllPage];
+        //[[self getScrollView ] addCurrentPage];
+    }
+}
+
+#pragma mark ====tab切换操作======
+//选中当前controller
+-(void)tabSelected{
+    //子类实现
+}
+//切换tab,没选中当前
+-(void)tabNotSelected{
+    //子类实现
+}
+#pragma mark =====
 @end

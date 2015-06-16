@@ -360,6 +360,18 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
     
 }
 
+-(void)removeDiskImage:(NSString*)path withCompletion:(SDWebImageNoParamsBlock)completion{
+    dispatch_async(self.ioQueue, ^{
+        [_fileManager removeItemAtPath:path error:nil];
+        
+        if (completion) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion();
+            });
+        }
+    });
+}
+
 - (void)setMaxMemoryCost:(NSUInteger)maxMemoryCost {
     self.memCache.totalCostLimit = maxMemoryCost;
 }
