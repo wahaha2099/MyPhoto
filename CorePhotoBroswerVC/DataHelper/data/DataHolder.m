@@ -111,4 +111,29 @@ NSString * const keyAccount = @"accounts";
 }
 #pragma mark ------------save page info end---------
 
+#pragma mark -------------花瓣的boarid-------
+//添加关注
+-(void) addBoardFollow:(NSString*)boardid{
+    NSString * follows = @"BOARD_FOLLOW";
+    
+    [self getBoardFollows];
+    
+    //3.本地存储
+    [_follows setValue:[NSString stringWithFormat:@"http://huaban.com/boards/%@",boardid ] forKey:boardid];//add to array
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_follows forKey:follows];//save
+}
+//返回关注的boardid
+-(NSDictionary*) getBoardFollows{
+    NSString * follows = @"BOARD_FOLLOW";
+    if(_follows == nil){
+        _follows = [[NSMutableDictionary alloc]init];
+        
+        NSDictionary * dic3 = [[NSUserDefaults standardUserDefaults] objectForKey:follows];
+        [_follows addEntriesFromDictionary:dic3];
+    }
+    return _follows;
+}
+#pragma mark -------------花瓣的boarid-------
+
 @end

@@ -17,6 +17,9 @@
 @property CGFloat maxHeight;
 @property CGFloat headOffset;
 @property NSInteger cacheSize;
+
+//添加花瓣id
+@property NSString * addHuabanId;
 @end
 
 @implementation SettingViewController
@@ -140,9 +143,74 @@ CGFloat maxHeight;
             
             break;
         }
+        case 1:{
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell.textLabel setText:@"添加花瓣画板Id,请访问花瓣网"];
+            break;
+        }
+        case 2:{
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell.textLabel setText:@"Id:"];
+            
+            CGRect textFieldRect = CGRectMake(40.0f, 12.0f
+                                              , 215.0f, 31.0f);
+            UITextField *theTextField = [[UITextField alloc] initWithFrame:textFieldRect];
+            //UITextField *theTextField = [[UITextField alloc]init];
+            theTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+            theTextField.returnKeyType = UIReturnKeyDone;
+            theTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            //theTextField.clearButtonMode = YES;
+            theTextField.tag = indexPath.row;
+            //theTextField.delegate = self;
+            
+            //此方法为关键方法
+            [theTextField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
+            [cell.contentView addSubview:theTextField];
+ 
+            //和textLabel保持同一行
+            NSLayoutConstraint * lineConstraint2 =[NSLayoutConstraint constraintWithItem:theTextField
+                                                                              attribute:NSLayoutAttributeBaseline
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:cell.textLabel
+                                                                              attribute:NSLayoutAttributeBaseline
+                                                                             multiplier:1                                                        constant:0];
+            
+            //[cell.contentView addConstraint:constraint];
+            [cell.contentView addConstraint:lineConstraint2];
+            //添加布局
+            
+            //添加按钮
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            button.translatesAutoresizingMaskIntoConstraints = NO;
+            [button addTarget:self action:@selector(addHuaban:) forControlEvents:UIControlEventTouchUpInside];
+            [button setTitle:@"添加" forState:UIControlStateNormal];
+            [cell.contentView addSubview:button];
+            
+            //相对于contentView右对齐,向左30
+            NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:-30.f];
+            
+            //和textLabel保持同一行
+            NSLayoutConstraint * lineConstraint =[NSLayoutConstraint constraintWithItem:button
+                                                                              attribute:NSLayoutAttributeBaseline
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:cell.textLabel
+                                                                              attribute:NSLayoutAttributeBaseline
+                                                                             multiplier:1                                                        constant:0];
+            
+            [cell.contentView addConstraint:constraint];
+            [cell.contentView addConstraint:lineConstraint];
+            
+            break;
+        }
     }
 
     return cell;
+}
+
+- (void)textFieldWithText:(UITextField *)textField
+{
+    NSLog(@"add text field %@" , textField.text);
+    self.addHuabanId = textField.text;
 }
 
 -(void)showCacheSize{
@@ -172,5 +240,14 @@ CGFloat maxHeight;
         [_settingView reloadData];
     }
 }
+
+-(void)addHuaban:(UIButton * )sender{
+    [[DataHolder sharedInstance]addBoardFollow:self.addHuabanId];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"消息" message:@"已添加." delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+    [alert show];
+}
+
+
+
 
 @end

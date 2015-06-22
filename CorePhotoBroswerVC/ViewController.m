@@ -55,6 +55,10 @@
     [[iAdHelper Instance] addADBanner:self.view top:YES];
     
     [[SDImageCache sharedImageCache]setMaxMemoryCost:10 ];
+    long maxCacheAge = 60 * 60 * 24 * 7; // 1 week
+    
+    [[SDImageCache sharedImageCache] setMaxCacheAge:maxCacheAge * 4 * 12 * 5];//5年
+    
     [[SDImageCache sharedImageCache] setShouldDecompressImages:NO];
     [[SDWebImageDownloader sharedDownloader] setShouldDecompressImages:NO];
 

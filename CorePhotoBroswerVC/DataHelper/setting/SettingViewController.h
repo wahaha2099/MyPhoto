@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SDImageCache.h"
+#import "DataHolder.h"
 
 @interface SettingViewController : UIViewController
 

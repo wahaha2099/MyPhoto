@@ -31,6 +31,9 @@
 //是否请求花瓣
 @property bool isHuaban;
 
+//是否只显示范冰冰的照片
+@property bool isFanbinbin;
+
 //通知回调
 @property NSString * NOTIFY_HTTP_PIC_REQ ;
 @property NSString * NOTIFY_FINISH_PIC_REQ ;
