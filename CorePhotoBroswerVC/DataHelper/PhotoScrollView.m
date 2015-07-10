@@ -42,7 +42,9 @@
     [self setScrollEnabled:YES];
     [self setCanCancelContentTouches:YES];
     self.delaysContentTouches = NO;
+    
     CGRect myFrame = [[UIScreen mainScreen] bounds];
+
     [ self setContentSize:myFrame.size];
     
     self.frame = myFrame;
@@ -51,7 +53,11 @@
     self.showsHorizontalScrollIndicator=NO;
     self.showsVerticalScrollIndicator=NO;
     self.delegate =self;
-
+    //self.backgroundColor = [UIColor redColor];
+    [self setContentOffset:CGPointMake(0,0)];
+    
+    NSLog(@"insert left %i " , (int)self.contentInset.right);
+    
     _pageOnScrollView = -1;
     _uiViewTag = [[NSMutableDictionary alloc]init];
     _cachePage = [[NSMutableSet alloc]init];
@@ -89,8 +95,9 @@
         }
     }
     newHeight = newHeight + height / 2 ;//默认加大一点,避免拖拉不生效
-    
+
     self.contentSize =  CGSizeMake(myFrame.size.width , newHeight);
+
     //NSLog(@"content height %i" , newHeight);
 }
 
@@ -162,8 +169,9 @@
     
     CGFloat y = height * col + 10;
     
-    //NSLog(@"i , x , y = %i ,%f , %f " , imgIndex , x , y  );
-    
+    NSLog(@"i , x , y = %i ,%f , %f " , imgIndex , x , y  );
+    NSLog(@"content offset x %i" , (int)self.contentOffset.x);
+//    [self setContentOffset:CGPointMake(0,0)];
     CGRect frame = CGRectMake(x, y, width, height);
     
     subView.frame = frame;

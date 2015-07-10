@@ -8,7 +8,7 @@
 
 #import "SettingViewController.h"
 
-@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
 
 @property (nonatomic) UINavigationBar * navBar;
@@ -161,7 +161,7 @@ CGFloat maxHeight;
             theTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             //theTextField.clearButtonMode = YES;
             theTextField.tag = indexPath.row;
-            //theTextField.delegate = self;
+            theTextField.delegate = self;
             
             //此方法为关键方法
             [theTextField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
@@ -232,6 +232,7 @@ CGFloat maxHeight;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    
     //删除按钮点击
     if([[alertView title] isEqualToString:@"Delete"] && buttonIndex == 1)
     {
@@ -247,7 +248,13 @@ CGFloat maxHeight;
     [alert show];
 }
 
-
-
+// 这个方法是UITextFieldDelegate协议里面的
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    NSLog(@"textFieldShouldReturn the keyboard *** %@ ",theTextField.text);
+    //if (theTextField == self.textField) {
+        [theTextField resignFirstResponder]; //这句代码可以隐藏 键盘
+    //}
+    return YES;
+}
 
 @end

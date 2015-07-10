@@ -48,7 +48,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V7K-fh-lwA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1386" y="704"/>
+            <point key="canvasLocation" x="1366" y="708"/>
         </scene>
         <!--NetPhoto-->
         <scene sceneID="lrl-9q-0Im">
@@ -69,13 +69,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="NetPhoto" id="qx4-J4-aTZ" userLabel="NetPhoto"/>
-                    <connections>
-                        <outlet property="scrollView" destination="Ioz-SJ-gDb" id="aVm-OQ-gRx"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R91-PI-ONn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="650" y="-33"/>
+            <point key="canvasLocation" x="21" y="1169"/>
         </scene>
         <!--Main Tabbar-->
         <scene sceneID="aXe-yR-vTU">
@@ -88,14 +85,58 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="7rJ-Qw-onB" kind="relationship" relationship="viewControllers" id="s70-U5-3b9"/>
-                        <segue destination="Jzn-Lv-aFC" kind="relationship" relationship="viewControllers" id="xCL-DF-0Y8"/>
-                        <segue destination="Ne9-vA-eRY" kind="relationship" relationship="viewControllers" id="PWO-oI-Fe6"/>
+                        <segue destination="4m1-O6-uuw" kind="relationship" relationship="viewControllers" id="8nf-Vb-1Yc"/>
+                        <segue destination="Jzn-Lv-aFC" kind="relationship" relationship="viewControllers" id="jBc-aC-nV4"/>
+                        <segue destination="Ne9-vA-eRY" kind="relationship" relationship="viewControllers" id="eJW-Wh-etm"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKJ-gm-qfN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-170" y="298"/>
+            <point key="canvasLocation" x="-172" y="226"/>
+        </scene>
+        <!--最新壁纸-->
+        <scene sceneID="H1u-zf-WJ1">
+            <objects>
+                <tableViewController id="o3p-nb-xgj" customClass="IndexViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="5" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9II-yh-PMV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="G9W-fW-NUs">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G9W-fW-NUs" id="Wjc-le-DdA">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="o3p-nb-xgj" id="lG8-Yv-V3T"/>
+                            <outlet property="delegate" destination="o3p-nb-xgj" id="jOv-qV-jdh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="最新壁纸" id="qSd-4N-b2Y"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xIj-Mr-Osl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-660" y="1169"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="xkN-Vl-yiX">
+            <objects>
+                <navigationController id="4m1-O6-uuw" customClass="IndexNavigateController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="g23-0D-M2c"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aIL-BZ-Qhc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="o3p-nb-xgj" kind="relationship" relationship="rootViewController" id="kdd-vb-bJt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w4N-cC-3bs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1322" y="1169"/>
         </scene>
     </scenes>
 </document>

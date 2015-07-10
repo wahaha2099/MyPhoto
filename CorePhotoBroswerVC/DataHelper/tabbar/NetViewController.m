@@ -27,8 +27,16 @@
 }
 
 -(void)initTab{
+
+    
+    NSLog(@"view frame x %i " , (int)self.view.frame.origin.x);
+    
     [self initNetMode];
+    
+    self.navigationController.automaticallyAdjustsScrollViewInsets = NO;
+    
     [[self getScrollView] initScrollView:self];
+    
     
     NSArray * files = [[SDImageCache sharedImageCache]getDiskKeys];
 

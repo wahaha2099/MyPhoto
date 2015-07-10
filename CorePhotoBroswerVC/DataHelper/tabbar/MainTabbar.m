@@ -11,13 +11,14 @@
 #import "ViewController.h"
 #import "CacheViewController.h"
 #import "NetViewController.h"
+#import "IndexNavigateController.h"
 
 @interface MainTabbar ()
 
 @property NetViewController *netView ;//= [self viewControllers][0];
 @property SettingViewController *setting;// = [self viewControllers][1];
 @property CacheViewController *cacheView ;//= [self viewControllers][2];
-
+@property IndexNavigateController *indexView;
 @end
 
 @implementation MainTabbar
@@ -25,15 +26,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _netView = [self viewControllers][0];
+    //_netView = [self viewControllers][0];
     _cacheView = [self viewControllers][1];
     _setting = [self viewControllers][2];
+    _indexView = [self viewControllers][0];
     
     self.delegate = self;
     
-    [_netView initTabItem];
+    //[_netView initTabItem];
     [_setting initTabItem];
     [_cacheView initTabItem];
+    [_indexView initTabItem];
     // Do any additional setup after loading the view.
 }
 
@@ -47,16 +50,16 @@
     if( [viewController isKindOfClass:[SettingViewController class]]){
         SettingViewController *setting = (SettingViewController*)viewController;
         [setting.settingView reloadData];
-    }else{
-        [[iAdHelper Instance]showADBanner:viewController.view top:YES];
     }
     
     if( [viewController isKindOfClass:[CacheViewController class]]){
         [_netView tabNotSelected];
         [_cacheView tabSelected];
+        [[iAdHelper Instance]showADBanner:viewController.view top:YES];
     }else if( [viewController isKindOfClass:[NetViewController class]]){
         [_cacheView tabNotSelected];
         [_netView tabSelected];
+        [[iAdHelper Instance]showADBanner:viewController.view top:YES];
     }
 }
 /*

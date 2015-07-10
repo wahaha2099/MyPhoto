@@ -34,6 +34,7 @@
     
     [self initTab];
     [self initController];
+    
 }
 /*
 -(void)showViewPhoto{
