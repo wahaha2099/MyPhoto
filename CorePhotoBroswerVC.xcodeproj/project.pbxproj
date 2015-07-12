@@ -38,6 +38,7 @@
 		187BB85E1B26DCD500993116 /* NetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB85D1B26DCD500993116 /* NetViewController.m */; };
 		1883B6E01B145710009E0271 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6DF1B145710009E0271 /* HttpHelper.m */; };
 		1883B6E31B146652009E0271 /* DataMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B6E21B146652009E0271 /* DataMagic.m */; };
+		188557391B508BC70048272C /* HuabanImageUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 188557381B508BC70048272C /* HuabanImageUrl.m */; };
 		188EE9EA1B22E9DC00FC44DE /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188EE9E91B22E9DC00FC44DE /* SettingViewController.m */; };
 		18903BAA1B21DE3800C7155F /* iAdHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 18903BA91B21DE3800C7155F /* iAdHelper.m */; };
 		18C079B91B17009300F92123 /* BoardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C079B81B17009300F92123 /* BoardInfo.m */; };
@@ -179,6 +180,8 @@
 		1883B6DF1B145710009E0271 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
 		1883B6E11B146652009E0271 /* DataMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMagic.h; sourceTree = "<group>"; };
 		1883B6E21B146652009E0271 /* DataMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMagic.m; sourceTree = "<group>"; };
+		188557371B508BC70048272C /* HuabanImageUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuabanImageUrl.h; sourceTree = "<group>"; };
+		188557381B508BC70048272C /* HuabanImageUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuabanImageUrl.m; sourceTree = "<group>"; };
 		188EE9E81B22E9DC00FC44DE /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		188EE9E91B22E9DC00FC44DE /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		18903BA81B21DE3800C7155F /* iAdHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iAdHelper.h; sourceTree = "<group>"; };
@@ -402,6 +405,8 @@
 				187893631B2007FF00EC6024 /* HuabanImage.m */,
 				1878935F1B1D60D200EC6024 /* BaiduImage.h */,
 				187893601B1D60D200EC6024 /* BaiduImage.m */,
+				188557371B508BC70048272C /* HuabanImageUrl.h */,
+				188557381B508BC70048272C /* HuabanImageUrl.m */,
 			);
 			path = ImgSource;
 			sourceTree = "<group>";
@@ -1158,6 +1163,7 @@
 				89E38DED1AFB4A51000B273A /* SDWebImageCompat.m in Sources */,
 				89E38DF11AFB4A51000B273A /* SDWebImageManager.m in Sources */,
 				89F704151AFB395700B048E8 /* UIImage+Water.m in Sources */,
+				188557391B508BC70048272C /* HuabanImageUrl.m in Sources */,
 				892DD8DA1B0C1FFD0038CC9A /* PBScrollView.m in Sources */,
 				188EE9EA1B22E9DC00FC44DE /* SettingViewController.m in Sources */,
 				89E38DEC1AFB4A51000B273A /* SDImageCache.m in Sources */,
